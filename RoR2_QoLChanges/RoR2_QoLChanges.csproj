@@ -76,11 +76,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BleedConfig.cs" />
+    <Compile Include="Configuration\GeneralConfig.cs" />
+    <Compile Include="Configuration\MulTConfig.cs" />
+    <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
+    <Compile Include="Patches\Items\HI_BleedChanges.cs" />
     <Compile Include="PluginCore.cs" />
     <Compile Include="Configuration\ConVars.cs" />
-    <Compile Include="Configuration\ItemsConfig.cs" />
+    <Compile Include="Configuration\FreshMeatConfig.cs" />
     <Compile Include="Patches\HarmonyInjector.cs" />
-    <Compile Include="Patches\Items\HarmonyPatch.cs" />
+    <Compile Include="Patches\HarmonyPatchable.cs" />
     <Compile Include="Patches\Items\HI_FreshMeatChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

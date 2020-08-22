@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace RoR2QoLChanges.Patches.Items
+namespace RoR2QoLChanges.Patches
 {
     public class HarmonyPatchable
     {

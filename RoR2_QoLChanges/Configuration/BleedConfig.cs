@@ -11,6 +11,7 @@ namespace RoR2_QoLChanges.Configuration
     {
         public static ItemIndex TriTipDaggerItemIndex = ItemIndex.Dagger;
         public static BuffIndex BleedBuffIndex = BuffIndex.Bleeding;
+        public static ProcType BleedProcIndex = ProcType.BleedOnHit;
 
         [ConfigEntryDefaultValue(Value = 2.4f)]
         [ConfigEntryDescription(Value = "The bleed damage scale multiplier. Scales off of Base Damage")]
