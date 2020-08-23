@@ -34,10 +34,10 @@ Note: This plugin requires the following modding libraries:
 
 - Engineer: The Best Class
 	- *Planned*: Carbonizer Turrets walking speed is set at Engineer's sprinting speed. **Note** Sprinting is used conservatively by the AI Director to help the turrets catch up to the player and cannot attack while sprinting.
-	- *Planned*: Turrets will now re-copy/update their inventory when Engineer picks up an item.
+	- *Planned*: Turrets re-copy/update their inventory when Engineer picks up an item.
 	- *Planned*: Harpoon Missiles' Targeting/Painter Mode enemy lock on range increased.
-	- *Planned*: Engineer has a 10% chance to receive the OnKillEnemy Proc from his turrets (IE: Soulbound, Topaz Brooch, Fresh Meat, etc).
+	- *Planned*: Engineer has a 10% chance to receive the *OnKill-Proc Effect* from his turrets (IE: Soulbound, Topaz Brooch, Fresh Meat, etc).
 	
 **Integrations**
-- *Planned*: Item Stats Mod: Will reflect mod QoL changes.
-- *Planned*: Item Stats Mod: Data will be taken from in-game sources instead of the current lookup Dictionary.
+- *Planned*: Item Stats Mod: In-Game stats reflect QoL changes.
+- *Planned*: Item Stats Mod: Data taken from in-game sources instead of the current lookup Dictionary.
