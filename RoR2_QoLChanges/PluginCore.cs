@@ -9,6 +9,7 @@ using RoR2_QoLChanges.Patches.Bugfix;
 using RoR2QoLChanges.Configuration;
 using RoR2QoLChanges.Patches;
 using RoR2QoLChanges.Patches.Items;
+using System.Collections.Generic;
 
 namespace RoR2QoLChanges
 {
@@ -23,6 +24,8 @@ namespace RoR2QoLChanges
         private FreshMeatConfig activeItemsConfig;
         private GeneralConfig generalConfig;
 
+        private Dictionary<string, HarmonyPatchable> harmonyPatches;
+
         void Awake()
         {
             Init();
@@ -31,14 +34,20 @@ namespace RoR2QoLChanges
 
         void Init()
         {
+
+            harmonyPatches = new Dictionary<string, HarmonyPatchable>();
+
             activeItemsConfig = new FreshMeatConfig(Config, Logger);
             generalConfig = new GeneralConfig(Config, Logger);
 
-            freshMeatChangesInjection = new HI_FreshMeatChanges(activeItemsConfig, HarmonyInjector.Instance);
-            captainHeadCenterNull = new HI_CaptainHeadCenterNull(HarmonyInjector.Instance, generalConfig);
+            harmonyPatches.Add(nameof(HI_FreshMeatChanges), new HI_FreshMeatChanges(activeItemsConfig, HarmonyInjector.Instance));
+            harmonyPatches.Add(nameof(HI_CaptainHeadCenterNull), new HI_CaptainHeadCenterNull(HarmonyInjector.Instance, generalConfig));
 
-            freshMeatChangesInjection.ApplyPatches();
-            captainHeadCenterNull.ApplyPatches();
+
+            foreach(KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
+            {
+                hp.Value.ApplyPatches();
+            }
         }
     }
 }
