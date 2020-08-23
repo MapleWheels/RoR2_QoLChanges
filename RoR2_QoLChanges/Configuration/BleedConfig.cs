@@ -9,7 +9,7 @@ namespace RoR2_QoLChanges.Configuration
     [ConfigModelSectionName(Value = "Bleeding")]
     public class BleedConfig : ConfigFileModel
     {
-        public const ItemIndex TriTipDaggerItemIndex = ItemIndex.Dagger;
+        public const ItemIndex TriTipDaggerItemIndex = ItemIndex.BleedOnHit;
         public const BuffIndex BleedBuffIndex = BuffIndex.Bleeding;
         public const ProcType BleedProcIndex = ProcType.BleedOnHit;
 
