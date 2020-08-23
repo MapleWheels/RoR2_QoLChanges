@@ -7,6 +7,7 @@ Note: This plugin requires the following modding libraries:
 
 
 **Feature-Set:**
+
 **Items, Procs & Mechanics:**
 - Item - Fresh Meat:
 	- *Completed*: Now heals for 0.5% (+0.25%/stack) Max HP.
