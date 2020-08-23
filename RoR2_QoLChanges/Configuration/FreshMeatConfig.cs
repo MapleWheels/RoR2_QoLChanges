@@ -9,8 +9,8 @@ namespace RoR2QoLChanges.Configuration
     [ConfigModelSectionName(Value = "Fresh_Meat")]
     public class FreshMeatConfig : ConfigFileModel
     {
-        public static ItemIndex FreshMeatItemIndex = ItemIndex.RegenOnKill;
-        public static BuffIndex FreshMeatBuffIndex = BuffIndex.MeatRegenBoost;
+        public const ItemIndex FreshMeatItemIndex = ItemIndex.RegenOnKill;
+        public const BuffIndex FreshMeatBuffIndex = BuffIndex.MeatRegenBoost;
 
         [ConfigEntryDefaultValue(Value = 0.5f)]
         [ConfigEntryDescription(Value = "Fresh Meat's %MaxHP healing at base.")]
