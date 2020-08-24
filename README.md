@@ -19,8 +19,8 @@ Note: This plugin requires the following modding libraries:
 - Mechanic - Bleeding:
 	- *Planned*: Bleed damage reduced from 240% to 180% base damage per stack.
 	- *Planned*: Tri-tip Dagger proc chance reduced from 15%/stack to 6%/stack.
-	- *Planned*: Tri-Tip Bleeding Debuff time increased from 4 seconds to 6 seconds.
-	- *Planned*: Shatterspleen Bleeding Debuff time reduced from 3 seconds to 1 second.
+	- *Planned*: Tri-Tip Bleeding Debuff time increased from 3 seconds to 4 seconds.
+	- *Planned*: Shatterspleen Bleeding Debuff time reduced from 3 seconds to 2 second.
 	
 **Survivors & Entities**
 - Artificer:

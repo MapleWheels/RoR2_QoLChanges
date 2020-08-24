@@ -5,8 +5,9 @@ using R2API.Utils;
 using RoR2;
 
 using RoR2_QoLChanges.Configuration;
+using RoR2_QoLChanges.Patches;
 using RoR2_QoLChanges.Patches.Bugfix;
-
+using RoR2_QoLChanges.Patches.Mechanics;
 using RoR2QoLChanges.Configuration;
 using RoR2QoLChanges.Patches;
 using RoR2QoLChanges.Patches.Items;
@@ -20,6 +21,7 @@ namespace RoR2QoLChanges
     public class PluginCore : BaseUnityPlugin
     {
         private Dictionary<string, HarmonyPatchable> harmonyPatches;
+        private Dictionary<string, MonoModPatchable> monoModPatches;
 
         void Awake()
         {
@@ -31,7 +33,9 @@ namespace RoR2QoLChanges
         {
 
             harmonyPatches = new Dictionary<string, HarmonyPatchable>();
-
+            monoModPatches = new Dictionary<string, MonoModPatchable>();
+            
+            //Harmony
             harmonyPatches.Add(
                 nameof(HI_FreshMeatChanges), 
                 new HI_FreshMeatChanges(Config.BindModel<FreshMeatConfig>(Logger), HarmonyInjector.Instance)
@@ -41,9 +45,20 @@ namespace RoR2QoLChanges
                 new HI_CaptainHeadCenterNull(Config.BindModel<GeneralConfig>(Logger), HarmonyInjector.Instance)
                 );
 
-            foreach(KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
+            //Monomod
+            monoModPatches.Add(
+                nameof(MMH_BleedChanges),
+                new MMH_BleedChanges(Config.BindModel<BleedConfig>(Logger))
+                );
+
+            //Patch Calls
+            foreach (KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
             {
                 hp.Value.ApplyPatches();
+            }
+            foreach (KeyValuePair<string, MonoModPatchable> mp in monoModPatches)
+            {
+                mp.Value.ApplyPatches();
             }
         }
     }
