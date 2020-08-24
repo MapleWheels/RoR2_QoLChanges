@@ -21,7 +21,7 @@ namespace RoR2_QoLChanges.Patches.Bugfix
     {
         protected static GeneralConfig generalConfig;
 
-        public HI_CaptainHeadCenterNull(Harmony instance, GeneralConfig activeConfig) : base (instance) 
+        public HI_CaptainHeadCenterNull(GeneralConfig activeConfig, Harmony instance) : base (instance) 
         { 
             generalConfig = activeConfig;
         }
