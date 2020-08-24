@@ -19,12 +19,6 @@ namespace RoR2QoLChanges
     [BepInPlugin(ConVars.PackageName, ConVars.PluginName, ConVars.Version)]
     public class PluginCore : BaseUnityPlugin
     {
-        private HI_FreshMeatChanges freshMeatChangesInjection;
-        private HI_CaptainHeadCenterNull captainHeadCenterNull;
-
-        private FreshMeatConfig activeItemsConfig;
-        private GeneralConfig generalConfig;
-
         private Dictionary<string, HarmonyPatchable> harmonyPatches;
 
         void Awake()
@@ -38,12 +32,14 @@ namespace RoR2QoLChanges
 
             harmonyPatches = new Dictionary<string, HarmonyPatchable>();
 
-            activeItemsConfig = Config.BindModel<FreshMeatConfig>(Logger);
-            generalConfig = Config.BindModel<GeneralConfig>(Logger);
-
-            harmonyPatches.Add(nameof(HI_FreshMeatChanges), new HI_FreshMeatChanges(activeItemsConfig, HarmonyInjector.Instance));
-            harmonyPatches.Add(nameof(HI_CaptainHeadCenterNull), new HI_CaptainHeadCenterNull(generalConfig, HarmonyInjector.Instance));
-
+            harmonyPatches.Add(
+                nameof(HI_FreshMeatChanges), 
+                new HI_FreshMeatChanges(Config.BindModel<FreshMeatConfig>(Logger), HarmonyInjector.Instance)
+                );
+            harmonyPatches.Add(
+                nameof(HI_CaptainHeadCenterNull), 
+                new HI_CaptainHeadCenterNull(Config.BindModel<GeneralConfig>(Logger), HarmonyInjector.Instance)
+                );
 
             foreach(KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
             {

@@ -29,7 +29,5 @@ namespace RoR2QoLChanges.Configuration
         [ConfigEntryDefaultValue(Value = 0f)]
         [ConfigEntryDescription(Value = "Fresh Meat's flat healing per extra stack.")]
         public ConfigEntry<float> FreshMeat_FlatHpScale { get; set; }
-
-        public FreshMeatConfig(ConfigFile file, ManualLogSource logger = null) : base(file, null, logger) { }
     }
 }
