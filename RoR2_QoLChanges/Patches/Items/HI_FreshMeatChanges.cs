@@ -35,7 +35,7 @@ namespace RoR2QoLChanges.Patches.Items
                 return;
 
             //Traverse<float> regenT = Traverse.Create(__instance).Property<float>("regen");
-            PropertyInfo piRegen = AccessTools.DeclaredProperty(__instance.GetType(), "regen");
+            PropertyInfo piRegen = AccessTools.DeclaredProperty(__instance.GetType(), nameof(CharacterBody.regen));
             float regen = (float)piRegen.GetValue(__instance);
 
 

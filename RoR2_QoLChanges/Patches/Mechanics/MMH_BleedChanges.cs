@@ -50,10 +50,10 @@ namespace RoR2_QoLChanges.Patches.Mechanics
                 csr.GotoNext(
                     x => x.MatchDup(),
                     x => x.MatchLdcR4(0.25f),
-                    x => x.MatchStfld<float>("RoR2.DotController/DotDef::interval"),
+                    x => x.MatchStfld<RoR2.DotController.DotDef>("interval"),
                     x => x.MatchDup(),
-                    x => x.MatchLdcR4(0.2f),    //Target value, Bleeding Damage Coefficient per second.
-                    x => x.MatchStfld<float>("RoR2.DotController/DotDef::damageCoefficient")
+                    x => x.MatchLdcR4(0.2f),    //Target value, Bleeding Damage Coefficient per interval.
+                    x => x.MatchStfld<RoR2.DotController.DotDef>("damageCoefficient")
                     );
 
                 csr.Index += 4;

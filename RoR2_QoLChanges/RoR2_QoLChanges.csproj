@@ -34,8 +34,8 @@
     <Reference Include="0Harmony">
       <HintPath>..\Libs\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\Libs\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp.publicized">
+      <HintPath>..\Libs\Assembly-CSharp.publicized.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\Libs\BepInEx.dll</HintPath>
@@ -80,9 +80,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyPolicies.cs" />
+    <Compile Include="Configuration\ArtificerConfig.cs" />
     <Compile Include="Configuration\BleedConfig.cs" />
+    <Compile Include="Configuration\EngineerConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
     <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
+    <Compile Include="Patches\Entities\HI_ArtificerChanges.cs" />
+    <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
     <Compile Include="PluginCore.cs" />
@@ -95,7 +100,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Program Files (x86)\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\RoR2_QoLChanges\RoR2_QoLChanges.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

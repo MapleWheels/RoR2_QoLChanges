@@ -28,7 +28,5 @@ namespace RoR2_QoLChanges.Configuration
         [ConfigEntryDefaultValue(Value = 1f)]
         [ConfigEntryDescription(Value = "The Shatterspleen bleed damage debuff time.")]
         public ConfigEntry<float> ShatterspleenBleed_TimeSecs { get; set; }
-
-        public BleedConfig(ConfigFile file, ManualLogSource logger = null) : base(file, null, logger) { }
     }
 }

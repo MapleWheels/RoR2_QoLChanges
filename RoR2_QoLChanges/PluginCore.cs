@@ -7,6 +7,7 @@ using RoR2;
 using RoR2_QoLChanges.Configuration;
 using RoR2_QoLChanges.Patches;
 using RoR2_QoLChanges.Patches.Bugfix;
+using RoR2_QoLChanges.Patches.Entities;
 using RoR2_QoLChanges.Patches.Mechanics;
 using RoR2QoLChanges.Configuration;
 using RoR2QoLChanges.Patches;
@@ -16,7 +17,7 @@ using System.Collections.Generic;
 namespace RoR2QoLChanges
 {
     [BepInDependency(R2API.R2API.PluginGUID)]
-    [NetworkCompatibility(CompatibilityLevel.NoNeedForSync)]
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod)]
     [BepInPlugin(ConVars.PackageName, ConVars.PluginName, ConVars.Version)]
     public class PluginCore : BaseUnityPlugin
     {
@@ -43,6 +44,10 @@ namespace RoR2QoLChanges
             harmonyPatches.Add(
                 nameof(HI_CaptainHeadCenterNull), 
                 new HI_CaptainHeadCenterNull(Config.BindModel<GeneralConfig>(Logger), HarmonyInjector.Instance)
+                );
+            harmonyPatches.Add(
+                nameof(HI_ArtificerChanges),
+                new HI_ArtificerChanges(Config.BindModel<ArtificerConfig>(Logger), HarmonyInjector.Instance)
                 );
 
             //Monomod
