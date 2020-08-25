@@ -17,7 +17,7 @@ namespace RoR2_QoLChanges.Configuration
         [ConfigEntryDescription(Value = "The bleed damage scale multiplier. Scales off of Base Damage")]
         public ConfigEntry<float> Bleed_BaseDamageRatio { get; set; }
 
-        [ConfigEntryDefaultValue(Value = 0.06f)]
+        [ConfigEntryDefaultValue(Value = 6f)]
         [ConfigEntryDescription(Value = "Item: Tri-Tip Dagger's Proc chance per item.")]
         public ConfigEntry<float> Dagger_ProcChance { get; set; }
 

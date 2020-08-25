@@ -50,6 +50,11 @@ namespace RoR2QoLChanges
                 new HI_ArtificerChanges(Config.BindModel<ArtificerConfig>(Logger), HarmonyInjector.Instance)
                 );
 
+            harmonyPatches.Add(
+                nameof(HI_EngineerChanges),
+                new HI_EngineerChanges(Config.BindModel<EngineerConfig>(Logger), HarmonyInjector.Instance)
+                );
+
             //Monomod
             monoModPatches.Add(
                 nameof(MMH_BleedChanges),

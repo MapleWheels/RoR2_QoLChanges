@@ -1,4 +1,5 @@
-﻿using BepInEx.Extensions.Configuration;
+﻿using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
 
 using RoR2;
 
@@ -13,7 +14,10 @@ namespace RoR2_QoLChanges.Configuration
     [ConfigModelSectionName(Value = "Engineer")]
     public class EngineerConfig : ConfigFileModel
     {
-        public const string EngiBodyName = "EngiBody";
         public const string EngiCarbonizerTurretBodyName = "EngiWalker";
+
+        [ConfigEntryDefaultValue(Value = 250f)]
+        [ConfigEntryDescription(Value = "The max targeting distance for the Engineer Painter.")]
+        public ConfigEntry<float> EngiMissilePainer_MaxDistance { get; set; }
     }
 }

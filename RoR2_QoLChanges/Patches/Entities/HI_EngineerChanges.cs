@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using BepInEx.Logging;
+
+using HarmonyLib;
 
 using RoR2;
 
@@ -8,6 +10,7 @@ using RoR2QoLChanges.Patches;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,6 +30,11 @@ namespace RoR2_QoLChanges.Patches.Entities
                 original: HI_EngineerChanges.MI_CharacterBody_RecalculateStats,
                 postfix: HI_EngineerChanges.MI_Post_RecalculateStats
                 );
+
+            harmonyInstance.Patch(
+                original: HI_EngineerChanges.MI_EngiPaint_OnEnter,
+                prefix: HI_EngineerChanges.MI_EngiPaint_Post_OnEnter
+                );
         }
 
         public static void Post_CharacterBody_RecalculateStats(RoR2.CharacterBody __instance)
@@ -40,20 +48,26 @@ namespace RoR2_QoLChanges.Patches.Entities
 
                 piMoveSpeed.SetValue(__instance, movespeed);
             }
+        }
 
-            if (__instance.name.ToLower().Trim().Contains(EngineerConfig.EngiBodyName.ToLower()))
-            {
-                EntityStates.Engi.EngiMissilePainter.Paint.maxDistance = 350;   //Just guessing, unknown what vanilla value is.
-            }
+        public static void EngiPaint_Post_OnEnter(EntityStates.Engi.EngiMissilePainter.Paint __instance)
+        {
+            EntityStates.Engi.EngiMissilePainter.Paint.maxDistance = activeConfig.EngiMissilePainer_MaxDistance.Value;   
         }
 
         protected static MethodInfo MI_CharacterBody_RecalculateStats;
         protected static HarmonyMethod MI_Post_RecalculateStats;
 
+        protected static MethodInfo MI_EngiPaint_OnEnter;
+        protected static HarmonyMethod MI_EngiPaint_Post_OnEnter;
+
         static HI_EngineerChanges()
         {
             MI_CharacterBody_RecalculateStats = typeof(CharacterBody).GetMethod(nameof(CharacterBody.RecalculateStats));
-            MI_Post_RecalculateStats = new HarmonyMethod(typeof(HI_ArtificerChanges).GetMethod(nameof(MI_Post_RecalculateStats)));
+            MI_Post_RecalculateStats = new HarmonyMethod(typeof(HI_EngineerChanges).GetMethod(nameof(Post_CharacterBody_RecalculateStats)));
+
+            MI_EngiPaint_OnEnter = typeof(EntityStates.Engi.EngiMissilePainter.Paint).GetMethod(nameof(EntityStates.Engi.EngiMissilePainter.Paint.OnEnter));
+            MI_EngiPaint_Post_OnEnter = new HarmonyMethod(typeof(HI_EngineerChanges).GetMethod(nameof(EngiPaint_Post_OnEnter)));
         }
     }
 }

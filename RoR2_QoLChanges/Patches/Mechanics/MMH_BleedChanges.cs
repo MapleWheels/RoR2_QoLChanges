@@ -24,6 +24,7 @@ namespace RoR2_QoLChanges.Patches.Mechanics
 
         private void Patch_GlobalEventManager_OnHitEnemy()
         {
+            //Tri-tip Proc Chance
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor csr = new ILCursor(il);
@@ -38,6 +39,52 @@ namespace RoR2_QoLChanges.Patches.Mechanics
 
                 csr.Index += 4;
                 csr.Next.Operand = activeConfig.Dagger_ProcChance.Value;
+            };
+
+            //Tri-tip Bleed Time
+            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            {
+                ILCursor csr = new ILCursor(il);
+                //Starting at DnSpy's IL View: Line 908: "/* 0x0003CCC8 287F220006   */ IL_0160: call  bool RoR2.Util::CheckRoll(float32, class RoR2.CharacterMaster)"
+                csr.GotoNext(
+                    i => i.MatchCallOrCallvirt("RoR2.Util", "CheckRoll"),
+                    i => i.MatchBrfalse(out var IL_0BF1),
+                    i => i.MatchLdarg(1),
+                    i => i.MatchLdfld<RoR2.DamageInfo>("procChainMask"),
+                    i => i.MatchStloc(out int V_24),
+                    i => i.MatchLdloca(out int V_24),
+                    i => i.MatchLdcI4(5),
+                    i => i.MatchCallOrCallvirt<RoR2.ProcChainMask>("AddProc"),
+                    i => i.MatchLdarg(2),
+                    i => i.MatchLdarg(1),
+                    i => i.MatchLdfld<RoR2.DamageInfo>("attacker"),
+                    i => i.MatchLdcI4(0),
+                    i => i.MatchLdcR4(3)    //Bleed time
+                    );
+
+                csr.Index += 12;
+                csr.Next.Operand = activeConfig.StandardBleed_TimeSecs.Value;
+
+                //Shatterspleen Bleed Time
+                //Starting at DnSpy's IL View: Line 1966: "/* 0x0003D724 7B13060004 */ IL_0BBC: ldfld"
+                csr.GotoNext(
+                    i => i.MatchLdfld<RoR2.DamageInfo>("crit"),
+                    i => i.MatchBrfalse(out var IL_0BF1),
+                    i => i.MatchLdarg(1),
+                    i => i.MatchLdfld<RoR2.DamageInfo>("procChainMask"),
+                    i => i.MatchStloc(out int V_72),
+                    i => i.MatchLdloca(out int V_72),
+                    i => i.MatchLdcI4(5),
+                    i => i.MatchCallOrCallvirt<RoR2.ProcChainMask>("AddProc"),
+                    i => i.MatchLdarg(2),
+                    i => i.MatchLdarg(1),
+                    i => i.MatchLdfld<RoR2.DamageInfo>("attacker"),
+                    i => i.MatchLdcI4(0),
+                    i => i.MatchLdcR4(3)    //Bleed time
+                    );
+
+                csr.Index += 12;
+                csr.Next.Operand = activeConfig.ShatterspleenBleed_TimeSecs.Value;
             };
         }
 
