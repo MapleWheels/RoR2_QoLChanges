@@ -23,6 +23,7 @@ namespace RoR2QoLChanges
     {
         private Dictionary<string, HarmonyPatchable> harmonyPatches;
         private Dictionary<string, MonoModPatchable> monoModPatches;
+        private GeneralConfig GeneralConfig;
 
         void Awake()
         {
@@ -34,7 +35,9 @@ namespace RoR2QoLChanges
         {
             harmonyPatches = new Dictionary<string, HarmonyPatchable>();
             monoModPatches = new Dictionary<string, MonoModPatchable>();
-            
+
+
+
             //Harmony
             harmonyPatches.Add(
                 nameof(HI_FreshMeatChanges), 
@@ -68,6 +71,17 @@ namespace RoR2QoLChanges
             foreach (KeyValuePair<string, MonoModPatchable> mp in monoModPatches)
             {
                 mp.Value.ApplyPatches();
+            }
+        }
+
+        void InitConfig()
+        {
+            GeneralConfig = Config.BindModel<GeneralConfig>(Logger);
+            
+            if (GeneralConfig.INTERNAL_CONFIGFILE_VERSION.Value != ConVars.Version)
+            {
+                //Nuke time baby
+                
             }
         }
     }

@@ -16,5 +16,9 @@ namespace RoR2_QoLChanges.Configuration
         [ConfigEntryDefaultValue(Value = true)]
         [ConfigEntryDescription(Value = "Enables the fix for the Captain Equipment Gorag's Opus bug")]
         public ConfigEntry<bool> CaptainOpusFix { get; set; }
+
+        [ConfigEntryDefaultValue(Value = "0.1.7")]
+        [ConfigEntryDescription(Value = "WARNING: Do not touch if you don't know what you're doing or the config file will get nuked.")]
+        public ConfigEntry<string> INTERNAL_CONFIGFILE_VERSION { get; set; }
     }
 }
