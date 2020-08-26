@@ -41,16 +41,16 @@ namespace RoR2_QoLChanges.Patches.Entities
 
                 m1.SetBonusStockFromBody(
                     Math.Min(
-                        ((int)__instance.level)/artificerConfig.M1Fire_LevelsPerCharge.Value,
+                        (int)(__instance.level/artificerConfig.M1Fire_LevelsPerCharge.Value),
                         artificerConfig.M1Fire_MaxLevelCharges.Value
                         ) +
                     Math.Min(
-                        __instance.inventory.GetItemCount(ItemIndex.SecondarySkillMagazine)/artificerConfig.M1Fire_BackupMagsPerCharge.Value,
+                        (__instance.inventory.GetItemCount(ItemIndex.SecondarySkillMagazine)/artificerConfig.M1Fire_BackupMagsPerCharge.Value),
                         artificerConfig.M1Fire_MaxBackupMagCharges.Value
                         )
                     );
 
-                Debug.LogWarning($"HI_ArtificerChanges::Post..Stats() | Arti Charges count={m1.stock}");
+                Debug.LogWarning($"HI_ArtificerChanges::Post..Stats() | Arti Charges count={m1.maxStock}");
 
                 m1.cooldownScale *= Mathf.Min(
                     Mathf.Max(__instance.attackSpeed - __instance.baseAttackSpeed, 0f) * artificerConfig.M1Fire_CooldownPerAttackSpeedRatio.Value,

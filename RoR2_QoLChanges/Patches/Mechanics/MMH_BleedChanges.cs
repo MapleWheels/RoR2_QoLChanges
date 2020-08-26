@@ -103,8 +103,11 @@ namespace RoR2_QoLChanges.Patches.Mechanics
                     x => x.MatchStfld<RoR2.DotController.DotDef>("damageCoefficient")
                     );
 
-                csr.Index += 4;
-                csr.Next.Operand = activeConfig.Bleed_BaseDamageRatio.Value * 0.25f * activeConfig.StandardBleed_TimeSecs.Value;
+                csr.Index += 1;
+                csr.Next.Operand = BleedConfig.BleedIntervalRate;
+
+                csr.Index += 3;
+                csr.Next.Operand = activeConfig.Bleed_BaseDamageRatio.Value * BleedConfig.BleedIntervalRate / activeConfig.StandardBleed_TimeSecs.Value;
             };
         }
     }

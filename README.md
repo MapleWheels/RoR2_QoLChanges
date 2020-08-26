@@ -18,7 +18,7 @@ Note: This plugin requires the following modding libraries:
 
 - Mechanic - Bleeding:
 	- *Completed*: Bleed damage reduced from 240% to 180% base damage per stack.
-	- *Completed*: Tri-tip Dagger proc chance reduced from 15%/stack to 6%/stack.
+	- *Completed*: Tri-tip Dagger proc chance reduced from 15%/stack to 7%/stack.
 	- *Completed*: Tri-Tip Bleeding Debuff time increased from 3 seconds to 4 seconds.
 	- *Completed*: Shatterspleen Bleeding Debuff time reduced from 3 seconds to 2 second.
 	

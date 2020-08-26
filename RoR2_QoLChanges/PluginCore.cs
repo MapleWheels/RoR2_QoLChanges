@@ -32,7 +32,6 @@ namespace RoR2QoLChanges
 
         void Init()
         {
-
             harmonyPatches = new Dictionary<string, HarmonyPatchable>();
             monoModPatches = new Dictionary<string, MonoModPatchable>();
             
