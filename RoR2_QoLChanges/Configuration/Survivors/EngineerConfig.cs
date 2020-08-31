@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoR2_QoLChanges.Configuration
+namespace RoR2_QoLChanges.Configuration.Survivors
 {
     [ConfigModelSectionName(Value = "Engineer")]
     public class EngineerConfig : ConfigFileModel

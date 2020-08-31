@@ -4,7 +4,7 @@ using BepInEx.Logging;
 
 using RoR2;
 
-namespace RoR2QoLChanges.Configuration
+namespace RoR2_QoLChanges.Configuration.Items
 {
     [ConfigModelSectionName(Value = "Fresh_Meat")]
     public class FreshMeatConfig : ConfigFileModel

@@ -69,6 +69,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
     <Reference Include="UnityEngine">
       <HintPath>..\Libs\UnityEngine.dll</HintPath>
     </Reference>
@@ -81,23 +82,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Additions\Buffs\BuffEntry.cs" />
+    <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
+    <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
     <Compile Include="AssemblyPolicies.cs" />
-    <Compile Include="Configuration\ArtificerConfig.cs" />
-    <Compile Include="Configuration\BleedConfig.cs" />
-    <Compile Include="Configuration\EngineerConfig.cs" />
+    <Compile Include="Configuration\Buffs\BuffsConfig.cs" />
+    <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
+    <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
+    <Compile Include="Configuration\Survivors\CaptainConfig.cs" />
+    <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
     <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
     <Compile Include="Patches\Entities\HI_ArtificerChanges.cs" />
     <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
+    <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
     <Compile Include="PluginCore.cs" />
     <Compile Include="Configuration\ConVars.cs" />
-    <Compile Include="Configuration\FreshMeatConfig.cs" />
+    <Compile Include="Configuration\Items\FreshMeatConfig.cs" />
     <Compile Include="Patches\HarmonyInjector.cs" />
     <Compile Include="Patches\HarmonyPatchable.cs" />
     <Compile Include="Patches\Items\HI_FreshMeatChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Additions\Items\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MissingHpHealingBoostBuff.png" />
+    <EmbeddedResource Include="ror2qolchanges" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

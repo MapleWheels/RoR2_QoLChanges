@@ -2,6 +2,8 @@
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2_QoLChanges.Configuration;
+using RoR2_QoLChanges.Configuration.Mechanics;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

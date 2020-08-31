@@ -4,7 +4,7 @@ using BepInEx.Logging;
 
 using RoR2;
 
-namespace RoR2_QoLChanges.Configuration
+namespace RoR2_QoLChanges.Configuration.Mechanics
 {
     [ConfigModelSectionName(Value = "Bleeding")]
     public class BleedConfig : ConfigFileModel

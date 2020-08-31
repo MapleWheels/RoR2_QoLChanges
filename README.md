@@ -31,7 +31,7 @@ Note: This plugin requires the following modding libraries:
 - Captain:
 	- **Vanilla BUGFIX**: Captain can now properly use Equipment Item *Gorag's Opus*.
 	- *Planned*: Special: Healing Station Beacon's % Max HP healing is increased by +0.75% Max HP/level.
-	- *Planned*: Special: Beacon Calldown max uses per Stage increased by 1 per 5 levels (capped at 4 beacons).
+	- *Planned*: Special: Healing Station Beacon increases all healing based on % missing HP.
 
 - Engineer: The Best Class
 	- *Completed*: Carbonizer Turrets walking speed is set at Engineer's sprinting speed. **Note** Sprinting is used conservatively by the AI Director to help the turrets catch up to the player and cannot attack while sprinting.

@@ -3,6 +3,8 @@
 using RoR2;
 
 using RoR2_QoLChanges.Configuration;
+using RoR2_QoLChanges.Configuration.Survivors;
+
 using RoR2QoLChanges.Patches;
 
 using System;

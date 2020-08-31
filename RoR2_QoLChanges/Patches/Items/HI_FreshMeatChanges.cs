@@ -2,6 +2,9 @@
 
 using R2API.Utils;
 using RoR2;
+
+using RoR2_QoLChanges.Configuration.Items;
+
 using RoR2QoLChanges.Configuration;
 using System.Reflection;
 
