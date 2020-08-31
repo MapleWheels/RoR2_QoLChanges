@@ -20,6 +20,8 @@ using RoR2QoLChanges.Patches;
 using RoR2QoLChanges.Patches.Items;
 using System.Collections.Generic;
 using RoR2_QoLChanges.Configuration.Buffs;
+using RoR2_QoLChanges.Additions.Mechanics;
+using UnityEngine;
 
 namespace RoR2QoLChanges
 {
@@ -34,10 +36,17 @@ namespace RoR2QoLChanges
         public static Dictionary<string, BuffEntry> buffCatalog;
         public static GeneralConfig GeneralConfig;
 
+        //Init
         void Awake()
         {
             Init();
             Logger.LogInfo($"{ConVars.PluginName} is loaded");
+        }
+
+        //Late Init
+        void Start()
+        {
+            LateInit();
         }
 
         void Init()
@@ -46,6 +55,11 @@ namespace RoR2QoLChanges
             InitConfig();
             InitBuffs();
             InitHooks();
+        }
+
+        void LateInit()
+        {
+            InitSystemInstances();
         }
 
         void InitConfig()
@@ -105,9 +119,20 @@ namespace RoR2QoLChanges
         void InitBuffs()
         {
             buffCatalog = new Dictionary<string, BuffEntry>();
+            buffCatalog.Add(
+                nameof(MissingHpHealingBoostBuff),
+                new MissingHpHealingBoostBuff(Config.BindModel<BuffsConfig>(Logger))
+                );
 
             foreach (KeyValuePair<string, BuffEntry> buff in buffCatalog)
                 buff.Value.Init();
+        }
+
+        void InitSystemInstances()
+        {
+            if (EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab)
+                if(!EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>())
+                    EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<MissingHpHealingBoostBehaviour>();
         }
 
     }

@@ -20,6 +20,7 @@ namespace RoR2_QoLChanges.Additions.Mechanics
     /// This class is used to apply the boosted healing effect to buff to Captain's healing ward, and other effects.
     /// </summary>
     [RequireComponent(typeof(RoR2.HealingWard))]
+	[DisallowMultipleComponent]
     public class MissingHpHealingBoostBehaviour : MonoBehaviour
     {
 		public static float
@@ -51,8 +52,8 @@ namespace RoR2_QoLChanges.Additions.Mechanics
 			if (missingHpBuffIndex == BuffIndex.None)
 				return;
 
-			ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(this.teamFilter.teamIndex);
-			float num = radius * radius;
+			ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(teamFilter.teamIndex);
+			float sqrDist = radius * radius;
 			Vector3 position = base.transform.position;
 
 			for (int i = 0; i < teamMembers.Count; i++)
@@ -60,7 +61,7 @@ namespace RoR2_QoLChanges.Additions.Mechanics
 				CharacterBody component = teamMembers[i].GetComponent<CharacterBody>();
 				if (component)
 				{
-					if ((teamMembers[i].transform.position - position).sqrMagnitude <= num)
+					if ((teamMembers[i].transform.position - position).sqrMagnitude <= sqrDist)
 					{
 						if (!component.HasBuff(missingHpBuffIndex))
 							component.AddBuff(missingHpBuffIndex);
