@@ -26,26 +26,22 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
             if (component)
             {
-                CharacterBody body = self;
-                if (body.teamComponent.teamIndex == TeamIndex.Player)
-                {
-                    //calculate healing fraction
-                    float teamLevel = body.level;
-                    float interval = MissingHpHealingBoostBehaviour.interval;
-                    float healFraction = (ActiveConfig.Beacon_MaxHpHealingBase.Value + ActiveConfig.Beacon_MaxHpHealingRatioPerLevel.Value * teamLevel)/100f * interval;
+                //calculate healing fraction
+                float teamLevel = self.level;
+                float interval = MissingHpHealingBoostBehaviour.interval;
+                float healFraction = (ActiveConfig.Beacon_MaxHpHealingBase.Value + ActiveConfig.Beacon_MaxHpHealingRatioPerLevel.Value * teamLevel)/100f * interval;
 
-                    //calculate radius
-                    float radius = ActiveConfig.Beacon_HealingDefaultRadius.Value + ActiveConfig.Beacon_HealingRadiusIncreasePerLevel.Value * teamLevel;
+                //calculate radius
+                float radius = ActiveConfig.Beacon_HealingDefaultRadius.Value + ActiveConfig.Beacon_HealingRadiusIncreasePerLevel.Value * teamLevel;
 
-                    component.SyncHealingStats(false); //get current healingward stats
+                component.SyncHealingStats(false); //get current healingward stats
 
-                    //set the values
-                    MissingHpHealingBoostBehaviour.healFraction = healFraction;
-                    MissingHpHealingBoostBehaviour.radius = radius;
+                //set the values
+                MissingHpHealingBoostBehaviour.healFraction = healFraction;
+                MissingHpHealingBoostBehaviour.radius = radius;
 
-                    //call the sync method
-                    component.SyncHealingStats(true);   //Update the healing ward stats
-                }
+                //call the sync method
+                component.SyncHealingStats(true);   //Update the healing ward stats
             }
 
             orig(self);

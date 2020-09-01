@@ -32,6 +32,7 @@ Note: This plugin requires the following modding libraries:
 	- **Vanilla BUGFIX**: Captain can now properly use Equipment Item *Gorag's Opus*.
 	- *Completed*: Special: Healing Station Beacon's % Max HP healing is increased by +0.75% Max HP/level.
 	- *Completed*: Special: Healing Station Beacon increases all healing based on % missing HP.
+	- *Completed*: Special: Healing Station Beacon radius increases by 1.25 per level (vanilla size = 10).
 	- *Planned*: Special: Shock Field Beacon buffs (TBA).
 	- *Planned*: M2/Secondary: Tazer Gun buffs (TBA).
 
