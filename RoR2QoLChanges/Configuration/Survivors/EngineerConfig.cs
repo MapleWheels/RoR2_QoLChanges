@@ -19,5 +19,9 @@ namespace RoR2QoLChanges.Configuration.Survivors
         [ConfigEntryDefaultValue(Value = 250f)]
         [ConfigEntryDescription(Value = "The max targeting distance for the Engineer Painter.")]
         public ConfigEntry<float> EngiMissilePainer_MaxDistance { get; set; }
+
+        [ConfigEntryDefaultValue(Value = 10f)]
+        [ConfigEntryDescription(Value = "The chance the EngiTurret OnKill effect is sent to the owner Engineer.")]
+        public ConfigEntry<float> EngiTurret_ChanceOnKillProcAppliedToEngi { get; set; }
     }
 }

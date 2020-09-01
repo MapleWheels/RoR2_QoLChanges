@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Additions\Buffs\BuffEntry.cs" />
     <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
+    <Compile Include="Additions\Mechanics\MinionOnKillProcBehaviour.cs" />
     <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
     <Compile Include="AssemblyPolicies.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
     <Compile Include="Patches\Entities\HI_ArtificerChanges.cs" />
     <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
+    <Compile Include="Patches\Entities\MMH_EngiTurretOnKillEffect.cs" />
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />

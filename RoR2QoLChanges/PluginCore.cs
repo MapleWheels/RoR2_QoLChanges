@@ -118,6 +118,11 @@ namespace RoR2QoLChanges
                 new MMH_MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
                 );
 
+            //monoModPatches.Add(
+            //    nameof(MMH_EngiTurretOnKillEffect),
+            //    new MMH_EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
+            //    );
+
             //Patch Calls
             foreach (KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
                 hp.Value.ApplyPatches();

@@ -20,7 +20,10 @@ namespace RoR2QoLChanges.Patches.Mechanics
         private void ApplyHealingRadiusChanges(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             if (!self.CompareTag("Player"))
+            {
+                orig(self);
                 return;
+            }
 
             MissingHpHealingBoostBehaviour component = EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>();
 

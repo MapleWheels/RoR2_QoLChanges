@@ -9,6 +9,7 @@ Note: This plugin requires the following modding libraries:
 **Feature-Set:**
 
 **Items, Procs & Mechanics:**
+
 - Item - Fresh Meat:
 	- *Completed*: Now heals for 0.5% (+0.25%/stack) Max HP.
 	
@@ -23,6 +24,7 @@ Note: This plugin requires the following modding libraries:
 	- *Completed*: Shatterspleen Bleeding Debuff time reduced from 3 seconds to 2 second.
 	
 **Survivors & Entities**
+
 - Artificer:
 	- *Completed*: Fire Bolt (M1) gains +1 max charge per 10 levels (capped at 99).
 	- *Completed*: Fire Bolt (M1) gains +1 max charge per 3 Backup Magazines (capped at 99).
@@ -44,3 +46,8 @@ Note: This plugin requires the following modding libraries:
 **Integrations**
 - *Planned*: Item Stats Mod: In-Game stats reflect QoL changes.
 - *Planned*: Item Stats Mod: Data taken from in-game sources instead of the current lookup Dictionary.
+
+
+**Changelog**
+0.2.1: First Thunderstore published build.
+0.2.2: Fixed bugs from Risk of Risk of 2 v1.0.1.1 update.
