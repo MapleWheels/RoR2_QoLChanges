@@ -1,7 +1,4 @@
-﻿
-using System.Collections.Generic;
-
-namespace RoR2QoLChanges.Configuration
+﻿namespace RoR2QoLChanges.Configuration
 {
     public static class ConVars
     {

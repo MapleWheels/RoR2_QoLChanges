@@ -89,7 +89,6 @@
     <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
     <Compile Include="AssemblyPolicies.cs" />
-    <Compile Include="Configuration\Buffs\BuffsConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
     <Compile Include="Configuration\Survivors\CaptainConfig.cs" />
@@ -116,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Additions\Items\" />
+    <Folder Include="Configuration\Buffs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

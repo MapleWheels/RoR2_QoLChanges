@@ -1,17 +1,6 @@
 ﻿using RoR2;
-
 using RoR2QoLChanges.Additions.Buffs;
-using RoR2QoLChanges.Configuration.Buffs;
-
-using RoR2QoLChanges;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using UnityEngine;
 
 namespace RoR2QoLChanges.Additions.Mechanics
@@ -47,6 +36,27 @@ namespace RoR2QoLChanges.Additions.Mechanics
 			}
         }
 
+		public void SyncHealingStats(bool isMaster = true)
+        {
+			if (AttachedWard)
+			{
+				if (isMaster)
+				{
+					AttachedWard.radius = radius;
+					AttachedWard.healFraction = healFraction;
+					AttachedWard.healPoints = healPoints;
+					AttachedWard.radius = radius;
+				}
+                else
+                {
+					radius = AttachedWard.radius;
+					healFraction = AttachedWard.healFraction;
+					healPoints = AttachedWard.healPoints;
+					radius = AttachedWard.radius;
+				}
+			}
+        }
+
         void Update()
         {
 			if (missingHpBuffIndex == BuffIndex.None)
@@ -64,12 +74,7 @@ namespace RoR2QoLChanges.Additions.Mechanics
 					if ((teamMembers[i].transform.position - position).sqrMagnitude <= sqrDist)
 					{
 						if (!component.HasBuff(missingHpBuffIndex))
-							component.AddBuff(missingHpBuffIndex);
-					}
-					else
-					{
-						if (component.HasBuff(missingHpBuffIndex))
-							component.RemoveBuff(missingHpBuffIndex);
+							component.AddTimedBuff(missingHpBuffIndex, 0.25f);
 					}
 				}
 			}

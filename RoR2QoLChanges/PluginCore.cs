@@ -3,23 +3,23 @@ using BepInEx.Extensions.Configuration;
 
 using R2API;
 using R2API.Utils;
-using System.Reflection;
-using RoR2;
-using UnityEngine;
 
 using RoR2QoLChanges.Additions.Buffs;
+using RoR2QoLChanges.Additions.Mechanics;
 using RoR2QoLChanges.Configuration;
-using RoR2QoLChanges.Configuration.Survivors;
-using RoR2QoLChanges.Configuration.Mechanics;
 using RoR2QoLChanges.Configuration.Items;
+using RoR2QoLChanges.Configuration.Mechanics;
+using RoR2QoLChanges.Configuration.Survivors;
 using RoR2QoLChanges.Patches;
 using RoR2QoLChanges.Patches.Bugfix;
 using RoR2QoLChanges.Patches.Entities;
-using RoR2QoLChanges.Patches.Mechanics;
 using RoR2QoLChanges.Patches.Items;
+using RoR2QoLChanges.Patches.Mechanics;
+
 using System.Collections.Generic;
-using RoR2QoLChanges.Configuration.Buffs;
-using RoR2QoLChanges.Additions.Mechanics;
+using System.Reflection;
+
+using UnityEngine;
 
 namespace RoR2QoLChanges
 {
@@ -114,8 +114,8 @@ namespace RoR2QoLChanges
                 );
 
             monoModPatches.Add(
-                nameof(MMH_MissingHpHealingBoostBuff),
-                new MMH_MissingHpHealingBoostBuff(Config.BindModel<BuffsConfig>(Logger))
+                nameof(Patches.Mechanics.MMH_MissingHpHealingBoostBuff),
+                new MMH_MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
                 );
 
             //Patch Calls
@@ -130,8 +130,8 @@ namespace RoR2QoLChanges
         {
             buffCatalog = new Dictionary<string, BuffEntry>();
             buffCatalog.Add(
-                nameof(MissingHpHealingBoostBuff),
-                new MissingHpHealingBoostBuff(Config.BindModel<BuffsConfig>(Logger))
+                nameof(Additions.Buffs.MissingHpHealingBoostBuff),
+                new MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
                 );
 
             foreach (KeyValuePair<string, BuffEntry> buff in buffCatalog)
