@@ -14,22 +14,25 @@ namespace RoR2QoLChanges.Patches.Mechanics
         public override void ApplyPatches()
         {
             On.RoR2.HealthComponent.Heal += PreHealBuffApply;
-            On.EntityStates.CaptainSupplyDrop.HealZoneMainState.OnEnter += ApplyHealingRadiusChanges;
+            On.RoR2.CharacterBody.RecalculateStats += ApplyHealingRadiusChanges;
         }
 
-        private void ApplyHealingRadiusChanges(On.EntityStates.CaptainSupplyDrop.HealZoneMainState.orig_OnEnter orig, EntityStates.CaptainSupplyDrop.HealZoneMainState self)
+        private void ApplyHealingRadiusChanges(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
+            if (!self.CompareTag("Player"))
+                return;
+
             MissingHpHealingBoostBehaviour component = EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>();
 
             if (component)
             {
-                CharacterBody body = component.GetComponent<CharacterBody>();
-                if (body)
+                CharacterBody body = self;
+                if (body.teamComponent.teamIndex == TeamIndex.Player)
                 {
                     //calculate healing fraction
                     float teamLevel = body.level;
                     float interval = MissingHpHealingBoostBehaviour.interval;
-                    float healFraction = (ActiveConfig.Beacon_MaxHpHealingBase.Value + ActiveConfig.Beacon_MaxHpHealingRatioPerLevel.Value * teamLevel) * interval;
+                    float healFraction = (ActiveConfig.Beacon_MaxHpHealingBase.Value + ActiveConfig.Beacon_MaxHpHealingRatioPerLevel.Value * teamLevel)/100f * interval;
 
                     //calculate radius
                     float radius = ActiveConfig.Beacon_HealingDefaultRadius.Value + ActiveConfig.Beacon_HealingRadiusIncreasePerLevel.Value * teamLevel;
@@ -63,7 +66,6 @@ namespace RoR2QoLChanges.Patches.Mechanics
         public override void RemovePatches()
         {
             On.RoR2.HealthComponent.Heal -= PreHealBuffApply;
-            On.EntityStates.CaptainSupplyDrop.HealZoneMainState.OnEnter -= ApplyHealingRadiusChanges;
         }
 
         public static float GetAdjustedHealAmount(float healAmount, float currentHp, float maxHp) =>

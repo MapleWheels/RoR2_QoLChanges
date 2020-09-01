@@ -18,7 +18,7 @@ namespace RoR2QoLChanges.Configuration.Survivors
         [ConfigEntryDescription(Value = "Captain's Beacon'd healing ward range at level 1.")]
         public ConfigEntry<float> Beacon_HealingDefaultRadius { get; set; }
 
-        [ConfigEntryDefaultValue(Value = 1f)]
+        [ConfigEntryDefaultValue(Value = 1.25f)]
         [ConfigEntryDescription(Value = "Captain's Beacon'd healing ward increase per level.")]
         public ConfigEntry<float> Beacon_HealingRadiusIncreasePerLevel { get; set; }
 
