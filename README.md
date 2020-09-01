@@ -24,9 +24,9 @@ Note: This plugin requires the following modding libraries:
 	
 **Survivors & Entities**
 - Artificer:
-	- *Completed*: Fire Bolt (M1) gains +1 max charge per 10 levels (capped at +2 charges).
-	- *Completed*: Fire Bolt (M1) gains +1 max charge per 3 Backup Magazines (capped at +2 charges).
-	- *Completed*: Fire Bolt (M1)'s cooldown is reduced by 1% per 10% bonus attack speed. **Note**: This is applied **multiplicatively after** all other cooldown reduction has been applied.
+	- *Completed*: Fire Bolt (M1) gains +1 max charge per 10 levels (capped at 99).
+	- *Completed*: Fire Bolt (M1) gains +1 max charge per 3 Backup Magazines (capped at 99).
+	- *Completed*: Fire Bolt (M1)'s cooldown is reduced by 1% per 10% bonus attack speed (capped at 45%). **Note**: This is applied **multiplicatively after** all other cooldown reduction has been applied.
 
 - Captain:
 	- **Vanilla BUGFIX**: Captain can now properly use Equipment Item *Gorag's Opus*.

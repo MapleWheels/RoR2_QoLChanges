@@ -35,6 +35,10 @@ namespace RoR2QoLChanges.Patches.Entities
                 );
         }
 
+        /// <summary>
+        /// Increases the M1/Fire Bolt max charges on Artificer/Mage.
+        /// </summary>
+        /// <param name="__instance"></param>
         public static void Post_CharacterBody_RecalculateStats(RoR2.CharacterBody __instance)
         {
             if (__instance.name.ToLower().Contains(ArtificerConfig.ArtificerBodyName.ToLower()))
@@ -51,8 +55,6 @@ namespace RoR2QoLChanges.Patches.Entities
                         artificerConfig.M1Fire_MaxBackupMagCharges.Value
                         )
                     );
-
-                Debug.LogWarning($"HI_ArtificerChanges::Post..Stats() | Arti Charges count={m1.maxStock}");
 
                 m1.cooldownScale *= Mathf.Min(
                     Mathf.Max(__instance.attackSpeed - __instance.baseAttackSpeed, 0f) * artificerConfig.M1Fire_CooldownPerAttackSpeedRatio.Value,

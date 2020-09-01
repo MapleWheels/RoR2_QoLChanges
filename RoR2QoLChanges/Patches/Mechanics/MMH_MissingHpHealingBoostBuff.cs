@@ -26,7 +26,6 @@ namespace RoR2QoLChanges.Patches.Mechanics
                 CharacterBody body = component.GetComponent<CharacterBody>();
                 if (body)
                 {
-
                     //calculate healing fraction
                     float teamLevel = body.level;
                     float interval = MissingHpHealingBoostBehaviour.interval;
@@ -34,7 +33,6 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
                     //calculate radius
                     float radius = ActiveConfig.Beacon_HealingDefaultRadius.Value + ActiveConfig.Beacon_HealingRadiusIncreasePerLevel.Value * teamLevel;
-
 
                     component.SyncHealingStats(false); //get current healingward stats
 
