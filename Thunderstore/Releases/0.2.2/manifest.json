@@ -1,6 +1,6 @@
 {
     "name": "QualityOfLifeChanges",
-    "version_number": "0.2.2",
+    "version_number": "0.2.3",
     "website_url": "https://github.com/MapleWheels/RoR2_QoLChanges",
     "description": "A collection of Quality of Life changes for Risk of Rain 2's 1.0 release update. All options are configurable via the configuration file.",
     "dependencies": [

@@ -1,5 +1,10 @@
 This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 release update. All options are configurable via the configuration file.
 
+**Changelog**
+0.2.1: First Thunderstore published build.
+**!0.2.2: Fixed bugs from Risk of Risk of 2 v1.0.1.1 update.**
+0.2.3: Quick Readme fix. No need to update.
+
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
 - [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) (Included) v1.0.0.4 or higher.
@@ -47,7 +52,3 @@ Note: This plugin requires the following modding libraries:
 - *Planned*: Item Stats Mod: In-Game stats reflect QoL changes.
 - *Planned*: Item Stats Mod: Data taken from in-game sources instead of the current lookup Dictionary.
 
-
-**Changelog**
-0.2.1: First Thunderstore published build.
-0.2.2: Fixed bugs from Risk of Risk of 2 v1.0.1.1 update.
