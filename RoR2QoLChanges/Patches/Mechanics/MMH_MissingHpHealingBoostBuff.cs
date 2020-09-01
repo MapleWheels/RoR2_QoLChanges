@@ -26,6 +26,7 @@ namespace RoR2QoLChanges.Patches.Mechanics
                 CharacterBody body = component.GetComponent<CharacterBody>();
                 if (body)
                 {
+
                     //calculate healing fraction
                     float teamLevel = body.level;
                     float interval = MissingHpHealingBoostBehaviour.interval;
@@ -33,6 +34,7 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
                     //calculate radius
                     float radius = ActiveConfig.Beacon_HealingDefaultRadius.Value + ActiveConfig.Beacon_HealingRadiusIncreasePerLevel.Value * teamLevel;
+
 
                     component.SyncHealingStats(false); //get current healingward stats
 
@@ -44,6 +46,8 @@ namespace RoR2QoLChanges.Patches.Mechanics
                     component.SyncHealingStats(true);   //Update the healing ward stats
                 }
             }
+
+            orig(self);
         }
 
         private float PreHealBuffApply(On.RoR2.HealthComponent.orig_Heal orig, RoR2.HealthComponent self, float amount, RoR2.ProcChainMask procChainMask, bool nonRegen)
@@ -51,12 +55,9 @@ namespace RoR2QoLChanges.Patches.Mechanics
             CharacterBody component = self.GetComponent<CharacterBody>();
             MissingHpHealingBoostBuff buff = (MissingHpHealingBoostBuff)PluginCore.buffCatalog[nameof(MissingHpHealingBoostBuff)];
 
-            UnityEngine.Debug.LogWarning($"MMH_MissingHp..Buff::PreHealBuffApply() | Before={amount}");
             if (component && buff != null)
                 if (component.HasBuff(buff.BuffDef.buffIndex))
                     amount = GetAdjustedHealAmount(amount, self.health, self.fullHealth);
-
-            UnityEngine.Debug.LogWarning($"MMH_MissingHp..Buff::PreHealBuffApply() | After={amount}");
 
             return orig(self, amount, procChainMask, nonRegen);
         }
