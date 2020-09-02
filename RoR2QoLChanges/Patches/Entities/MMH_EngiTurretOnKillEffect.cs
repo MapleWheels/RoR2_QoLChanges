@@ -20,64 +20,22 @@ namespace RoR2QoLChanges.Patches.Entities
 
         public override void ApplyPatches()
         {
-            On.RoR2.GlobalEventManager.OnCharacterDeath += OnEngiTurretKillEffects;
-            On.RoR2.CharacterBody.SendConstructTurret += OnEngiTurretSpawnCommand;
-            On.RoR2.CharacterBody.HandleConstructTurret += OnEngiTurretSpawned;
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::ApplyPatches()|Init Good.");
+            GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeathPostProcess;
         }
 
-        private void OnEngiTurretSpawnCommand(On.RoR2.CharacterBody.orig_SendConstructTurret orig, CharacterBody self, CharacterBody builder, Vector3 position, Quaternion rotation, MasterCatalog.MasterIndex masterIndex)
+        private void OnCharacterDeathPostProcess(DamageReport damageReport)
         {
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawnCommand()|masterIndex={masterIndex}");
+            //suicide
+            if (!damageReport.attacker || !damageReport.damageInfo.inflictor || damageReport.attacker == damageReport.victim || damageReport.damageInfo.inflictor == damageReport.victim)
+                return;
 
-            GameObject masterTurretPrefab = MasterCatalog.GetMasterPrefab(masterIndex);
-
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawnCommand()|masterTurretPrefab={masterTurretPrefab}");
-
-            var component = masterTurretPrefab.GetComponent<MinionOnKillProcBehaviour>();
-
-            if (!component)
-                component = masterTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
-
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawnCommand()|component={component}");
-
-            component.ChanceToPassOnHit = ActiveConfig.EngiTurret_ChanceOnKillProcAppliedToEngi.Value;
-
-            orig(self, builder, position, rotation, masterIndex);
-        }
-
-        private void OnEngiTurretSpawned(On.RoR2.CharacterBody.orig_HandleConstructTurret orig, UnityEngine.Networking.NetworkMessage netMsg)
-        {
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawned()|netMsg={netMsg}");
-
-            GameObject masterTurretPrefab = MasterCatalog.GetMasterPrefab(netMsg.ReadMessage<CharacterBody.ConstructTurretMessage>().turretMasterIndex);
-
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawned()|masterTurretPrefab={masterTurretPrefab}");
-
-
-            var component = masterTurretPrefab.GetComponent<MinionOnKillProcBehaviour>();
-
-            if (!component)
-                component = masterTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
-
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretSpawned()|component={component}");
-
-
-            component.ChanceToPassOnHit = ActiveConfig.EngiTurret_ChanceOnKillProcAppliedToEngi.Value;
-
-            orig(netMsg);
-        }
-
-        private void OnEngiTurretKillEffects(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, RoR2.GlobalEventManager self, RoR2.DamageReport damageReport)
-        {
-            orig(self, damageReport);
-
-            UnityEngine.Debug.LogWarning($"MMH_EngiTurret..::OnEngiTurretKillEffects()|damageReport={damageReport}");
-
-            MinionOnKillProcBehaviour component = damageReport.attacker.GetComponent<MinionOnKillProcBehaviour>();
+            MinionOnKillProcBehaviour component = damageReport.attacker.GetComponent<MinionOnKillProcBehaviour>();  
 
             if (component)
+            {
                 component.ProcessAttackerOnKillEffects(damageReport);
+                component.ChanceToPassOnHit = ActiveConfig.EngiTurret_ChanceOnKillProcAppliedToEngi.Value;
+            }
         }
     }
 }

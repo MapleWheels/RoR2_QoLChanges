@@ -4,6 +4,8 @@ using BepInEx.Extensions.Configuration;
 using R2API;
 using R2API.Utils;
 
+using RoR2;
+
 using RoR2QoLChanges.Additions.Buffs;
 using RoR2QoLChanges.Additions.Mechanics;
 using RoR2QoLChanges.Configuration;
@@ -118,10 +120,10 @@ namespace RoR2QoLChanges
                 new MMH_MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
                 );
 
-            //monoModPatches.Add(
-            //    nameof(MMH_EngiTurretOnKillEffect),
-            //    new MMH_EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
-            //    );
+            monoModPatches.Add(
+                nameof(MMH_EngiTurretOnKillEffect),
+                new MMH_EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
+                );
 
             //Patch Calls
             foreach (KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
@@ -148,6 +150,18 @@ namespace RoR2QoLChanges
             if (EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab)
                 if(!EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>())
                     EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<MissingHpHealingBoostBehaviour>();
+
+            GameObject engiTurretPrefab = BodyCatalog.FindBodyPrefab("EngiTurretBody");
+            UnityEngine.Debug.LogWarning($"PluginCore:InitSystemInstances()|bodyIndex={engiTurretPrefab}");
+
+            if (engiTurretPrefab)
+                engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
+
+            engiTurretPrefab = BodyCatalog.FindBodyPrefab("EngiWalkerTurretBody");
+            UnityEngine.Debug.LogWarning($"PluginCore:InitSystemInstances()|bodyIndex={engiTurretPrefab}");
+
+            if (engiTurretPrefab)
+                engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
         }
 
     }

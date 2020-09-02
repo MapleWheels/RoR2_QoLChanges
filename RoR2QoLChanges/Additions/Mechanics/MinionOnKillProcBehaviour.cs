@@ -10,39 +10,33 @@ using UnityEngine;
 
 namespace RoR2QoLChanges.Additions.Mechanics
 {
-    [RequireComponent(typeof(CharacterBody))]
     [DisallowMultipleComponent]
     public class MinionOnKillProcBehaviour : MonoBehaviour
     {
         public float ChanceToPassOnHit = 100f;
-        public CharacterBody selfBody;
-        public CharacterMaster ownerMaster;
-
-        void Start()
-        {
-            selfBody = GetComponent<CharacterBody>();
-            ownerMaster = selfBody.master.minionOwnership.ownerMaster;
-        }
 
         public void ProcessAttackerOnKillEffects(DamageReport report)
         {
-            if (ownerMaster)
+            var selfBody = report.attackerBody;
+            var ownerBody = report.attackerOwnerMaster.GetBody();
+
+            if (!selfBody)
+                return;
+
+            if (!ownerBody || ownerBody == selfBody)
+                return;
+
+            if (Util.CheckRoll(ChanceToPassOnHit, ownerBody.master))
             {
-                UnityEngine.Debug.LogWarning($"MinionOnKill..::ProcessAttackerOnKillEffects()|ownermaster={ownerMaster}");
+                report.attacker = ownerBody.gameObject;
+                report.attackerBody = ownerBody;
+                report.attackerBodyIndex = BodyCatalog.FindBodyIndex(report.attackerBody);
+                report.attackerMaster = ownerBody.master;
+                report.attackerTeamIndex = ownerBody.master.teamIndex;
+                report.damageInfo.attacker = ownerBody.gameObject;
+                report.damageInfo.inflictor = ownerBody.gameObject;
 
-                if (Util.CheckRoll(ChanceToPassOnHit, 0, null))
-                {
-                    UnityEngine.Debug.LogWarning($"MinionOnKill..::ProcessAttackerOnKillEffects()|untilCheckRoll Good.");
-
-                    DamageReport reportClone = new DamageReport(report.damageInfo, report.victim, report.damageDealt, report.combinedHealthBeforeDamage);
-                    reportClone.attacker = ownerMaster.gameObject;
-                    reportClone.attackerBody = ownerMaster.GetBody();
-                    reportClone.attackerBodyIndex = BodyCatalog.FindBodyIndex(reportClone.attackerBody);
-                    reportClone.attackerMaster = ownerMaster;
-                    reportClone.attackerTeamIndex = ownerMaster.teamIndex;
-
-                    GlobalEventManager.instance.OnCharacterDeath(reportClone);
-                }
+                GlobalEventManager.instance.OnCharacterDeath(report);
             }
         }
     }
