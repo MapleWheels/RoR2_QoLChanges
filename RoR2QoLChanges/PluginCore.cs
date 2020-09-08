@@ -34,6 +34,7 @@ namespace RoR2QoLChanges
         public static Dictionary<string, HarmonyPatchable> harmonyPatches;
         public static Dictionary<string, MonoModPatchable> monoModPatches;
         public static Dictionary<string, BuffEntry> buffCatalog;
+        public static EntityPrefabPatches EntityPatcher;
         public static GeneralConfig GeneralConfig;
         public static Sprite Assets;
 
@@ -147,21 +148,8 @@ namespace RoR2QoLChanges
 
         void InitSystemInstances()
         {
-            if (EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab)
-                if(!EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>())
-                    EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<MissingHpHealingBoostBehaviour>();
-
-            GameObject engiTurretPrefab = BodyCatalog.FindBodyPrefab("EngiTurretBody");
-            UnityEngine.Debug.LogWarning($"PluginCore:InitSystemInstances()|bodyIndex={engiTurretPrefab}");
-
-            if (engiTurretPrefab)
-                engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
-
-            engiTurretPrefab = BodyCatalog.FindBodyPrefab("EngiWalkerTurretBody");
-            UnityEngine.Debug.LogWarning($"PluginCore:InitSystemInstances()|bodyIndex={engiTurretPrefab}");
-
-            if (engiTurretPrefab)
-                engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
+            EntityPatcher = new EntityPrefabPatches();
+            EntityPatcher.ApplyPatches();
         }
 
     }

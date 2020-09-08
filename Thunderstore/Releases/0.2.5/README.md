@@ -1,17 +1,11 @@
 This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 release update. All options are configurable via the configuration file.
 
 **Changelog**
-0.2.1: 
-	- First Thunderstore published build.
+0.2.1: First Thunderstore published build.
 **!0.2.2: Fixed bugs from Risk of Risk of 2 v1.0.1.1 update.**
-0.2.3: 
-	- Quick Readme fix. No need to update.
-0.2.4: 
-	- Added OnKill-Proc Chance feature to Engineer's turrets.
-0.2.5: 
-	- Description fixes.
-0.2.6: 
-	- Squid Polyp: Health no longer decays over time. 
+0.2.3: Quick Readme fix. No need to update.
+0.2.4: Added OnKill-Proc Chance feature to Engineer's turrets.
+0.2.5: Hotfix to proc rate.
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
@@ -24,13 +18,11 @@ Note: This plugin requires the following modding libraries:
 **Items, Procs & Mechanics:**
 
 - Item - Fresh Meat:
-	- *Completed*: Now heals for 2HP (increases with level) + 0.5% (+0.25%/stack) Max HP per second.
+	- *Completed*: Now heals for 0.5% (+0.25%/stack) Max HP.
 	
 - Item - Gorag's Opus:
 	- *Planned*: Buff time increased from 7 to 8 seconds (to match War Horn).
-
-- Item - Squid Polyp:
-	- *Completed*: Squid Polyp's health no longer decays.
+	- *Planned*: Cooldown time increased from 45 seconds to 55 seconds.
 
 - Mechanic - Bleeding:
 	- *Completed*: Bleed damage reduced from 240% to 180% base damage per stack.

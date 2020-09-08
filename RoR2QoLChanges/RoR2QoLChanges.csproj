@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -89,6 +90,7 @@
     <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Additions\Mechanics\MinionOnKillProcBehaviour.cs" />
     <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
+    <Compile Include="Additions\Mechanics\SquidPolypConfiguratorBehaviour.cs" />
     <Compile Include="AssemblyPolicies.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Patches\Entities\HI_ArtificerChanges.cs" />
     <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
     <Compile Include="Patches\Entities\MMH_EngiTurretOnKillEffect.cs" />
+    <Compile Include="Patches\Entities\EntityPrefabPatches.cs" />
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
@@ -132,6 +135,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Program Files (x86)\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\RoR2_QoLChanges\RoR2_QoLChanges.dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Program Files (x86)\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\RoR2QoLChanges\RoR2QoLChanges.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -33,8 +33,8 @@ namespace RoR2QoLChanges.Patches.Entities
 
             if (component)
             {
-                component.ProcessAttackerOnKillEffects(damageReport);
                 component.ChanceToPassOnHit = ActiveConfig.EngiTurret_ChanceOnKillProcAppliedToEngi.Value;
+                component.ProcessAttackerOnKillEffects(damageReport);
             }
         }
     }

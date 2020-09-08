@@ -13,7 +13,7 @@ namespace RoR2QoLChanges.Additions.Mechanics
     [DisallowMultipleComponent]
     public class MinionOnKillProcBehaviour : MonoBehaviour
     {
-        public float ChanceToPassOnHit = 100f;
+        public float ChanceToPassOnHit = 10f;
 
         public void ProcessAttackerOnKillEffects(DamageReport report)
         {
