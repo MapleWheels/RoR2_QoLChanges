@@ -92,9 +92,11 @@
     <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
     <Compile Include="Additions\Mechanics\SquidPolypConfiguratorBehaviour.cs" />
     <Compile Include="AssemblyPolicies.cs" />
+    <Compile Include="Configuration\Items\WarbannerConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
     <Compile Include="Configuration\Survivors\CaptainConfig.cs" />
+    <Compile Include="Configuration\Survivors\CommandoConfig.cs" />
     <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
     <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
     <Compile Include="Patches\Entities\MMH_EngiTurretOnKillEffect.cs" />
     <Compile Include="Patches\Entities\EntityPrefabPatches.cs" />
+    <Compile Include="Patches\Items\MMH_WarbannerChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />

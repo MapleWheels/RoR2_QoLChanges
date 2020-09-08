@@ -14,9 +14,7 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Squid Polyp: Health no longer decays over time. 
 0.2.7:
 	- Commando Alt_Special/R: Grenades now are now Sticky/stick to the target.
-	- Commando's Grenades' damage multiplier changed from 700% to 1000%.
-0.2.8
-	- HOTFIX: Commando's grenade damage properly set to 1000% at the centre.
+	- Commando's Grenades' damage multiplier changed from 400% to 800%.
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
@@ -60,7 +58,7 @@ Note: This plugin requires the following modding libraries:
 	
 - Commando:
 	- *Completed*: Commando's Grenades (R/Special) now stick when they land instead of bouncing.
-	- *Completed*: Commando's Grenades' damage multiplier changed **from 700% to 1000%**.
+	- *Completed*: Commando's Grenades' damage multiplier changed **from 400% to 800%**.
 
 - Engineer: The Best Class
 	- *Completed*: Carbonizer Turrets walking speed is set at Engineer's sprinting speed. **Note** Sprinting is used conservatively by the AI Director to help the turrets catch up to the player and cannot attack while sprinting.
