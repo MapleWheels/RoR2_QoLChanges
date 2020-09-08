@@ -4,7 +4,7 @@
     {
         public const string PackageName = "com.tbnmods.RoR2QoLChanges";
         public const string PluginName = "RoR2QoLChanges";
-        public const string Version = "0.2.6";
+        public const string Version = "0.2.7";
 
         public const string ModPrefix = "@" + PluginName + ":";
         public static class Assets

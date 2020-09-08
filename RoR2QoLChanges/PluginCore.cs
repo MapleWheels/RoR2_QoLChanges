@@ -139,7 +139,7 @@ namespace RoR2QoLChanges
             buffCatalog = new Dictionary<string, BuffEntry>();
             buffCatalog.Add(
                 nameof(Additions.Buffs.MissingHpHealingBoostBuff),
-                new MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
+                new MissingHpHealingBoostBuff(Config.BindModel<CaptainConfig>(Logger))
                 );
 
             foreach (KeyValuePair<string, BuffEntry> buff in buffCatalog)
@@ -148,7 +148,7 @@ namespace RoR2QoLChanges
 
         void InitSystemInstances()
         {
-            EntityPatcher = new EntityPrefabPatches();
+            EntityPatcher = new EntityPrefabPatches(Config.BindModel<CommandoConfig>(Logger));
             EntityPatcher.ApplyPatches();
         }
 

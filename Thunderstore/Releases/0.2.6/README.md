@@ -12,12 +12,10 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Description fixes.
 0.2.6: 
 	- Squid Polyp: Health no longer decays over time. 
-0.2.7:
-	- Commando Alt_Special/R: Grenades now are now Sticky/stick to the target.
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
-- [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) (**Included**) v1.0.0.4 or higher.
+- [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) (Included) v1.0.0.4 or higher.
 - [R2API](https://github.com/risk-of-thunder/R2API) (Risk of Rain 2 build 1.0.0.5 or higher)
 
 
@@ -54,10 +52,6 @@ Note: This plugin requires the following modding libraries:
 	- *Completed*: Special: Healing Station Beacon radius increases by 1.25 per level (vanilla size = 10).
 	- *Planned*: Special: Shock Field Beacon buffs (TBA).
 	- *Planned*: M2/Secondary: Tazer Gun buffs (TBA).
-	
-- Commando:
-	- *Completed*: Commando's Grenades (R/Special) now stick when they land instead of bouncing.
-	- *Completed*: Commando's Grenades' damage multiplier changed **from 400% to 800%**.
 
 - Engineer: The Best Class
 	- *Completed*: Carbonizer Turrets walking speed is set at Engineer's sprinting speed. **Note** Sprinting is used conservatively by the AI Director to help the turrets catch up to the player and cannot attack while sprinting.
