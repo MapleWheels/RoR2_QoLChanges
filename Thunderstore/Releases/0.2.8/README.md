@@ -17,9 +17,6 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Commando's Grenades' damage multiplier changed from 700% to 1000%.
 0.2.8
 	- HOTFIX: Commando's grenade damage properly set to 1000% at the centre.
-0.3.0
-	- Added new Warbanner Buffs: Attack speed bonus now scales with warbanner item count.
-	
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
@@ -39,9 +36,6 @@ Note: This plugin requires the following modding libraries:
 
 - Item - Squid Polyp:
 	- *Completed*: Squid Polyp's health no longer decays.
-	
-- Item - Warbanner:
-	- *Completed*: Warbanner now grants 30% (+5%/stack) attack speed.
 
 - Mechanic - Bleeding:
 	- *Completed*: Bleed damage reduced from 240% to 180% base damage per stack.

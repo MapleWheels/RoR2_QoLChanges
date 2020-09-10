@@ -25,7 +25,8 @@ using UnityEngine;
 
 namespace RoR2QoLChanges
 {
-    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency(R2API.R2API.PluginGUID)] 
+    [BepInDependency(MiniRpcLib.MiniRpcPlugin.Dependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod)]
     [BepInPlugin(ConVars.PackageName, ConVars.PluginName, ConVars.Version)]
     [R2APISubmoduleDependency(nameof(BuffAPI), nameof(ItemAPI), nameof(ResourcesAPI))]
@@ -37,6 +38,7 @@ namespace RoR2QoLChanges
         public static EntityPrefabPatches EntityPatcher;
         public static GeneralConfig GeneralConfig;
         public static Sprite Assets;
+        public static WarbannerBuffHelper WarbannerBuffHelper;
 
         //Init
         void Awake()
@@ -126,6 +128,11 @@ namespace RoR2QoLChanges
                 new MMH_EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
                 );
 
+            monoModPatches.Add(
+                nameof(MMH_WarbannerChanges),
+                new MMH_WarbannerChanges(Config.BindModel<WarbannerConfig>(Logger))
+                );
+
             //Patch Calls
             foreach (KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
                 hp.Value.ApplyPatches();
@@ -148,6 +155,8 @@ namespace RoR2QoLChanges
 
         void InitSystemInstances()
         {
+            WarbannerBuffHelper = new WarbannerBuffHelper();
+
             EntityPatcher = new EntityPrefabPatches(Config.BindModel<CommandoConfig>(Logger));
             EntityPatcher.ApplyPatches();
         }

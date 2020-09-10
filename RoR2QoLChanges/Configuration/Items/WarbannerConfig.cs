@@ -12,6 +12,12 @@ namespace RoR2QoLChanges.Configuration.Items
     [ConfigModelSectionName(Value = "Item_Warbanner")]
     public class WarbannerConfig : ConfigFileModel
     {
-        public ConfigEntry<float> attackSpeedPerStack;
+        [ConfigEntryDefaultValue(Value = 0.3f)]
+        [ConfigEntryDescription(Value = "The attack speed gained at base.")]
+        public ConfigEntry<float> attackSpeedBase { get; set; }
+
+        [ConfigEntryDefaultValue(Value = 0.05f)]
+        [ConfigEntryDescription(Value = "The attack speed gained per stack of Warbanner.")]
+        public ConfigEntry<float> attackSpeedPerStack { get; set; }
     }
 }

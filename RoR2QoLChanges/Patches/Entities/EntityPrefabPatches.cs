@@ -18,12 +18,15 @@ namespace RoR2QoLChanges.Patches.Entities
     public class EntityPrefabPatches
     {
         public CommandoConfig commandoConfig;
+        GameObject warbannerWardRef;
 
         protected void CommandoGrenadePatch()
         {
             GameObject prefab = ProjectileCatalog.GetProjectilePrefab(ProjectileCatalog.FindProjectileIndex("CommandoGrenadeProjectile"));
             if (prefab)
                 prefab.AddComponent<ProjectileStickOnImpact>();
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::CommandoGrenadePatch() | Could not load CommandoGrenadeProjectile prefab!");
 
             EntityStates.Commando.CommandoWeapon.FireGrenade.damageCoefficient = commandoConfig.GrenadeDamageCoefficient.Value;
         }
@@ -32,9 +35,23 @@ namespace RoR2QoLChanges.Patches.Entities
         {
             GameObject squidBodyPrefab = BodyCatalog.FindBodyPrefab("SquidTurretBody");
             if (squidBodyPrefab)
-            {
                 squidBodyPrefab.AddComponent<SquidPolypConfiguratorBehaviour>();
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::SquidPolypPatch() | Could not load SquidTurretBody prefab!");
+        }
+
+        protected void WarbannerBuffPatch()
+        {
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
+            if (prefab)
+            {
+                WarbannerBuffRpcBehaviour component = prefab.AddComponent<WarbannerBuffRpcBehaviour>();
+                component.enabled = true;
+                UnityEngine.Debug.LogWarning($"Warbanner Prefab Patching: GO={prefab} | Component={component}");
+                warbannerWardRef = prefab;  //Cache it or it gets unloaded...
             }
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::WarbannerBuffPatch() | Could not load WarbannerWard prefab!");
         }
 
         protected void EngiTurretPatch()
@@ -43,17 +60,24 @@ namespace RoR2QoLChanges.Patches.Entities
 
             if (engiTurretPrefab)
                 engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::EngiTurretPatch() | Could not load EngiTurretBody prefab!");
+
 
             engiTurretPrefab = BodyCatalog.FindBodyPrefab("EngiWalkerTurretBody");
 
             if (engiTurretPrefab)
                 engiTurretPrefab.AddComponent<MinionOnKillProcBehaviour>();
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::EngiTurretPatch() | Could not load EngiWalkerTurretBody prefab!");
         }
 
         protected void CaptainBeaconPatch()
         {
             if (EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab)
                 EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<MissingHpHealingBoostBehaviour>();
+            else
+                UnityEngine.Debug.LogError($"EntityPrefabPatches::CaptainBeaconPatch() | Could not load HealZone prefab!");
         }
 
         public void ApplyPatches()
@@ -62,6 +86,7 @@ namespace RoR2QoLChanges.Patches.Entities
             CommandoGrenadePatch();
             EngiTurretPatch();
             SquidPolypPatch();
+            WarbannerBuffPatch();
         }
 
         public EntityPrefabPatches(CommandoConfig commandoConfig)
