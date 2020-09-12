@@ -18,7 +18,6 @@ namespace RoR2QoLChanges.Patches.Entities
     public class EntityPrefabPatches
     {
         public CommandoConfig commandoConfig;
-        GameObject warbannerWardRef;
 
         protected void CommandoGrenadePatch()
         {
@@ -42,13 +41,11 @@ namespace RoR2QoLChanges.Patches.Entities
 
         protected void WarbannerBuffPatch()
         {
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
-            if (prefab)
+            //GameObject prefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");       
+            if (PrefabCacheHelper.Instance.TryGetPrefab("Prefabs/NetworkedObjects/WarbannerWard", out GameObject prefab))
             {
                 WarbannerBuffRpcBehaviour component = prefab.AddComponent<WarbannerBuffRpcBehaviour>();
-                component.enabled = true;
                 UnityEngine.Debug.LogWarning($"Warbanner Prefab Patching: GO={prefab} | Component={component}");
-                warbannerWardRef = prefab;  //Cache it or it gets unloaded...
             }
             else
                 UnityEngine.Debug.LogError($"EntityPrefabPatches::WarbannerBuffPatch() | Could not load WarbannerWard prefab!");
@@ -93,5 +90,7 @@ namespace RoR2QoLChanges.Patches.Entities
         {
             this.commandoConfig = commandoConfig;
         }
+
+        
     }
 }

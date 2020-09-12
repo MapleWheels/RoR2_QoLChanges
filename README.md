@@ -1,5 +1,7 @@
 This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 release update. All options are configurable via the configuration file.
 
+**BUG REPORTS AND SUGGESTIONS**: Please submit an Issue Ticket at https://github.com/MapleWheels/RoR2_QoLChanges/issues/
+
 **Changelog**
 0.2.1: 
 	- First Thunderstore published build.
@@ -17,8 +19,15 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Commando's Grenades' damage multiplier changed from 700% to 1000%.
 0.2.8
 	- HOTFIX: Commando's grenade damage properly set to 1000% at the centre.
-0.3.0
-	- Added new Warbanner Buffs: Attack speed bonus now scales with warbanner item count.
+0.3.0: **Huge Updates**
+	- **IMPORTANT!!: Please delete your configuration file for this mod in ~BepInEx/config/!!**
+	- **New**: Warbanner Buffs:
+		- Added new Warbanner Buffs: Attack speed bonus now scales with warbanner item count at +3%/level.
+		- The scaling portion of Warbanner's attack speed buff is stackable from overlapping war banners.
+	- Fixed a bug with Artificer's M1 cooldown scaling calculation.
+	- Captain:
+		- Reduced the size scaling on Captain's healing beacom from 1.25m/level to 1m/level.
+		- Reduced the scaling healing amount from 0.75%HP/level to 0.5%HP/level.
 	
 
 Note: This plugin requires the following modding libraries:
@@ -41,7 +50,8 @@ Note: This plugin requires the following modding libraries:
 	- *Completed*: Squid Polyp's health no longer decays.
 	
 - Item - Warbanner:
-	- *Completed*: Warbanner now grants 30% (+5%/stack) attack speed.
+	- *Completed*: Warbanner now grants 30% (+3%/stack) attack speed.
+	- *Completed*: Warbanner's per-stack attack speed buffs will stack from overlapping Warbanner areas.
 
 - Mechanic - Bleeding:
 	- *Completed*: Bleed damage reduced from 240% to 180% base damage per stack.
@@ -58,9 +68,9 @@ Note: This plugin requires the following modding libraries:
 
 - Captain:
 	- **Vanilla BUGFIX**: Captain can now properly use Equipment Item *Gorag's Opus*.
-	- *Completed*: Special: Healing Station Beacon's % Max HP healing is increased by +0.75% Max HP/level.
-	- *Completed*: Special: Healing Station Beacon increases all healing based on % missing HP.
-	- *Completed*: Special: Healing Station Beacon radius increases by 1.25 per level (vanilla size = 10).
+	- *Completed*: Special: Healing Station Beacon's % Max HP healing is increased by +0.5% Max HP/level.
+	- *Completed*: Special: Healing Station Beacon increases all healing based on % missing HP, up to 50%.
+	- *Completed*: Special: Healing Station Beacon radius increases by 1m per level (vanilla size = 10m).
 	- *Planned*: Special: Shock Field Beacon buffs (TBA).
 	- *Planned*: M2/Secondary: Tazer Gun buffs (TBA).
 	

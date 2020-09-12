@@ -57,8 +57,8 @@ namespace RoR2QoLChanges.Patches.Entities
                     );
 
                 m1.cooldownScale *= Mathf.Min(
-                    Mathf.Max(__instance.attackSpeed - __instance.baseAttackSpeed, 0f) * artificerConfig.M1Fire_CooldownPerAttackSpeedRatio.Value,
-                    artificerConfig.M1Fire_MaxCooldownFromAttackSpeed.Value
+                    Mathf.Max(__instance.attackSpeed - (__instance.baseAttackSpeed + __instance.levelAttackSpeed * __instance.level), 0f) * artificerConfig.M1Fire_CooldownPerAttackSpeedRatio.Value,
+                    1f - artificerConfig.M1Fire_MaxCooldownFromAttackSpeed.Value
                     );
             }
         }

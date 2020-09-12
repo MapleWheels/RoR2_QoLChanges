@@ -10,7 +10,7 @@ namespace RoR2QoLChanges.Configuration.Survivors
         [ConfigEntryDescription(Value = "How much increase %MaxHp Captain's beacon heals for per level")]
         public ConfigEntry<float> Beacon_MaxHpHealingBase { get; set; }
 
-        [ConfigEntryDefaultValue(Value = 0.75f)]
+        [ConfigEntryDefaultValue(Value = 0.5f)]
         [ConfigEntryDescription(Value = "How much increase %MaxHp Captain's beacon heals for per level")]
         public ConfigEntry<float> Beacon_MaxHpHealingRatioPerLevel { get; set; }
 
@@ -18,7 +18,7 @@ namespace RoR2QoLChanges.Configuration.Survivors
         [ConfigEntryDescription(Value = "Captain's Beacon's healing ward range at level 1.")]
         public ConfigEntry<float> Beacon_HealingDefaultRadius { get; set; }
 
-        [ConfigEntryDefaultValue(Value = 1.25f)]
+        [ConfigEntryDefaultValue(Value = 1f)]
         [ConfigEntryDescription(Value = "Captain's Beacon's healing ward increase per level.")]
         public ConfigEntry<float> Beacon_HealingRadiusIncreasePerLevel { get; set; }
 
@@ -30,7 +30,7 @@ namespace RoR2QoLChanges.Configuration.Survivors
         [ConfigEntryDescription(Value = "Captain's Beacon's healing ward range at level 1.")]
         public ConfigEntry<float> Beacon_ShockDefaultRadius { get; set; }
 
-        [ConfigEntryDefaultValue(Value = 1.25f)]
+        [ConfigEntryDefaultValue(Value = 1f)]
         [ConfigEntryDescription(Value = "Captain's Beacon's healing ward increase per level.")]
         public ConfigEntry<float> Beacon_ShockRadiusIncreasePerLevel { get; set; }
     }

@@ -114,6 +114,7 @@
     <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
     <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
+    <Compile Include="Patches\PrefabCacheHelper.cs" />
     <Compile Include="PluginCore.cs" />
     <Compile Include="Configuration\ConVars.cs" />
     <Compile Include="Configuration\Items\FreshMeatConfig.cs" />
