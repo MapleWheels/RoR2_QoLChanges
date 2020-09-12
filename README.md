@@ -32,7 +32,7 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
-- [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) (**Included**) v1.0.0.4 or higher.
+- [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) v1.0.1.2 or higher.
 - [R2API](https://github.com/risk-of-thunder/R2API) (Risk of Rain 2 build 1.0.0.5 or higher)
 
 
@@ -41,7 +41,7 @@ Note: This plugin requires the following modding libraries:
 **Items, Procs & Mechanics:**
 
 - Item - Fresh Meat:
-	- *Completed*: Now heals for 2HP (increases with level) + 0.5% (+0.25%/stack) Max HP per second.
+	- *Completed*: Now heals for 2HP (increases with level) + 0.5% (+0.25%/stack) Max HP per second for 3 (+3/stack) seconds.
 	
 - Item - Gorag's Opus:
 	- *Planned*: Buff time increased from 7 to 8 seconds (to match War Horn).
