@@ -1,4 +1,7 @@
 ﻿using EntityStates.LunarTeleporter;
+
+using HarmonyLib;
+
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2QoLChanges.Configuration;
@@ -7,6 +10,7 @@ using RoR2QoLChanges.Configuration.Mechanics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -92,25 +96,8 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
         private void Patch_DotController_InitDotCatalog()
         {
-            IL.RoR2.DotController.InitDotCatalog += (il) =>
-            {
-                ILCursor csr = new ILCursor(il);
-                //IL Match
-                csr.GotoNext(
-                    x => x.MatchDup(),
-                    x => x.MatchLdcR4(0.25f),
-                    x => x.MatchStfld<RoR2.DotController.DotDef>("interval"),
-                    x => x.MatchDup(),
-                    x => x.MatchLdcR4(0.2f),    //Target value, Bleeding Damage Coefficient per interval.
-                    x => x.MatchStfld<RoR2.DotController.DotDef>("damageCoefficient")
-                    );
-
-                csr.Index += 1;
-                csr.Next.Operand = BleedConfig.BleedIntervalRate;
-
-                csr.Index += 3;
-                csr.Next.Operand = activeConfig.Bleed_BaseDamageRatio.Value * BleedConfig.BleedIntervalRate / activeConfig.StandardBleed_TimeSecs.Value;
-            };
+            RoR2.DotController.dotDefs[0].interval = BleedConfig.BleedIntervalRate;
+            RoR2.DotController.dotDefs[0].damageCoefficient = activeConfig.Bleed_BaseDamageRatio.Value * BleedConfig.BleedIntervalRate / activeConfig.StandardBleed_TimeSecs.Value;
         }
     }
 }

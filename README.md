@@ -3,23 +3,32 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 **BUG REPORTS AND SUGGESTIONS**: Please submit an Issue Ticket at https://github.com/MapleWheels/RoR2_QoLChanges/issues/
 
 **Changelog**
+
 0.2.1: 
 	- First Thunderstore published build.
+	
 **!0.2.2: Fixed bugs from Risk of Risk of 2 v1.0.1.1 update.**
+
 0.2.3: 
 	- Quick Readme fix. No need to update.
+	
 0.2.4: 
 	- Added OnKill-Proc Chance feature to Engineer's turrets.
+	
 0.2.5: 
 	- Description fixes.
+	
 0.2.6: 
 	- Squid Polyp: Health no longer decays over time. 
+	
 0.2.7:
 	- Commando Alt_Special/R: Grenades now are now Sticky/stick to the target.
 	- Commando's Grenades' damage multiplier changed from 700% to 1000%.
+	
 0.2.8
 	- HOTFIX: Commando's grenade damage properly set to 1000% at the centre.
-0.3.0: **Huge Updates**
+	
+0.3.0: 
 	- **IMPORTANT!!: Please delete your configuration file for this mod in ~BepInEx/config/!!**
 	- **New**: Warbanner Buffs:
 		- Added new Warbanner Buffs: Attack speed bonus now scales with warbanner item count at +3%/level.
@@ -28,7 +37,7 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Captain:
 		- Reduced the size scaling on Captain's healing beacom from 1.25m/level to 1m/level.
 		- Reduced the scaling healing amount from 0.75%HP/level to 0.5%HP/level.
-	
+	- Fixed a bug with Bleed where the damage multiplier from the Configuration file was not being applied.
 
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
