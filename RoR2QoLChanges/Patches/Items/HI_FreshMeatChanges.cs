@@ -46,7 +46,7 @@ namespace RoR2QoLChanges.Patches.Items
             if (__instance.HasBuff(FreshMeatConfig.FreshMeatBuffIndex))
             {
                 //Check if healing isn't disabled. If it has been, abort;
-                if (regen <= 0f)
+                if (regen > 0f)
                 {
                     //Original scaling from code at Line:1489 on 2020-08-20
                     float hpRateScalar = 1f + (__instance.level - 1f) * 0.2f;
@@ -59,8 +59,8 @@ namespace RoR2QoLChanges.Patches.Items
                         ActiveItemConfig.FreshMeat_FlatHpBase.Value
                         + ActiveItemConfig.FreshMeat_FlatHpScale.Value * __instance.level
                         + __instance.maxHealth * (
-                            ActiveItemConfig.FreshMeat_MaxHpPercentBase.Value
-                            + ActiveItemConfig.FreshMeat_MaxHpPercentScale.Value * __instance.level);
+                            ActiveItemConfig.FreshMeat_MaxHpPercentBase.Value * 0.01f
+                            + ActiveItemConfig.FreshMeat_MaxHpPercentScale.Value * __instance.level * 0.01f);
 
                     regen += newRegenPerSec;
                 }

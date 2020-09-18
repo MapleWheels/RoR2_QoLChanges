@@ -90,18 +90,12 @@ namespace RoR2QoLChanges.Additions.Mechanics
         [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Unity Message")]
         public void Start()
         {
-            UnityEngine.Debug.LogWarning($"WarrbannerRPC: Spawning.");
-
             Initialize();
             if (IsReady)
             {
                 short stackCount = (short)((AttachedWard.Networkradius - 8f) / 8f); //Reverse engineer radius formula to find stack count.
                 RegisterWarBannerWardServer();
                 RpcSetWarbannerStackCountServer(stackCount);
-                if (!NetworkServer.active)
-                    UnityEngine.Debug.LogWarning($"WarbannerRPC: Server Active.");
-                else
-                    UnityEngine.Debug.LogWarning($"WarbannerRPC: Client Active.");
             }
         }
 

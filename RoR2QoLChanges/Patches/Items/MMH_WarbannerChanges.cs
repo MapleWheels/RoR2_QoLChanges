@@ -21,13 +21,10 @@ namespace RoR2QoLChanges.Patches.Items
         {
             orig(self);
 
-            UnityEngine.Debug.LogWarning($"Warbanner Buffstate = {self.HasBuff(RoR2.BuffIndex.Warbanner)}");
-
             if (!self.HasBuff(RoR2.BuffIndex.Warbanner))
                 return;
 
             float stacks = PluginCore.WarbannerBuffHelper.GetWarbannerAttackSpeedModifier(self.corePosition);
-            UnityEngine.Debug.LogWarning($"WarbannerStacks Count = {stacks}");
             float atkSpeed = self.attackSpeed;
             float charAS = self.baseAttackSpeed + self.levelAttackSpeed * self.level;
 
