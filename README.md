@@ -39,6 +39,11 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 		- Reduced the scaling healing amount from 0.75%HP/level to 0.5%HP/level.
 	- Fixed a bug with Bleed where the damage multiplier from the Configuration file was not being applied.
 
+0.3.1:
+	- *Bugfix edition!*
+	- Re-applied the fix to Artificer's M1 that got undone by poor version control practices.
+	- Fixed an interaction bug between Fresh Meat and debuffs that stop natural regen.
+
 Note: This plugin requires the following modding libraries:
 - [BepInEx](https://github.com/BepInEx/BepInEx) v5.3.x or higher
 - [BepInEx.Extensions](https://github.com/MapleWheels/BepInEx_Extensions) v1.0.1.2 or higher.
