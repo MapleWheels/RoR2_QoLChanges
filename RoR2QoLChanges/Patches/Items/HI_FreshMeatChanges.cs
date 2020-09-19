@@ -38,8 +38,10 @@ namespace RoR2QoLChanges.Patches.Items
                 return;
 
             //Traverse<float> regenT = Traverse.Create(__instance).Property<float>("regen");
-            PropertyInfo piRegen = AccessTools.DeclaredProperty(__instance.GetType(), nameof(CharacterBody.regen));
-            float regen = (float)piRegen.GetValue(__instance);
+            PropertyInfo piRegen = AccessTools.DeclaredProperty(typeof(CharacterBody), nameof(CharacterBody.regen));
+            float regen = (float)piRegen.GetValue(__instance, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy, null, null, null);
+
+            //float regen = __instance.GetPropertyValue<float>("regen"); //r2api can't access inheritied members
 
             //Fresh meat effects
             if (__instance.HasBuff(FreshMeatConfig.FreshMeatBuffIndex))
@@ -65,7 +67,8 @@ namespace RoR2QoLChanges.Patches.Items
                 }
             }
 
-            piRegen.SetValue(__instance, regen);
+            //piRegen.SetValue(__instance, regen);
+            //__instance.SetPropertyValue<float>("regen", regen);   //r2api can't access inheritied members
         }
 
         public HI_FreshMeatChanges(FreshMeatConfig activeConfig, Harmony instance) : base(instance)

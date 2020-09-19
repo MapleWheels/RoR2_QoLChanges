@@ -139,6 +139,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Resources\MissingHpHealingBoostBuff.png" />
     <EmbeddedResource Include="ror2qolchanges" />
     <EmbeddedResource Include="ror2qolchanges.manifest" />
