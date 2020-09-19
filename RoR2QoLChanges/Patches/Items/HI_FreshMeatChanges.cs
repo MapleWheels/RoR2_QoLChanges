@@ -41,7 +41,6 @@ namespace RoR2QoLChanges.Patches.Items
             PropertyInfo piRegen = AccessTools.DeclaredProperty(__instance.GetType(), nameof(CharacterBody.regen));
             float regen = (float)piRegen.GetValue(__instance);
 
-
             //Fresh meat effects
             if (__instance.HasBuff(FreshMeatConfig.FreshMeatBuffIndex))
             {

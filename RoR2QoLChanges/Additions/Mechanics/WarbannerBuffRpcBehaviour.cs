@@ -91,7 +91,7 @@ namespace RoR2QoLChanges.Additions.Mechanics
         public void Start()
         {
             Initialize();
-            if (IsReady)
+            if (IsReady && NetworkServer.active)
             {
                 short stackCount = (short)((AttachedWard.Networkradius - 8f) / 8f); //Reverse engineer radius formula to find stack count.
                 RegisterWarBannerWardServer();
