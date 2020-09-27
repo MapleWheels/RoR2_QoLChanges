@@ -92,10 +92,11 @@
     <Compile Include="Additions\Buffs\BuffEntry.cs" />
     <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Additions\Mechanics\MinionOnKillProcBehaviour.cs" />
-    <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
+    <Compile Include="Additions\Mechanics\WardHealingBoostBehaviour.cs" />
     <Compile Include="Additions\Mechanics\SquidPolypConfiguratorBehaviour.cs" />
     <Compile Include="Additions\Mechanics\WarbannerBuffHelper.cs" />
     <Compile Include="Additions\Mechanics\WarbannerBuffRpcBehaviour.cs" />
+    <Compile Include="Additions\Mechanics\WardCleanseEffectBehaviour.cs" />
     <Compile Include="Additions\Networking\MiniRpcManager.cs" />
     <Compile Include="AssemblyPolicies.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Patches\Entities\EntityPrefabPatches.cs" />
     <Compile Include="Patches\Items\WarbannerChanges.cs" />
     <Compile Include="Patches\Mechanics\BleedChanges.cs" />
+    <Compile Include="Patches\Mechanics\CaptainShockBeaconChanges.cs" />
     <Compile Include="Patches\Mechanics\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
     <Compile Include="Patches\PrefabCacheHelper.cs" />

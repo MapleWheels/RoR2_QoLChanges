@@ -69,17 +69,17 @@ namespace RoR2QoLChanges.Patches.Entities
                 UnityEngine.Debug.LogError($"EntityPrefabPatches::EngiTurretPatch() | Could not load EngiWalkerTurretBody prefab!");
         }
 
-        protected void CaptainBeaconPatch()
+        protected void CaptainHealBeaconPatch()
         {
             if (EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab)
-                EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<MissingHpHealingBoostBehaviour>();
+                EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.AddComponent<WardHealingBoostBehaviour>();
             else
                 UnityEngine.Debug.LogError($"EntityPrefabPatches::CaptainBeaconPatch() | Could not load HealZone prefab!");
         }
 
         public void ApplyPatches()
         {
-            CaptainBeaconPatch();
+            CaptainHealBeaconPatch();
             CommandoGrenadePatch();
             EngiTurretPatch();
             SquidPolypPatch();
