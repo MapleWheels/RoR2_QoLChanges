@@ -17,21 +17,26 @@ using UnityEngine;
 
 namespace RoR2QoLChanges.Patches.Bugfix
 {
-    public class HI_CaptainHeadCenterNull : HarmonyPatchable
+    public class CaptainHeadCenterNull : MonoModPatchable
     {
         protected static GeneralConfig generalConfig;
 
-        public HI_CaptainHeadCenterNull(GeneralConfig activeConfig, Harmony instance) : base (instance) 
+        public CaptainHeadCenterNull(GeneralConfig activeConfig)
         { 
             generalConfig = activeConfig;
         }
 
         public override void ApplyPatches()
         {
-            harmonyInstance.Patch(
-                original: MI_Global_ChildLocator_FindChild,
-                postfix: new HarmonyMethod(MI_PostFindChild)
-                );
+            On.ChildLocator.FindChild_string += ChildLocator_FindChild_string;
+        }
+
+        private Transform ChildLocator_FindChild_string(On.ChildLocator.orig_FindChild_string orig, ChildLocator self, string childName)
+        {
+
+            Transform orgResult = orig(self, childName);
+            Transform result = Post_FindChild(orgResult, self, ref childName);
+            return result;
         }
 
         public static Transform Post_FindChild(Transform __result, ChildLocator __instance, ref string childName)
@@ -48,22 +53,6 @@ namespace RoR2QoLChanges.Patches.Bugfix
                 }
             }
             return __result;
-        }
-
-        protected static MethodInfo MI_Global_ChildLocator_FindChild;
-
-        protected static MethodInfo MI_PostFindChild;
-
-        static HI_CaptainHeadCenterNull()
-        {
-            MI_Global_ChildLocator_FindChild = typeof(ChildLocator).GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .FirstOrDefault(
-                    mi => mi.GetParameters().Length == 1
-                    && mi.GetParameters()[0].ParameterType == typeof(string)
-                    && mi.Name == nameof(ChildLocator.FindChild)
-                );
-
-            MI_PostFindChild = typeof(HI_CaptainHeadCenterNull).GetMethod(nameof(Post_FindChild));
         }
     }
 }

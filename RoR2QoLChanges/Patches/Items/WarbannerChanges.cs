@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Patches.Items
 {
-    public class MMH_WarbannerChanges: MonoModPatchable
+    public class WarbannerChanges: MonoModPatchable
     {
         public WarbannerConfig activeConfig;
 
@@ -36,6 +36,6 @@ namespace RoR2QoLChanges.Patches.Items
             self.attackSpeed = atkSpeed; 
         }
 
-        public MMH_WarbannerChanges(WarbannerConfig config) => activeConfig = config;
+        public WarbannerChanges(WarbannerConfig config) => activeConfig = config;
     }
 }

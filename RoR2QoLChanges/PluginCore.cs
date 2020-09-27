@@ -32,8 +32,7 @@ namespace RoR2QoLChanges
     [R2APISubmoduleDependency(nameof(BuffAPI), nameof(ItemAPI), nameof(ResourcesAPI))]
     public class PluginCore : BaseUnityPlugin
     {
-        public static Dictionary<string, HarmonyPatchable> harmonyPatches;
-        public static Dictionary<string, MonoModPatchable> monoModPatches;
+        public static Dictionary<string, IPatchable> HookPatches;
         public static Dictionary<string, BuffEntry> buffCatalog;
         public static EntityPrefabPatches EntityPatcher;
         public static GeneralConfig GeneralConfig;
@@ -91,53 +90,51 @@ namespace RoR2QoLChanges
 
         void InitHooks()
         {
-            harmonyPatches = new Dictionary<string, HarmonyPatchable>();
-            monoModPatches = new Dictionary<string, MonoModPatchable>();
+            HookPatches = new Dictionary<string, IPatchable>();
 
             //Harmony
-            harmonyPatches.Add(
-                nameof(HI_FreshMeatChanges),
-                new HI_FreshMeatChanges(Config.BindModel<FreshMeatConfig>(Logger), HarmonyInjector.Instance)
-                );
-            harmonyPatches.Add(
-                nameof(HI_CaptainHeadCenterNull),
-                new HI_CaptainHeadCenterNull(Config.BindModel<GeneralConfig>(Logger), HarmonyInjector.Instance)
-                );
-            harmonyPatches.Add(
-                nameof(HI_ArtificerChanges),
-                new HI_ArtificerChanges(Config.BindModel<ArtificerConfig>(Logger), HarmonyInjector.Instance)
-                );
-            harmonyPatches.Add(
-                nameof(HI_EngineerChanges),
-                new HI_EngineerChanges(Config.BindModel<EngineerConfig>(Logger), HarmonyInjector.Instance)
-                );
+
 
             //Monomod
-            monoModPatches.Add(
-                nameof(MMH_BleedChanges),
-                new MMH_BleedChanges(Config.BindModel<BleedConfig>(Logger))
+            HookPatches.Add(
+                nameof(FreshMeatChanges),
+                new FreshMeatChanges(Config.BindModel<FreshMeatConfig>(Logger))
+                );
+            HookPatches.Add(
+                nameof(CaptainHeadCenterNull),
+                new CaptainHeadCenterNull(Config.BindModel<GeneralConfig>(Logger))
+                );
+            HookPatches.Add(
+                nameof(ArtificerChanges),
+                new ArtificerChanges(Config.BindModel<ArtificerConfig>(Logger))
+                );
+            HookPatches.Add(
+                nameof(EngineerChanges),
+                new EngineerChanges(Config.BindModel<EngineerConfig>(Logger))
+                );
+    
+            HookPatches.Add(
+                nameof(BleedChanges),
+                new BleedChanges(Config.BindModel<BleedConfig>(Logger))
                 );
 
-            monoModPatches.Add(
-                nameof(Patches.Mechanics.MMH_MissingHpHealingBoostBuff),
-                new MMH_MissingHpHealingBoostBuff(Config.BindModel<Configuration.Survivors.CaptainConfig>(Logger))
+            HookPatches.Add(
+                nameof(Patches.Mechanics.MissingHpHealingBoostBuff),
+                new Patches.Mechanics.MissingHpHealingBoostBuff(Config.BindModel<CaptainConfig>(Logger))
                 );
 
-            monoModPatches.Add(
-                nameof(MMH_EngiTurretOnKillEffect),
-                new MMH_EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
+            HookPatches.Add(
+                nameof(EngiTurretOnKillEffect),
+                new EngiTurretOnKillEffect(Config.BindModel<EngineerConfig>(Logger))
                 );
 
-            monoModPatches.Add(
-                nameof(MMH_WarbannerChanges),
-                new MMH_WarbannerChanges(Config.BindModel<WarbannerConfig>(Logger))
+            HookPatches.Add(
+                nameof(WarbannerChanges),
+                new WarbannerChanges(Config.BindModel<WarbannerConfig>(Logger))
                 );
 
             //Patch Calls
-            foreach (KeyValuePair<string, HarmonyPatchable> hp in harmonyPatches)
-                hp.Value.ApplyPatches();
-
-            foreach (KeyValuePair<string, MonoModPatchable> mp in monoModPatches)
+            foreach (KeyValuePair<string, IPatchable> mp in HookPatches)
                 mp.Value.ApplyPatches();
         }
 
@@ -146,7 +143,7 @@ namespace RoR2QoLChanges
             buffCatalog = new Dictionary<string, BuffEntry>();
             buffCatalog.Add(
                 nameof(Additions.Buffs.MissingHpHealingBoostBuff),
-                new MissingHpHealingBoostBuff(Config.BindModel<CaptainConfig>(Logger))
+                new Additions.Buffs.MissingHpHealingBoostBuff(Config.BindModel<CaptainConfig>(Logger))
                 );
 
             foreach (KeyValuePair<string, BuffEntry> buff in buffCatalog)

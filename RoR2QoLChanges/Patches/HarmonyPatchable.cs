@@ -1,8 +1,9 @@
 ﻿using HarmonyLib;
+using RoR2QoLChanges.Patches.Bugfix;
 
 namespace RoR2QoLChanges.Patches
 {
-    public class HarmonyPatchable
+    public class HarmonyPatchable : IPatchable
     {
         protected Harmony harmonyInstance { get; private set; }
 

@@ -13,23 +13,19 @@ namespace RoR2QoLChanges.Patches.Items
     /// <summary>
     /// Applies the modified effects of Fresh Meat.
     /// </summary>
-    public class HI_FreshMeatChanges : HarmonyPatchable
+    public class FreshMeatChanges : MonoModPatchable
     {
         public static FreshMeatConfig ActiveItemConfig { get; protected set; }
 
         public override void ApplyPatches()
         {
-            //patch RecalculateStats
-            harmonyInstance.Patch(
-                MI_RoR2_CharacterBody_RecalculateStats,
-                prefix: new HarmonyMethod(MI_Pre_RecalculateStats),
-                postfix: new HarmonyMethod(MI_Post_RecalculateStats)
-                );
+            On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
         }
 
-        public static void Pre_RecalculateStats(CharacterBody __instance)
+        private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
-            //empty for now
+            orig(self);
+            Post_RecalculateStats(self);
         }
 
         public static void Post_RecalculateStats(CharacterBody __instance)
@@ -37,11 +33,7 @@ namespace RoR2QoLChanges.Patches.Items
             if (ActiveItemConfig == null)
                 return;
 
-            //Traverse<float> regenT = Traverse.Create(__instance).Property<float>("regen");
-            PropertyInfo piRegen = AccessTools.DeclaredProperty(typeof(CharacterBody), nameof(CharacterBody.regen));
-            float regen = (float)piRegen.GetValue(__instance, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy, null, null, null);
-
-            //float regen = __instance.GetPropertyValue<float>("regen"); //r2api can't access inheritied members
+            float regen = __instance.regen;
 
             //Fresh meat effects
             if (__instance.HasBuff(FreshMeatConfig.FreshMeatBuffIndex))
@@ -64,27 +56,14 @@ namespace RoR2QoLChanges.Patches.Items
                             + ActiveItemConfig.FreshMeat_MaxHpPercentScale.Value * __instance.level * 0.01f);
 
                     regen += newRegenPerSec;
+                    __instance.regen = regen;
                 }
             }
-
-            //piRegen.SetValue(__instance, regen);
-            //__instance.SetPropertyValue<float>("regen", regen);   //r2api can't access inheritied members
         }
 
-        public HI_FreshMeatChanges(FreshMeatConfig activeConfig, Harmony instance) : base(instance)
+        public FreshMeatChanges(FreshMeatConfig activeConfig)
         {
             ActiveItemConfig = activeConfig;
-        }
-
-        
-        protected static MethodInfo MI_RoR2_CharacterBody_RecalculateStats { get; }
-        protected static MethodInfo MI_Pre_RecalculateStats { get; }
-        protected static MethodInfo MI_Post_RecalculateStats { get; }
-        static HI_FreshMeatChanges()
-        {
-            MI_RoR2_CharacterBody_RecalculateStats = typeof(RoR2.CharacterBody).GetMethod(nameof(CharacterBody.RecalculateStats));
-            MI_Pre_RecalculateStats = typeof(HI_FreshMeatChanges).GetMethod(nameof(Pre_RecalculateStats));
-            MI_Post_RecalculateStats = typeof(HI_FreshMeatChanges).GetMethod(nameof(Post_RecalculateStats));
         }
     }
 }

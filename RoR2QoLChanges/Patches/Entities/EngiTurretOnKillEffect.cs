@@ -12,11 +12,11 @@ using UnityEngine;
 
 namespace RoR2QoLChanges.Patches.Entities
 {
-    public class MMH_EngiTurretOnKillEffect : MonoModPatchable
+    public class EngiTurretOnKillEffect : MonoModPatchable
     {
         public static EngineerConfig ActiveConfig;
 
-        public MMH_EngiTurretOnKillEffect(EngineerConfig config) => ActiveConfig = config;
+        public EngiTurretOnKillEffect(EngineerConfig config) => ActiveConfig = config;
 
         public override void ApplyPatches()
         {
