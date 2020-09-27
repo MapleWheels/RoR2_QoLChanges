@@ -10,15 +10,23 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Configuration
 {
-    [ConfigModelSectionName(Value = "General")]
-    public class GeneralConfig : ConfigFileModel
+    public class GeneralConfig : ConfigDataModel
     {
-        [ConfigEntryDefaultValue(Value = true)]
-        [ConfigEntryDescription(Value = "Enables the fix for the Captain Equipment Gorag's Opus bug")]
-        public ConfigEntry<bool> CaptainOpusFix { get; set; }
+        public ConfigData<bool> CaptainOpusFix { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enables the fix for the Captain Equipment Gorag's Opus bug",
+            DefaultValue = true
+        };
 
-        [ConfigEntryDefaultValue(Value = ConVars.Version)]
-        [ConfigEntryDescription(Value = "WARNING: Do not touch if you don't know what you're doing or the config file will get nuked.")]
-        public ConfigEntry<string> INTERNAL_CONFIGFILE_VERSION { get; set; }
+        public ConfigData<string> INTERNAL_CONFIGFILE_VERSION { get; set; } = new ConfigData<string>()
+        {
+            DescriptionString = "WARNING: Do not touch if you don't know what you're doing or the config file will get nuked.",
+            DefaultValue = ConVars.Version
+        };
+
+        public override void SetDefaults()
+        {
+            SectionName = "General";
+        }
     }
 }

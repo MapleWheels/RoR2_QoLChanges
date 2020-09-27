@@ -6,28 +6,38 @@ using RoR2;
 
 namespace RoR2QoLChanges.Configuration.Items
 {
-    [ConfigModelSectionName(Value = "Fresh_Meat")]
-    public class FreshMeatConfig : ConfigFileModel
+    public class FreshMeatConfig : ConfigDataModel
     {
         public const ItemIndex FreshMeatItemIndex = ItemIndex.RegenOnKill;
         public const BuffIndex FreshMeatBuffIndex = BuffIndex.MeatRegenBoost;
 
-        [ConfigEntryDefaultValue(Value = 0.5f)]
-        [ConfigEntryDescription(Value = "Fresh Meat's %MaxHP healing at base.")]
-        public ConfigEntry<float> FreshMeat_MaxHpPercentBase { get; set; }
+        public ConfigData<float> FreshMeat_MaxHpPercentBase { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Fresh Meat's %MaxHP healing at base.",
+            DefaultValue = 0.5f
+        };
 
+        public ConfigData<float> FreshMeat_MaxHpPercentScale { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Fresh Meat's %MaxHP healing per extra stack.",
+            DefaultValue = 0.25f
+        };
 
-        [ConfigEntryDefaultValue(Value = 0.25f)]
-        [ConfigEntryDescription(Value = "Fresh Meat's %MaxHP healing per extra stack.")]
-        public ConfigEntry<float> FreshMeat_MaxHpPercentScale { get; set; }
+        public ConfigData<float> FreshMeat_FlatHpBase { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Fresh Meat's flat healing at base.",
+            DefaultValue = 2f
+        };
 
+        public ConfigData<float> FreshMeat_FlatHpScale { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Fresh Meat's flat healing per extra stack.",
+            DefaultValue = 0f
+        };
 
-        [ConfigEntryDefaultValue(Value = 2f)]
-        [ConfigEntryDescription(Value = "Fresh Meat's flat healing at base.")]
-        public ConfigEntry<float> FreshMeat_FlatHpBase { get; set; }
-
-        [ConfigEntryDefaultValue(Value = 0f)]
-        [ConfigEntryDescription(Value = "Fresh Meat's flat healing per extra stack.")]
-        public ConfigEntry<float> FreshMeat_FlatHpScale { get; set; }
+        public override void SetDefaults()
+        {
+            SectionName = "Fresh_Meat";
+        }
     }
 }

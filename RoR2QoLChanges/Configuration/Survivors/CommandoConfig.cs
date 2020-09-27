@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-using BepInEx.Configuration;
-using BepInEx.Extensions.Configuration;
+﻿using BepInEx.Extensions.Configuration;
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    [ConfigModelSectionName(Value = "Commando")]
-    public class CommandoConfig : ConfigFileModel
+    public class CommandoConfig : ConfigDataModel
     {
-        [ConfigEntryDescription(Value = "Commando's Grenade Alt-R damage coefficient. 1 = 100% | Vanilla value is 4x1.75=7")]
-        [ConfigEntryDefaultValue(Value = 10f)]
-        public ConfigEntry<float> GrenadeDamageCoefficient { get; set; }
+        public ConfigData<float> GrenadeDamageCoefficient { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Commando's Grenade Alt-R damage coefficient. 1 = 100% | Vanilla value is 7 (4x1.75)",
+            DefaultValue = 10f
+        };
+
+        public override void SetDefaults()
+        {
+            SectionName = "Commando";
+        }
     }
 }
