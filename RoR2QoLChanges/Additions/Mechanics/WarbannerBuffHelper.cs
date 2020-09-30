@@ -15,14 +15,12 @@ namespace RoR2QoLChanges.Additions.Mechanics
         public List<WarbannerBuffRpcBehaviour> activeWards { get; protected set; }
         public float GetWarbannerAttackSpeedModifier(Vector3 selfPosition)
         {
+            //Clean the list
+            activeWards.RemoveAll(i => !i || !i.IsReady);
+
             float count = 0f;
             foreach(WarbannerBuffRpcBehaviour ward in activeWards)
             {
-                if (!ward || !ward.IsReady)
-                {
-                    activeWards.Remove(ward);
-                    continue;
-                }
                 float wardSqrDist = ward.AttachedWard.calculatedRadius * ward.AttachedWard.calculatedRadius;
 
                 if ((selfPosition - ward.transform.position).sqrMagnitude <= wardSqrDist)
