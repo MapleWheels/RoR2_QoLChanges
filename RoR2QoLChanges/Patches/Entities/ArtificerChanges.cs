@@ -18,21 +18,27 @@ using UnityEngine;
 
 namespace RoR2QoLChanges.Patches.Entities
 {
-    public class HI_ArtificerChanges : HarmonyPatchable
+    public class ArtificerChanges : MonoModPatchable
     {
         protected static ArtificerConfig artificerConfig;
 
-        public HI_ArtificerChanges(ArtificerConfig activeConfig, Harmony instance) : base(instance)
+        public ArtificerChanges(ArtificerConfig activeConfig)
         {
             artificerConfig = activeConfig;
         }
 
         public override void ApplyPatches()
         {
-            harmonyInstance.Patch(
-                original: MI_CharacterBody_RecalculateStats,
-                postfix: new HarmonyMethod(MI_Post_RecalculateStats)
-                );
+            if (!artificerConfig.Enabled.Value)
+                return;
+            On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+
+        }
+
+        private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        {
+            orig(self);
+            Post_CharacterBody_RecalculateStats(self);
         }
 
         /// <summary>
@@ -63,15 +69,6 @@ namespace RoR2QoLChanges.Patches.Entities
                     1f - artificerConfig.M1Fire_MaxCooldownFromAttackSpeed.Value
                     );
             }
-        }
-
-        protected static MethodInfo MI_CharacterBody_RecalculateStats;
-        protected static MethodInfo MI_Post_RecalculateStats;
-
-        static HI_ArtificerChanges()
-        {
-            MI_CharacterBody_RecalculateStats = typeof(CharacterBody).GetMethod(nameof(CharacterBody.RecalculateStats));
-            MI_Post_RecalculateStats = typeof(HI_ArtificerChanges).GetMethod(nameof(Post_CharacterBody_RecalculateStats));
         }
     }
 }

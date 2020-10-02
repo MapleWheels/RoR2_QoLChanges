@@ -11,33 +11,49 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    [ConfigModelSectionName(Value = "Artificer")]
-    public class ArtificerConfig : ConfigFileModel
+    public class ArtificerConfig : ConfigDataModel, IConfigBase
     {
         public const string ArtificerBodyName = "Mage";
 
-        [ConfigEntryDescription(Value = "The amount of levels for each extra charge in M1 Fire Bolt")]
-        [ConfigEntryDefaultValue(Value = 10)]
-        public ConfigEntry<int> M1Fire_LevelsPerCharge { get; set; }
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
-        [ConfigEntryDescription(Value = "The max amount of charges gained by level by M1 Fire Bolt")]
-        [ConfigEntryDefaultValue(Value = 99)]
-        public ConfigEntry<int> M1Fire_MaxLevelCharges { get; set; }
-
-        [ConfigEntryDescription(Value = "The amount of back magazines for each extra charge in M1 Fire Bolt")]
-        [ConfigEntryDefaultValue(Value = 3)]
-        public ConfigEntry<int> M1Fire_BackupMagsPerCharge { get; set; }
-
-        [ConfigEntryDescription(Value = "The max amount of charges gained by backup magazines by M1 Fire Bolt")]
-        [ConfigEntryDefaultValue(Value = 99)]
-        public ConfigEntry<int> M1Fire_MaxBackupMagCharges { get; set; }
-
-        [ConfigEntryDescription(Value = "The % cooldown reduction gained per 1% bonus attack speed.")]
-        [ConfigEntryDefaultValue(Value = 0.1f)]
-        public ConfigEntry<float> M1Fire_CooldownPerAttackSpeedRatio { get; set; }
-
-        [ConfigEntryDescription(Value = "The max % cooldown reduction that can be gained from attack speed.")]
-        [ConfigEntryDefaultValue(Value = 0.45f)]
-        public ConfigEntry<float> M1Fire_MaxCooldownFromAttackSpeed { get; set; }
+        public ConfigData<int> M1Fire_LevelsPerCharge { get; set; } = new ConfigData<int>()
+        {
+            DescriptionString = "The amount of levels for each extra charge in M1 Fire Bolt",
+            DefaultValue = 10
+        };
+        public ConfigData<int> M1Fire_MaxLevelCharges { get; set; } = new ConfigData<int>()
+        {
+            DescriptionString = "The max amount of charges gained by level by M1 Fire Bolt",
+            DefaultValue = 99
+        };
+        public ConfigData<int> M1Fire_BackupMagsPerCharge { get; set; } = new ConfigData<int>()
+        {
+            DescriptionString = "The amount of back magazines for each extra charge in M1 Fire Bolt",
+            DefaultValue = 3
+        };
+        public ConfigData<int> M1Fire_MaxBackupMagCharges { get; set; } = new ConfigData<int>()
+        {
+            DescriptionString = "The max amount of charges gained by backup magazines by M1 Fire Bolt",
+            DefaultValue = 99
+        };
+        public ConfigData<float> M1Fire_CooldownPerAttackSpeedRatio { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The % cooldown reduction gained per 1% bonus attack speed.",
+            DefaultValue = 0.1f
+        };
+        public ConfigData<float> M1Fire_MaxCooldownFromAttackSpeed { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The max % cooldown reduction that can be gained from attack speed.",
+            DefaultValue = 0.45f
+        };
+        public override void SetDefaults()
+        {
+            SectionName = "Artificer";
+        }
     }
 }

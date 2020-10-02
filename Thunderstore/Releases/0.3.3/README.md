@@ -44,7 +44,7 @@ This plugin is a collection of Quality of Life changes for Risk of Rain 2's 1.0 
 	- Re-applied the fix to Artificer's M1 that got undone by poor version control practices.
 	- Fixed an interaction bug between Fresh Meat and debuffs that stop natural regen.
 
-0.3.2:
+0.3.2 -> 0.3.3:
 	- *Bugfix edition!*
 	- **Now compatible with Rein's Sniper Mod**
 

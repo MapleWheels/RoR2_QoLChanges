@@ -16,14 +16,17 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Patches.Mechanics
 {
-    public class MMH_BleedChanges : MonoModPatchable
+    public class BleedChanges : MonoModPatchable
     {
         protected BleedConfig activeConfig;
 
-        public MMH_BleedChanges(BleedConfig config) => activeConfig = config;
+        public BleedChanges(BleedConfig config) => activeConfig = config;
 
         public override void ApplyPatches()
         {
+            if (!activeConfig.Enabled.Value)
+                return;
+
             Patch_DotController_InitDotCatalog();
             Patch_GlobalEventManager_OnHitEnemy();
         }

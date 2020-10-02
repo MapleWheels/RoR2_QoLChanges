@@ -92,12 +92,14 @@
     <Compile Include="Additions\Buffs\BuffEntry.cs" />
     <Compile Include="Additions\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Additions\Mechanics\MinionOnKillProcBehaviour.cs" />
-    <Compile Include="Additions\Mechanics\MissingHpHealingBoostBehaviour.cs" />
+    <Compile Include="Additions\Mechanics\WardHealingBoostBehaviour.cs" />
     <Compile Include="Additions\Mechanics\SquidPolypConfiguratorBehaviour.cs" />
     <Compile Include="Additions\Mechanics\WarbannerBuffHelper.cs" />
     <Compile Include="Additions\Mechanics\WarbannerBuffRpcBehaviour.cs" />
+    <Compile Include="Additions\Mechanics\WardCleanseEffectBehaviour.cs" />
     <Compile Include="Additions\Networking\MiniRpcManager.cs" />
     <Compile Include="AssemblyPolicies.cs" />
+    <Compile Include="Configuration\IConfigBase.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
@@ -105,14 +107,17 @@
     <Compile Include="Configuration\Survivors\CommandoConfig.cs" />
     <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
-    <Compile Include="Patches\Bugfix\HI_CaptainHeadCenterNull.cs" />
-    <Compile Include="Patches\Entities\HI_ArtificerChanges.cs" />
-    <Compile Include="Patches\Entities\HI_EngineerChanges.cs" />
-    <Compile Include="Patches\Entities\MMH_EngiTurretOnKillEffect.cs" />
+    <Compile Include="Patches\Bugfix\CaptainHeadCenterNull.cs" />
+    <Compile Include="Patches\Entities\CommandoGrenadeChanges.cs" />
+    <Compile Include="Patches\IPatchable.cs" />
+    <Compile Include="Patches\Entities\ArtificerChanges.cs" />
+    <Compile Include="Patches\Entities\EngineerChanges.cs" />
+    <Compile Include="Patches\Entities\EngiTurretOnKillEffect.cs" />
     <Compile Include="Patches\Entities\EntityPrefabPatches.cs" />
-    <Compile Include="Patches\Items\MMH_WarbannerChanges.cs" />
-    <Compile Include="Patches\Mechanics\MMH_BleedChanges.cs" />
-    <Compile Include="Patches\Mechanics\MMH_MissingHpHealingBoostBuff.cs" />
+    <Compile Include="Patches\Items\WarbannerChanges.cs" />
+    <Compile Include="Patches\Mechanics\BleedChanges.cs" />
+    <Compile Include="Patches\Mechanics\CaptainShockBeaconChanges.cs" />
+    <Compile Include="Patches\Mechanics\MissingHpHealingBoostBuffPatch.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
     <Compile Include="Patches\PrefabCacheHelper.cs" />
     <Compile Include="PluginCore.cs" />
@@ -120,7 +125,7 @@
     <Compile Include="Configuration\Items\FreshMeatConfig.cs" />
     <Compile Include="Patches\HarmonyInjector.cs" />
     <Compile Include="Patches\HarmonyPatchable.cs" />
-    <Compile Include="Patches\Items\HI_FreshMeatChanges.cs" />
+    <Compile Include="Patches\Items\FreshMeatChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,13 +144,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
     <None Include="Resources\MissingHpHealingBoostBuff.png" />
     <EmbeddedResource Include="ror2qolchanges" />
     <EmbeddedResource Include="ror2qolchanges.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Program Files (x86)\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\RoR2QoLChanges\RoR2QoLChanges.dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Program Files (x86)\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\__dev\RoR2QoLChanges.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

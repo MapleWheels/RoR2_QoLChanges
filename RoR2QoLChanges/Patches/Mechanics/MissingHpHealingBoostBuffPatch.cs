@@ -5,14 +5,17 @@ using RoR2QoLChanges.Additions.Mechanics;
 
 namespace RoR2QoLChanges.Patches.Mechanics
 {
-    public class MMH_MissingHpHealingBoostBuff : MonoModPatchable
+    public class MissingHpHealingBoostBuffPatch : MonoModPatchable
     {
         public static Configuration.Survivors.CaptainConfig ActiveConfig;
 
-        public MMH_MissingHpHealingBoostBuff(Configuration.Survivors.CaptainConfig config) => ActiveConfig = config;
+        public MissingHpHealingBoostBuffPatch(Configuration.Survivors.CaptainConfig config) => ActiveConfig = config;
 
         public override void ApplyPatches()
         {
+            if (!ActiveConfig.Enabled.Value)
+                return;
+
             On.RoR2.HealthComponent.Heal += PreHealBuffApply;
             On.RoR2.CharacterBody.RecalculateStats += ApplyHealingRadiusChanges;
         }
@@ -25,13 +28,13 @@ namespace RoR2QoLChanges.Patches.Mechanics
                 return;
             }
 
-            MissingHpHealingBoostBehaviour component = EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<MissingHpHealingBoostBehaviour>();
+            WardHealingBoostBehaviour component = EntityStates.CaptainSupplyDrop.HealZoneMainState.healZonePrefab.GetComponent<WardHealingBoostBehaviour>();
 
             if (component)
             {
                 //calculate healing fraction
                 float teamLevel = self.level;
-                float interval = MissingHpHealingBoostBehaviour.interval;
+                float interval = WardHealingBoostBehaviour.interval;
                 float healFraction = (ActiveConfig.Beacon_MaxHpHealingBase.Value + ActiveConfig.Beacon_MaxHpHealingRatioPerLevel.Value * teamLevel)/100f * interval;
 
                 //calculate radius
@@ -40,8 +43,8 @@ namespace RoR2QoLChanges.Patches.Mechanics
                 component.SyncHealingStats(false); //get current healingward stats
 
                 //set the values
-                MissingHpHealingBoostBehaviour.healFraction = healFraction;
-                MissingHpHealingBoostBehaviour.radius = radius;
+                WardHealingBoostBehaviour.healFraction = healFraction;
+                WardHealingBoostBehaviour.radius = radius;
 
                 //call the sync method
                 component.SyncHealingStats(true);   //Update the healing ward stats

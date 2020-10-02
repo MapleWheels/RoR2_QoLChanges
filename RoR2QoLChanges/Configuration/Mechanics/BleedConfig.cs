@@ -6,28 +6,46 @@ using RoR2;
 
 namespace RoR2QoLChanges.Configuration.Mechanics
 {
-    [ConfigModelSectionName(Value = "Bleeding")]
-    public class BleedConfig : ConfigFileModel
+    public class BleedConfig : ConfigDataModel, IConfigBase
     {
         public const ItemIndex TriTipDaggerItemIndex = ItemIndex.BleedOnHit;
         public const BuffIndex BleedBuffIndex = BuffIndex.Bleeding;
         public const ProcType BleedProcIndex = ProcType.BleedOnHit;
         public const float BleedIntervalRate = 0.25f;
 
-        [ConfigEntryDefaultValue(Value = 1.8f)]
-        [ConfigEntryDescription(Value = "The bleed damage scale multiplier. Scales off of Base Damage")]
-        public ConfigEntry<float> Bleed_BaseDamageRatio { get; set; }
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
-        [ConfigEntryDefaultValue(Value = 7f)]
-        [ConfigEntryDescription(Value = "Item: Tri-Tip Dagger's Proc chance per item.")]
-        public ConfigEntry<float> Dagger_ProcChance { get; set; }
+        public ConfigData<float> Bleed_BaseDamageRatio { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The bleed damage scale multiplier. Scales off of Base Damage",
+            DefaultValue = 1.8f
+        };
 
-        [ConfigEntryDefaultValue(Value = 4f)]
-        [ConfigEntryDescription(Value = "The standard bleed damage debuff time.")]
-        public ConfigEntry<float> StandardBleed_TimeSecs { get; set; }
+        public ConfigData<float> Dagger_ProcChance { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "Item: Tri-Tip Dagger's Proc chance per item.",
+            DefaultValue = 7f
+        };
 
-        [ConfigEntryDefaultValue(Value = 2f)]
-        [ConfigEntryDescription(Value = "The Shatterspleen bleed damage debuff time.")]
-        public ConfigEntry<float> ShatterspleenBleed_TimeSecs { get; set; }
+        public ConfigData<float> StandardBleed_TimeSecs { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The standard bleed damage debuff time.",
+            DefaultValue = 4f
+        };
+
+        public ConfigData<float> ShatterspleenBleed_TimeSecs { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The Shatterspleen bleed damage debuff time.",
+            DefaultValue = 2f
+        };
+
+        public override void SetDefaults()
+        {
+            SectionName = "Bleeding";
+        }
     }
 }

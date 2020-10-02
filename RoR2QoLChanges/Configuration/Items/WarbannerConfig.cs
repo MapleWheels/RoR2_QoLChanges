@@ -1,23 +1,27 @@
-﻿using BepInEx.Configuration;
-using BepInEx.Extensions.Configuration;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BepInEx.Extensions.Configuration;
 
 namespace RoR2QoLChanges.Configuration.Items
 {
-    [ConfigModelSectionName(Value = "Item_Warbanner")]
-    public class WarbannerConfig : ConfigFileModel
+    public class WarbannerConfig : ConfigDataModel, IConfigBase
     {
-        [ConfigEntryDefaultValue(Value = 0.3f)]
-        [ConfigEntryDescription(Value = "The attack speed gained at base.")]
-        public ConfigEntry<float> attackSpeedBase { get; set; }
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
-        [ConfigEntryDefaultValue(Value = 0.05f)]
-        [ConfigEntryDescription(Value = "The attack speed gained per stack of Warbanner.")]
-        public ConfigEntry<float> attackSpeedPerStack { get; set; }
+        public ConfigData<float> attackSpeedBase { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The attack speed gained at base.",
+            DefaultValue = 0.3f
+        };
+
+        public ConfigData<float> attackSpeedPerStack { get; set; } = new ConfigData<float>()
+        {
+            DescriptionString = "The attack speed gained per stack of Warbanner.",
+            DefaultValue = 0.05f
+        };
+
+        public override void SetDefaults() => SectionName = "Item_Warbanner";
     }
 }

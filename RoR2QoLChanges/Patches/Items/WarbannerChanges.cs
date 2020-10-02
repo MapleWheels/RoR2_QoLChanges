@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Patches.Items
 {
-    public class MMH_WarbannerChanges: MonoModPatchable
+    public class WarbannerChanges: MonoModPatchable
     {
         public WarbannerConfig activeConfig;
 
         public override void ApplyPatches()
         {
+            if (!activeConfig.Enabled.Value)
+                return;
+
             On.RoR2.CharacterBody.RecalculateStats += ApplyWarbannerChanges;
         }
 
@@ -36,6 +39,6 @@ namespace RoR2QoLChanges.Patches.Items
             self.attackSpeed = atkSpeed; 
         }
 
-        public MMH_WarbannerChanges(WarbannerConfig config) => activeConfig = config;
+        public WarbannerChanges(WarbannerConfig config) => activeConfig = config;
     }
 }

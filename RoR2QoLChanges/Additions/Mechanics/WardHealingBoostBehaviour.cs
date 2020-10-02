@@ -10,7 +10,7 @@ namespace RoR2QoLChanges.Additions.Mechanics
     /// </summary>
     [RequireComponent(typeof(RoR2.HealingWard))]
 	[DisallowMultipleComponent]
-    public class MissingHpHealingBoostBehaviour : MonoBehaviour
+    public class WardHealingBoostBehaviour : MonoBehaviour
     {
 		public static float
 			healFraction = 0.02f,
