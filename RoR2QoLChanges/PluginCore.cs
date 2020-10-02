@@ -2,6 +2,7 @@
 using BepInEx.Extensions.Configuration;
 
 using R2API;
+using R2API.Networking;
 using R2API.Utils;
 
 using RoR2;
@@ -27,9 +28,10 @@ namespace RoR2QoLChanges
 {
     [BepInDependency(R2API.R2API.PluginGUID)] 
     [BepInDependency(MiniRpcLib.MiniRpcPlugin.Dependency)]
+    [BepInDependency("com.bepinex.extensions.plugin")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod)]
     [BepInPlugin(ConVars.PackageName, ConVars.PluginName, ConVars.Version)]
-    [R2APISubmoduleDependency(nameof(BuffAPI), nameof(ItemAPI), nameof(ResourcesAPI))]
+    [R2APISubmoduleDependency(nameof(BuffAPI), nameof(ItemAPI), nameof(ResourcesAPI), nameof(NetworkingAPI))]
     public class PluginCore : BaseUnityPlugin
     {
         public static Dictionary<string, IPatchable> HookPatches;
