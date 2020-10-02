@@ -28,7 +28,7 @@ namespace RoR2QoLChanges
 {
     [BepInDependency(R2API.R2API.PluginGUID)] 
     [BepInDependency(MiniRpcLib.MiniRpcPlugin.Dependency)]
-    [BepInDependency("com.bepinex.extensions.plugin")]
+    [BepInDependency(BepInEx.Extensions.LibraryInfo.BepInDependencyID)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod)]
     [BepInPlugin(ConVars.PackageName, ConVars.PluginName, ConVars.Version)]
     [R2APISubmoduleDependency(nameof(BuffAPI), nameof(ItemAPI), nameof(ResourcesAPI), nameof(NetworkingAPI))]
