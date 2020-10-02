@@ -119,8 +119,8 @@ namespace RoR2QoLChanges
                 );
 
             HookPatches.Add(
-                nameof(Patches.Mechanics.MissingHpHealingBoostBuff),
-                new Patches.Mechanics.MissingHpHealingBoostBuff(Config.BindModel<CaptainConfig>(Logger))
+                nameof(Patches.Mechanics.MissingHpHealingBoostBuffPatch),
+                new Patches.Mechanics.MissingHpHealingBoostBuffPatch(Config.BindModel<CaptainConfig>(Logger))
                 );
 
             HookPatches.Add(

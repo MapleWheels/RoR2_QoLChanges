@@ -116,7 +116,7 @@
     <Compile Include="Patches\Items\WarbannerChanges.cs" />
     <Compile Include="Patches\Mechanics\BleedChanges.cs" />
     <Compile Include="Patches\Mechanics\CaptainShockBeaconChanges.cs" />
-    <Compile Include="Patches\Mechanics\MissingHpHealingBoostBuff.cs" />
+    <Compile Include="Patches\Mechanics\MissingHpHealingBoostBuffPatch.cs" />
     <Compile Include="Patches\MonoModPatchable.cs" />
     <Compile Include="Patches\PrefabCacheHelper.cs" />
     <Compile Include="PluginCore.cs" />

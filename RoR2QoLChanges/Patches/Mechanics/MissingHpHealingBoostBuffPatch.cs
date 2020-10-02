@@ -5,11 +5,11 @@ using RoR2QoLChanges.Additions.Mechanics;
 
 namespace RoR2QoLChanges.Patches.Mechanics
 {
-    public class MissingHpHealingBoostBuff : MonoModPatchable
+    public class MissingHpHealingBoostBuffPatch : MonoModPatchable
     {
         public static Configuration.Survivors.CaptainConfig ActiveConfig;
 
-        public MissingHpHealingBoostBuff(Configuration.Survivors.CaptainConfig config) => ActiveConfig = config;
+        public MissingHpHealingBoostBuffPatch(Configuration.Survivors.CaptainConfig config) => ActiveConfig = config;
 
         public override void ApplyPatches()
         {
