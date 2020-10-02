@@ -19,6 +19,9 @@ namespace RoR2QoLChanges.Patches.Items
 
         public override void ApplyPatches()
         {
+            if (!ActiveItemConfig.Enabled.Value)
+                return;
+
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
         }
 

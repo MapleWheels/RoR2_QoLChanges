@@ -2,8 +2,14 @@
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    public class CommandoConfig : ConfigDataModel
+    public class CommandoConfig : ConfigDataModel, IConfigBase
     {
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
+
         public ConfigData<float> GrenadeDamageCoefficient { get; set; } = new ConfigData<float>()
         {
             DescriptionString = "Commando's Grenade Alt-R damage coefficient. 1 = 100% | Vanilla value is 7 (4x1.75)",

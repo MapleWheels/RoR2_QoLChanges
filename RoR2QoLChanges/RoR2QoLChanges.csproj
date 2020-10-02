@@ -99,6 +99,7 @@
     <Compile Include="Additions\Mechanics\WardCleanseEffectBehaviour.cs" />
     <Compile Include="Additions\Networking\MiniRpcManager.cs" />
     <Compile Include="AssemblyPolicies.cs" />
+    <Compile Include="Configuration\IConfigBase.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
@@ -107,7 +108,7 @@
     <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
     <Compile Include="Patches\Bugfix\CaptainHeadCenterNull.cs" />
-    <Compile Include="Patches\Bugfix\IPatchable.cs" />
+    <Compile Include="Patches\IPatchable.cs" />
     <Compile Include="Patches\Entities\ArtificerChanges.cs" />
     <Compile Include="Patches\Entities\EngineerChanges.cs" />
     <Compile Include="Patches\Entities\EngiTurretOnKillEffect.cs" />

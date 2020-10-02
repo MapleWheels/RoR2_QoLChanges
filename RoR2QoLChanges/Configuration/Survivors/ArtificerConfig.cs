@@ -11,9 +11,15 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    public class ArtificerConfig : ConfigDataModel
+    public class ArtificerConfig : ConfigDataModel, IConfigBase
     {
         public const string ArtificerBodyName = "Mage";
+
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
         public ConfigData<int> M1Fire_LevelsPerCharge { get; set; } = new ConfigData<int>()
         {

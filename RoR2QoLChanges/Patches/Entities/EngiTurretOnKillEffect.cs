@@ -20,6 +20,9 @@ namespace RoR2QoLChanges.Patches.Entities
 
         public override void ApplyPatches()
         {
+            if (!ActiveConfig.Enabled.Value)
+                return;
+
             GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeathPostProcess;
         }
 

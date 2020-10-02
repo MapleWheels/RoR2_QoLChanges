@@ -2,9 +2,15 @@
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    public class EngineerConfig : ConfigDataModel
+    public class EngineerConfig : ConfigDataModel, IConfigBase
     {
         public const string EngiCarbonizerTurretBodyName = "EngiWalker";
+
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
         public ConfigData<float> EngiMissilePainer_MaxDistance { get; set; } = new ConfigData<float>()
         {

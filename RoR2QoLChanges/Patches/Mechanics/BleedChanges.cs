@@ -24,6 +24,9 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
         public override void ApplyPatches()
         {
+            if (!activeConfig.Enabled.Value)
+                return;
+
             Patch_DotController_InitDotCatalog();
             Patch_GlobalEventManager_OnHitEnemy();
         }

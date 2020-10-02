@@ -6,10 +6,16 @@ using RoR2;
 
 namespace RoR2QoLChanges.Configuration.Items
 {
-    public class FreshMeatConfig : ConfigDataModel
+    public class FreshMeatConfig : ConfigDataModel, IConfigBase
     {
         public const ItemIndex FreshMeatItemIndex = ItemIndex.RegenOnKill;
         public const BuffIndex FreshMeatBuffIndex = BuffIndex.MeatRegenBoost;
+
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
         public ConfigData<float> FreshMeat_MaxHpPercentBase { get; set; } = new ConfigData<float>()
         {

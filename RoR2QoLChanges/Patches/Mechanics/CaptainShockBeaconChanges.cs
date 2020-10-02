@@ -15,6 +15,9 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
         public override void ApplyPatches()
         {
+            if (!ActiveConfig.Enabled.Value)
+                return;
+
             On.EntityStates.CaptainSupplyDrop.ShockZoneMainState.OnEnter += ShockZoneMainState_OnEnter;
         }
 

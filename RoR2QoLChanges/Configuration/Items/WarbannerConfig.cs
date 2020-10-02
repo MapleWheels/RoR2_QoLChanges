@@ -2,8 +2,14 @@
 
 namespace RoR2QoLChanges.Configuration.Items
 {
-    public class WarbannerConfig : ConfigDataModel
+    public class WarbannerConfig : ConfigDataModel, IConfigBase
     {
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
+
         public ConfigData<float> attackSpeedBase { get; set; } = new ConfigData<float>()
         {
             DescriptionString = "The attack speed gained at base.",
@@ -16,9 +22,6 @@ namespace RoR2QoLChanges.Configuration.Items
             DefaultValue = 0.05f
         };
 
-        public override void SetDefaults()
-        {
-            SectionName = "Item_Warbanner";
-        }
+        public override void SetDefaults() => SectionName = "Item_Warbanner";
     }
 }

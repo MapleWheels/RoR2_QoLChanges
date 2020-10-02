@@ -13,6 +13,9 @@ namespace RoR2QoLChanges.Patches.Mechanics
 
         public override void ApplyPatches()
         {
+            if (!ActiveConfig.Enabled.Value)
+                return;
+
             On.RoR2.HealthComponent.Heal += PreHealBuffApply;
             On.RoR2.CharacterBody.RecalculateStats += ApplyHealingRadiusChanges;
         }

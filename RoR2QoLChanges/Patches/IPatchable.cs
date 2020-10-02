@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoR2QoLChanges.Patches.Bugfix
+namespace RoR2QoLChanges.Patches
 {
     public interface IPatchable
     {

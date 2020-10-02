@@ -27,6 +27,9 @@ namespace RoR2QoLChanges.Patches.Entities
 
         public override void ApplyPatches()
         {
+            if (!activeConfig.Enabled.Value)
+                return;
+
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
 
             On.EntityStates.Engi.EngiMissilePainter.Paint.OnEnter += Paint_OnEnter;

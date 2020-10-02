@@ -6,12 +6,18 @@ using RoR2;
 
 namespace RoR2QoLChanges.Configuration.Mechanics
 {
-    public class BleedConfig : ConfigDataModel
+    public class BleedConfig : ConfigDataModel, IConfigBase
     {
         public const ItemIndex TriTipDaggerItemIndex = ItemIndex.BleedOnHit;
         public const BuffIndex BleedBuffIndex = BuffIndex.Bleeding;
         public const ProcType BleedProcIndex = ProcType.BleedOnHit;
         public const float BleedIntervalRate = 0.25f;
+
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
 
         public ConfigData<float> Bleed_BaseDamageRatio { get; set; } = new ConfigData<float>()
         {

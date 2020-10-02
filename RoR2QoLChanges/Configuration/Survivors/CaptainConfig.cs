@@ -3,8 +3,14 @@ using BepInEx.Extensions.Configuration;
 
 namespace RoR2QoLChanges.Configuration.Survivors
 {
-    public class CaptainConfig : ConfigDataModel
+    public class CaptainConfig : ConfigDataModel, IConfigBase
     {
+        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable this module",
+            DefaultValue = true
+        };
+
         public ConfigData<float> Beacon_MaxHpHealingBase { get; set; } = new ConfigData<float>()
         {
             DescriptionString = "How much increase %MaxHp Captain's beacon heals for per level",
@@ -47,9 +53,6 @@ namespace RoR2QoLChanges.Configuration.Survivors
             DefaultValue = 1f
         };
 
-        public override void SetDefaults()
-        {
-            SectionName = "Captain";
-        }
+        public override void SetDefaults() => SectionName = "Captain";
     }
 }

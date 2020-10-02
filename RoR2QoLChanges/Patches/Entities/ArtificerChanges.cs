@@ -29,7 +29,10 @@ namespace RoR2QoLChanges.Patches.Entities
 
         public override void ApplyPatches()
         {
+            if (!artificerConfig.Enabled.Value)
+                return;
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+
         }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)

@@ -14,6 +14,9 @@ namespace RoR2QoLChanges.Patches.Items
 
         public override void ApplyPatches()
         {
+            if (!activeConfig.Enabled.Value)
+                return;
+
             On.RoR2.CharacterBody.RecalculateStats += ApplyWarbannerChanges;
         }
 
