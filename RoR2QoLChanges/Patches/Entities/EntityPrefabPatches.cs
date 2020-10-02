@@ -2,6 +2,7 @@
 using RoR2.Projectile;
 
 using RoR2QoLChanges.Additions.Mechanics;
+using RoR2QoLChanges.Configuration;
 using RoR2QoLChanges.Configuration.Items;
 using RoR2QoLChanges.Configuration.Survivors;
 
@@ -17,7 +18,8 @@ namespace RoR2QoLChanges.Patches.Entities
 {
     public class EntityPrefabPatches
     {
-        public CommandoConfig commandoConfig;
+        public CommandoConfig CommandoConfig;
+        public GeneralConfig GeneralConfig;
 
         protected void CommandoGrenadePatch()
         {
@@ -27,7 +29,6 @@ namespace RoR2QoLChanges.Patches.Entities
             else
                 UnityEngine.Debug.LogError($"EntityPrefabPatches::CommandoGrenadePatch() | Could not load CommandoGrenadeProjectile prefab!");
 
-            EntityStates.Commando.CommandoWeapon.FireGrenade.damageCoefficient = commandoConfig.GrenadeDamageCoefficient.Value;
         }
 
         protected void SquidPolypPatch()
@@ -80,15 +81,16 @@ namespace RoR2QoLChanges.Patches.Entities
         public void ApplyPatches()
         {
             CaptainHealBeaconPatch();
-            CommandoGrenadePatch();
+            if (CommandoConfig.Enabled.Value) CommandoGrenadePatch();
             EngiTurretPatch();
-            SquidPolypPatch();
+            if (GeneralConfig.SquidPolypEnabled.Value) SquidPolypPatch();
             WarbannerBuffPatch();
         }
 
-        public EntityPrefabPatches(CommandoConfig commandoConfig)
+        public EntityPrefabPatches(CommandoConfig commandoConfig, GeneralConfig generalConfig)
         {
-            this.commandoConfig = commandoConfig;
+            this.CommandoConfig = commandoConfig;
+            this.GeneralConfig = generalConfig;
         }
 
         

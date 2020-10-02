@@ -18,6 +18,12 @@ namespace RoR2QoLChanges.Configuration
             DefaultValue = true
         };
 
+        public ConfigData<bool> SquidPolypEnabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enables/Disables the changes to SquidPolyp (no health decay)",
+            DefaultValue = true
+        };
+
         public ConfigData<string> INTERNAL_CONFIGFILE_VERSION { get; set; } = new ConfigData<string>()
         {
             DescriptionString = "WARNING: Do not touch if you don't know what you're doing or the config file will get nuked.",

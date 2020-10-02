@@ -133,6 +133,11 @@ namespace RoR2QoLChanges
                 new WarbannerChanges(Config.BindModel<WarbannerConfig>(Logger))
                 );
 
+            HookPatches.Add(
+                nameof(CommandoGrenadeChanges),
+                new CommandoGrenadeChanges(Config.BindModel<CommandoConfig>(Logger))
+                );
+
             //Patch Calls
             foreach (KeyValuePair<string, IPatchable> mp in HookPatches)
                 mp.Value.ApplyPatches();
@@ -154,7 +159,7 @@ namespace RoR2QoLChanges
         {
             WarbannerBuffHelper = new WarbannerBuffHelper();
 
-            EntityPatcher = new EntityPrefabPatches(Config.BindModel<CommandoConfig>(Logger));
+            EntityPatcher = new EntityPrefabPatches(Config.BindModel<CommandoConfig>(Logger), Config.BindModel<GeneralConfig>(Logger));
             EntityPatcher.ApplyPatches();
         }
 
