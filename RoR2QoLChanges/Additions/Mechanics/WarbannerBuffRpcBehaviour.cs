@@ -105,7 +105,8 @@ namespace RoR2QoLChanges.Additions.Mechanics
             {
                 nextUpdateTime = Time.time + updateInterval;
                 short stackCount = (short)((AttachedWard.Networkradius - 8f) / 8f); //Reverse engineer radius formula to find stack count.
-                RpcSetWarbannerStackCountServer(stackCount);
+                if (NetworkServer.active)
+                    RpcSetWarbannerStackCountServer(stackCount);
             }
         }
 
