@@ -30,9 +30,6 @@ namespace RoR2QoLChanges.Configuration
             DefaultValue = ConVars.Version
         };
 
-        public override void SetDefaults()
-        {
-            SectionName = "General";
-        }
+        public override void SetDefaults() => SectionName = "General";
     }
 }

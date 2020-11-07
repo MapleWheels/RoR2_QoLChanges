@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2535448353
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 03913b6254f78dd93617314e57916c8d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 03970310989e9ae0e8cd1c6f532688cc
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleBrowser/Documentation/images/ABundleBrowserIconY1756Basic.png
+- Assets/AssetBundleBrowser/Editor/Icons/ABundleBrowserIconY1756Basic.png
+- Assets/AssetBundleBrowser/Editor/Icons/ABundleBrowserIconY1756Scene.png
+- Assets/AssetBundleBrowser/Documentation/com.unity.assetbundlebrowser.md
+- Assets/Icons/Buffs/MissingHpHealingBoostBuff.png
+- Assets/AssetBundleBrowser/Documentation/images/browser_header.png
+- Assets/AssetBundleBrowser/license.md
+- Assets/AssetBundleBrowser/README.md
+- Assets/AssetBundleBrowser/Documentation/images/browser_configure2.png
+- Assets/AssetBundleBrowser/Documentation/images/ABundleBrowserIconY1756Scene.png
+Dependencies: []
