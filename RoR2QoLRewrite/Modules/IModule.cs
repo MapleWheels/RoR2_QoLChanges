@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BepInEx.Configuration;
+using BepInEx.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,8 @@ namespace RoR2QoLRewrite.Modules
     {
         bool IsLoaded { get; }
         bool IsEnabled { get; }
-        void LoadModule();
+        void SetConfig(ConfigFile file);
+        void LoadModule(ConfigFile file, ManualLogSource logger);
         void UnloadModule();
         void EnableModule();
         void DisableModule();

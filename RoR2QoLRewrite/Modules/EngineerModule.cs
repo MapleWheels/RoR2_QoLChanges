@@ -3,49 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
+using BepInEx.Logging;
 using RoR2QoLRewrite.Configuration.Survivors;
-using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class EngineerModule : IModule
     {
         private static EngineerConfig Config;
-        internal EngineerModule(EngineerConfig config) => Config = config;
 
-        static EngineerPatch EngineerPatch
-        {
-            get
-            {
-                if (_EngineerPatch == null)
-                    _EngineerPatch = new EngineerPatch();
-                return _EngineerPatch;
-            }
-        }
-        private static EngineerPatch _EngineerPatch;
-
-        public bool IsEnabled => throw new NotImplementedException();
-
-        public bool IsLoaded => throw new NotImplementedException();
+        public bool IsEnabled { get; private set; }
+        public bool IsLoaded { get; private set; }
 
         public void DisableModule()
         {
-            throw new NotImplementedException();
+            if (!IsEnabled)
+                return;
+            EngineerPatch.Unpatch();
+            IsEnabled = false;
         }
 
         public void EnableModule()
         {
-            throw new NotImplementedException();
+            if (IsEnabled || !IsLoaded)
+                return;
+            EngineerPatch.Patch();
+            IsEnabled = true;
         }
 
-        public void LoadModule()
+        public void LoadModule(ConfigFile file, ManualLogSource logger)
         {
-            throw new NotImplementedException();
+            if (IsLoaded)
+                return;
+            Config = file.BindModel<EngineerConfig>(logger);
+            IsLoaded = true;
+            EnableModule();
+        }
+
+        public void SetConfig(ConfigFile file)
+        {
+            if (!IsLoaded)
+                return;
+            Config.SetConfigFile(file);
         }
 
         public void UnloadModule()
         {
-            throw new NotImplementedException();
+            if (!IsLoaded)
+                return;
+            if (IsEnabled)
+                DisableModule();
+            IsLoaded = false;
+        }
+
+        static class EngineerPatch
+        {
+            internal static void Patch() { }
+            internal static void Unpatch() { }
         }
     }
 }

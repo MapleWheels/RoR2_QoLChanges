@@ -26,14 +26,7 @@ namespace RoR2QoLRewrite.Modules
     internal class PluginCoreModule
     {
         //Configuration
-        internal static ArtificerConfig ArtificerConfig{ get; private set; }
-        internal static BleedConfig BleedConfig { get; private set; }
-        internal static CaptainConfig CaptainConfig { get; private set; }
-        internal static CommandoConfig CommandoConfig { get; private set; }
-        internal static EngineerConfig EngineerConfig { get; private set; }
-        internal static FreshMeatConfig FreshMeatConfig { get; private set; }
         internal static GeneralConfig GeneralConfig { get; private set; }
-        internal static WarbannerConfig WarbannerConfig { get; private set; }
 
         //Modules
         internal ArtificerModule ArtificerModule { get; private set; }
@@ -112,14 +105,7 @@ namespace RoR2QoLRewrite.Modules
 
         private void InitConfiguration()
         {
-            ArtificerConfig = Config.BindModel<ArtificerConfig>(Logger);
-            BleedConfig = Config.BindModel<BleedConfig>(Logger);
-            CaptainConfig = Config.BindModel<CaptainConfig>(Logger);
-            CommandoConfig = Config.BindModel<CommandoConfig>(Logger);
-            EngineerConfig = Config.BindModel<EngineerConfig>(Logger);
-            FreshMeatConfig = Config.BindModel<FreshMeatConfig>(Logger);
             GeneralConfig = Config.BindModel<GeneralConfig>(Logger);
-            WarbannerConfig = Config.BindModel<WarbannerConfig>(Logger);
         }
 
         private void InitModules()

@@ -3,60 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
+using BepInEx.Logging;
 using RoR2QoLRewrite.Configuration.Survivors;
-using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class CaptainModule : IModule
     {
         private static CaptainConfig Config;
-        internal CaptainModule(CaptainConfig config) => Config = config;
-
-        static CaptainPatch CaptainPatch
-        {
-            get
-            {
-                if (_CaptainPatch == null)
-                    _CaptainPatch = new CaptainPatch();
-                return _CaptainPatch;
-            }
-        }
-        private static CaptainPatch _CaptainPatch;
-
-        static BuffMissingHpHealBoostPatch BuffMissingHpHealBoostPatch
-        {
-            get
-            {
-                if (_BuffMissingHpHealBoostPatch == null)
-                    _BuffMissingHpHealBoostPatch = new BuffMissingHpHealBoostPatch();
-                return _BuffMissingHpHealBoostPatch;
-            }
-        }
-        private static BuffMissingHpHealBoostPatch _BuffMissingHpHealBoostPatch;
-
-        public bool IsEnabled => throw new NotImplementedException();
-
-        public bool IsLoaded => throw new NotImplementedException();
+        public bool IsEnabled { get; private set; }
+        public bool IsLoaded { get; private set; }
 
         public void DisableModule()
         {
-            throw new NotImplementedException();
+            if (!IsEnabled)
+                return;
+            CaptainPatch.Unpatch();
+            IsEnabled = false;
         }
 
         public void EnableModule()
         {
-            throw new NotImplementedException();
+            if (IsEnabled || !IsLoaded)
+                return;
+            CaptainPatch.Patch();
+            IsEnabled = true;
         }
 
-        public void LoadModule()
+        public void LoadModule(ConfigFile file, ManualLogSource logger)
         {
-            throw new NotImplementedException();
+            if (IsLoaded)
+                return;
+            Config = file.BindModel<CaptainConfig>(logger);
+            IsLoaded = true;
+            EnableModule();
+        }
+
+        public void SetConfig(ConfigFile file)
+        {
+            if (!IsLoaded)
+                return;
+            Config.SetConfigFile(file);
         }
 
         public void UnloadModule()
         {
-            throw new NotImplementedException();
+            if (!IsLoaded)
+                return;
+            if (IsEnabled)
+                DisableModule();
+            IsLoaded = false;
+        }
+
+        static class CaptainPatch
+        {
+            internal static void Patch() { }
+            internal static void Unpatch() { }
         }
     }
 }

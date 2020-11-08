@@ -1,5 +1,7 @@
-﻿using RoR2QoLRewrite.Configuration.Survivors;
-using RoR2QoLRewrite.Modules.Patches;
+﻿using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
+using BepInEx.Logging;
+using RoR2QoLRewrite.Configuration.Survivors;
 
 using System;
 using System.Collections.Generic;
@@ -12,41 +14,54 @@ namespace RoR2QoLRewrite.Modules
     class ArtificerModule : IModule
     {
         private static ArtificerConfig Config;
-        internal ArtificerModule(ArtificerConfig config) => Config = config;
-
-        static ArtificerPatch ArtificerPatch
-        {
-            get
-            {
-                if (_artificerPatch == null)
-                    _artificerPatch = new ArtificerPatch();
-                return _artificerPatch;
-            }
-        }
-        private static ArtificerPatch _artificerPatch;
-
-        public bool IsEnabled => throw new NotImplementedException();
-
-        public bool IsLoaded => throw new NotImplementedException();
+        public bool IsEnabled { get; private set; }
+        public bool IsLoaded { get; private set; }
 
         public void DisableModule()
         {
-            throw new NotImplementedException();
+            if (!IsEnabled)
+                return;
+            ArtificerPatch.Unpatch();
+            IsEnabled = false;
         }
 
         public void EnableModule()
         {
-            throw new NotImplementedException();
+            if (IsEnabled || !IsLoaded)
+                return;
+            ArtificerPatch.Patch();
+            IsEnabled = true;
         }
 
-        public void LoadModule()
+        public void LoadModule(ConfigFile file, ManualLogSource logger)
         {
-            throw new NotImplementedException();
+            if (IsLoaded)
+                return;
+            Config = file.BindModel<ArtificerConfig>(logger);
+            IsLoaded = true;
+            EnableModule();
+        }
+
+        public void SetConfig(ConfigFile file)
+        {
+            if (!IsLoaded)
+                return;
+            Config.SetConfigFile(file);
         }
 
         public void UnloadModule()
         {
-            throw new NotImplementedException();
+            if (!IsLoaded)
+                return;
+            if (IsEnabled)
+                DisableModule();
+            IsLoaded = false;
+        }
+
+        static class ArtificerPatch
+        {
+            internal static void Patch() { }
+            internal static void Unpatch() { }
         }
     }
 }

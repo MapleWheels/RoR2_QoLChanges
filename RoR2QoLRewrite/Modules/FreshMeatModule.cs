@@ -3,48 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
+using BepInEx.Logging;
 using RoR2QoLRewrite.Configuration.Items;
-using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class FreshMeatModule : IModule
     {
         private static FreshMeatConfig Config;
-        internal FreshMeatModule(FreshMeatConfig config) => Config = config;
-        static FreshMeatPatch FreshMeatPatch
-        {
-            get
-            {
-                if (_FreshMeatPatch == null)
-                    _FreshMeatPatch = new FreshMeatPatch();
-                return _FreshMeatPatch;
-            }
-        }
-        private static FreshMeatPatch _FreshMeatPatch;
 
-        public bool IsEnabled => throw new NotImplementedException();
-
-        public bool IsLoaded => throw new NotImplementedException();
+        public bool IsEnabled { get; private set; }
+        public bool IsLoaded { get; private set; }
 
         public void DisableModule()
         {
-            throw new NotImplementedException();
+            if (!IsEnabled)
+                return;
+            FreshMeatPatch.Unpatch();
+            IsEnabled = false;
         }
 
         public void EnableModule()
         {
-            throw new NotImplementedException();
+            if (IsEnabled || !IsLoaded)
+                return;
+            FreshMeatPatch.Patch();
+            IsEnabled = true;
         }
 
-        public void LoadModule()
+        public void LoadModule(ConfigFile file, ManualLogSource logger)
         {
-            throw new NotImplementedException();
+            if (IsLoaded)
+                return;
+            Config = file.BindModel<FreshMeatConfig>(logger);
+            IsLoaded = true;
+            EnableModule();
+        }
+
+        public void SetConfig(ConfigFile file)
+        {
+            if (!IsLoaded)
+                return;
+            Config.SetConfigFile(file);
         }
 
         public void UnloadModule()
         {
-            throw new NotImplementedException();
+            if (!IsLoaded)
+                return;
+            if (IsEnabled)
+                DisableModule();
+            IsLoaded = false;
+        }
+
+        static class FreshMeatPatch
+        {
+            internal static void Patch() { }
+            internal static void Unpatch() { }
         }
     }
 }

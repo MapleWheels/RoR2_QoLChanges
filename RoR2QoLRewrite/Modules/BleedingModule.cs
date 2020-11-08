@@ -1,5 +1,7 @@
-﻿using RoR2QoLRewrite.Configuration.Mechanics;
-using RoR2QoLRewrite.Modules.Patches;
+﻿using BepInEx.Configuration;
+using BepInEx.Extensions.Configuration;
+using BepInEx.Logging;
+using RoR2QoLRewrite.Configuration.Mechanics;
 
 using System;
 using System.Collections.Generic;
@@ -12,41 +14,55 @@ namespace RoR2QoLRewrite.Modules
     class BleedingModule : IModule
     {
         private static BleedConfig Config;
-        internal BleedingModule(BleedConfig config) => Config = config;
 
-        static BuffBleedPatch BuffBleedPatch
-        {
-            get
-            {
-                if (_BuffBleedPatch == null)
-                    _BuffBleedPatch = new BuffBleedPatch();
-                return _BuffBleedPatch;
-            }
-        }
-        public static BuffBleedPatch _BuffBleedPatch;
-
-        public bool IsEnabled => throw new NotImplementedException();
-
-        public bool IsLoaded => throw new NotImplementedException();
+        public bool IsEnabled { get; private set; }
+        public bool IsLoaded { get; private set; }
 
         public void DisableModule()
         {
-            throw new NotImplementedException();
+            if (!IsEnabled)
+                return;
+            BleedPatch.Unpatch();
+            IsEnabled = false;
         }
 
         public void EnableModule()
         {
-            throw new NotImplementedException();
+            if (IsEnabled || !IsLoaded)
+                return;
+            BleedPatch.Patch();
+            IsEnabled = true;
         }
 
-        public void LoadModule()
+        public void LoadModule(ConfigFile file, ManualLogSource logger)
         {
-            throw new NotImplementedException();
+            if (IsLoaded)
+                return;
+            Config = file.BindModel<BleedConfig>(logger);
+            IsLoaded = true;
+            EnableModule();
+        }
+
+        public void SetConfig(ConfigFile file)
+        {
+            if (!IsLoaded)
+                return;
+            Config.SetConfigFile(file);
         }
 
         public void UnloadModule()
         {
-            throw new NotImplementedException();
+            if (!IsLoaded)
+                return;
+            if (IsEnabled)
+                DisableModule();
+            IsLoaded = false;
+        }
+
+        static class BleedPatch
+        {
+            internal static void Patch() { }
+            internal static void Unpatch() { }
         }
     }
 }
