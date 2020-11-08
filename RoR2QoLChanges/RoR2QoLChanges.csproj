@@ -97,7 +97,9 @@
     <Compile Include="Additions\Mechanics\WarbannerBuffHelper.cs" />
     <Compile Include="Additions\Mechanics\WarbannerBuffRpcBehaviour.cs" />
     <Compile Include="Additions\Mechanics\WardCleanseEffectBehaviour.cs" />
+    <Compile Include="Additions\Networking\INetRpcServiceProvider.cs" />
     <Compile Include="Additions\Networking\MiniRpcManager.cs" />
+    <Compile Include="Additions\Networking\NetworkingManager.cs" />
     <Compile Include="AssemblyPolicies.cs" />
     <Compile Include="Configuration\IConfigBase.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />

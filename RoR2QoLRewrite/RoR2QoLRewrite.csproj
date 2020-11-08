@@ -108,6 +108,8 @@
     <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Modules\ArtificerModule.cs" />
     <Compile Include="Modules\BleedingModule.cs" />
+    <Compile Include="Modules\Buffs\BuffEntryBase.cs" />
+    <Compile Include="Modules\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Modules\CaptainModule.cs" />
     <Compile Include="Modules\CommandoModule.cs" />
     <Compile Include="Modules\Components\MissingHpBoostBuffWardComponent.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Modules\Patches\EngineerPatch.cs" />
     <Compile Include="Modules\Patches\FreshMeatPatch.cs" />
     <Compile Include="Modules\Patches\IMonoPatch.cs" />
+    <Compile Include="Modules\Patches\WarbannerBuffPatch.cs" />
     <Compile Include="Modules\WarbannerModule.cs" />
     <Compile Include="Modules\PluginCoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

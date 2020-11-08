@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RoR2QoLRewrite.Configuration.Items;
 using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class FreshMeatModule : IModule
     {
+        private static FreshMeatConfig Config;
+        internal FreshMeatModule(FreshMeatConfig config) => Config = config;
         static FreshMeatPatch FreshMeatPatch
         {
             get

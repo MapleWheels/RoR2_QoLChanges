@@ -1,4 +1,5 @@
-﻿using RoR2QoLRewrite.Modules.Patches;
+﻿using RoR2QoLRewrite.Configuration.Mechanics;
+using RoR2QoLRewrite.Modules.Patches;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace RoR2QoLRewrite.Modules
 {
     class BleedingModule : IModule
     {
+        private static BleedConfig Config;
+        internal BleedingModule(BleedConfig config) => Config = config;
+
         static BuffBleedPatch BuffBleedPatch
         {
             get

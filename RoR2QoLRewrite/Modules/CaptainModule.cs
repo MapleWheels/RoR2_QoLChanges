@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RoR2QoLRewrite.Configuration.Survivors;
 using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class CaptainModule : IModule
     {
+        private static CaptainConfig Config;
+        internal CaptainModule(CaptainConfig config) => Config = config;
+
         static CaptainPatch CaptainPatch
         {
             get

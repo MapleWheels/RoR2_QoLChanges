@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RoR2QoLRewrite.Configuration.Survivors;
 using RoR2QoLRewrite.Modules.Patches;
 
 namespace RoR2QoLRewrite.Modules
 {
     class EngineerModule : IModule
     {
+        private static EngineerConfig Config;
+        internal EngineerModule(EngineerConfig config) => Config = config;
+
         static EngineerPatch EngineerPatch
         {
             get

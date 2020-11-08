@@ -124,7 +124,7 @@ namespace RoR2QoLRewrite.Modules
 
         private void InitModules()
         {
-
+            ArtificerModule = new ArtificerModule();
         }
 
         public PluginCoreModule(ConfigFile configFile, ManualLogSource logger)

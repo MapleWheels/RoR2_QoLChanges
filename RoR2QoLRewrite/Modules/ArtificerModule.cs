@@ -1,4 +1,5 @@
-﻿using RoR2QoLRewrite.Modules.Patches;
+﻿using RoR2QoLRewrite.Configuration.Survivors;
+using RoR2QoLRewrite.Modules.Patches;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace RoR2QoLRewrite.Modules
 {
     class ArtificerModule : IModule
     {
+        private static ArtificerConfig Config;
+        internal ArtificerModule(ArtificerConfig config) => Config = config;
+
         static ArtificerPatch ArtificerPatch
         {
             get
