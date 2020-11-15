@@ -108,6 +108,7 @@
     <Compile Include="Configuration\Items\FreshMeatConfig.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
+    <Compile Include="Configuration\Mechanics\SquidConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Survivors\CaptainConfig.cs" />
     <Compile Include="Configuration\Survivors\CommandoConfig.cs" />
@@ -120,13 +121,17 @@
     <Compile Include="Modules\CommandoModule.cs" />
     <Compile Include="Modules\Components\MinionOnKillProcComponent.cs" />
     <Compile Include="Modules\Components\MissingHpBoostBuffWardComponent.cs" />
+    <Compile Include="Modules\Components\SquidPolypConfiguratorComponent.cs" />
+    <Compile Include="Modules\Components\WarbannerHelperComponent.cs" />
     <Compile Include="Modules\FreshMeatModule.cs" />
     <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\Networking\WarbannerSyncMsg.cs" />
     <Compile Include="Modules\Patches\EntityStates_CaptainSupplyDrop_ShockZoneMainState.cs" />
     <Compile Include="Modules\Patches\Ror2_CharacterBody.cs" />
     <Compile Include="Modules\Patches\RoR2_GlobalEventManager.cs" />
     <Compile Include="Modules\Patches\Ror2_HealthComponent.cs" />
     <Compile Include="Modules\Patches\Ror2_ProjectileManager.cs" />
+    <Compile Include="Modules\SquidPolypModule.cs" />
     <Compile Include="Modules\WarbannerModule.cs" />
     <Compile Include="Modules\PluginCoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

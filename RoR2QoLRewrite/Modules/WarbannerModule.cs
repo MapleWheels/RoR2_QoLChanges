@@ -7,6 +7,9 @@ using BepInEx.Configuration;
 using BepInEx.Extensions.Configuration;
 using BepInEx.Logging;
 using RoR2QoLRewrite.Configuration.Items;
+using RoR2QoLRewrite.Modules.Components;
+using RoR2QoLRewrite.Modules.Networking;
+using UnityEngine;
 
 namespace RoR2QoLRewrite.Modules
 {
@@ -16,6 +19,11 @@ namespace RoR2QoLRewrite.Modules
 
         public bool IsEnabled { get; private set; }
         public bool IsLoaded { get; private set; }
+
+        internal WarbannerHelperComponent WarbannerPrefabComponent;
+        internal const string WarbannerPrefabPath = "Prefabs/NetworkedObjects/WarbannerWard";
+        static ManualLogSource Logger;
+
 
         public void DisableModule()
         {
@@ -38,6 +46,8 @@ namespace RoR2QoLRewrite.Modules
             if (IsLoaded)
                 return;
             Config = file.BindModel<WarbannerConfig>(logger);
+            WarbannerModule.Logger = logger;
+
             IsLoaded = true;
             EnableModule();
         }
@@ -58,10 +68,32 @@ namespace RoR2QoLRewrite.Modules
             IsLoaded = false;
         }
 
+        void EntityPatch()
+        {
+            GameObject warbannerPrefab = Resources.Load<GameObject>(WarbannerPrefabPath);
+            if (!warbannerPrefab)
+            {
+                WarbannerModule.Logger.LogError("Warbannermodule::EntityPatch() | Could not load the warbanner ward prefab.");
+                return;
+            }
+
+            R2API.Networking.NetworkingAPI.RegisterMessageType<WarbannerSyncMsg>();
+            this.WarbannerPrefabComponent = warbannerPrefab.AddComponent<WarbannerHelperComponent>();
+            PluginCoreModule.PrefabCache.Add(WarbannerPrefabPath, warbannerPrefab);
+        }
+
+        void EntityUnpatch()
+        {
+            GameObject.Destroy(WarbannerPrefabComponent);
+            PluginCoreModule.PrefabCache.Remove(WarbannerPrefabPath);
+        }
+
         static class WarbannerPatch
         {
             internal static void Patch() { }
             internal static void Unpatch() { }
         }
+        
+
     }
 }
