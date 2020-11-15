@@ -10,6 +10,12 @@ namespace RoR2QoLRewrite.Configuration.Survivors
             DefaultValue = true
         };
 
+        public ConfigData<bool> EnableStickyGrenade { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Make Commando's grenade sticky",
+            DefaultValue = true
+        };
+
         public ConfigData<float> GrenadeDamageCoefficient { get; set; } = new ConfigData<float>()
         {
             DescriptionString = "Commando's Grenade Alt-R damage coefficient. 1 = 100% | Vanilla value is 7 (4x1.75)",

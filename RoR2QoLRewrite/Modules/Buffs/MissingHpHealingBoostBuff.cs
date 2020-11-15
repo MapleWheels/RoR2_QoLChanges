@@ -15,7 +15,6 @@ namespace RoR2QoLRewrite.Modules.Buffs
     {
         private const string IconPath = ConVars.ModPrefix + ConVars.Assets.Icons.Buffs.MissingHpHealingBoostBuff;
         public static UnityEngine.Color BuffColor { get; protected set; } = new UnityEngine.Color(255, 255, 255);
-        public static CaptainConfig ActiveConfig;
         public static BuffDef DefaultBuffDef { get; protected set; } = new BuffDef()
         {
             name = nameof(MissingHpHealingBoostBuff),
@@ -25,6 +24,6 @@ namespace RoR2QoLRewrite.Modules.Buffs
             iconPath = IconPath
         };
 
-        public MissingHpHealingBoostBuff(CaptainConfig buffsConfig) : base(DefaultBuffDef) => ActiveConfig = buffsConfig;
+        public MissingHpHealingBoostBuff() : base(DefaultBuffDef) { }
     }
 }

@@ -4,8 +4,6 @@ namespace RoR2QoLRewrite.Configuration.Survivors
 {
     public class EngineerConfig : ConfigDataModel, IConfigBase
     {
-        public const string EngiCarbonizerTurretBodyName = "EngiWalker";
-
         public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
         {
             DescriptionString = "Enable/Disable this module",
@@ -16,6 +14,12 @@ namespace RoR2QoLRewrite.Configuration.Survivors
         {
             DescriptionString = "The max targeting distance for the Engineer Painter.",
             DefaultValue = 250f
+        };
+
+        public ConfigData<bool> EngiTurretOnKillProcEnabled { get; set; } = new ConfigData<bool>()
+        {
+            DescriptionString = "Enable/Disable whether Engineer gets on kill proc effects from his turrets",
+            DefaultValue = true
         };
 
         public ConfigData<float> EngiTurret_ChanceOnKillProcAppliedToEngi { get; set; } = new ConfigData<float>()

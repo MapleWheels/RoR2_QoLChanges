@@ -11,7 +11,7 @@ namespace RoR2QoLRewrite.Modules.Components
 {
 	[RequireComponent(typeof(RoR2.HealingWard))]
 	[DisallowMultipleComponent]
-	public class MissingHpBoostBuffWardComponent : BuffWard
+	public sealed class MissingHpBoostBuffWardComponent : BuffWard
     {
 		void Start()
         {

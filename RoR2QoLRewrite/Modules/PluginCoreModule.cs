@@ -4,6 +4,8 @@ using BepInEx.Logging;
 
 using R2API;
 
+using RoR2;
+
 using RoR2QoLRewrite.Configuration;
 using RoR2QoLRewrite.Configuration.General;
 using RoR2QoLRewrite.Configuration.Items;
@@ -101,6 +103,9 @@ namespace RoR2QoLRewrite.Modules
                 var provider = new AssetBundleResourcesProvider(ConVars.ModPrefix.TrimEnd(':'), bundle);
                 ResourcesAPI.AddProvider(provider);
             }
+
+            BuffCatalog[nameof(MissingHpHealingBoostBuff)] = new MissingHpHealingBoostBuff();
+            BuffCatalog[nameof(MissingHpHealingBoostBuff)].Init();
         }
 
         private void InitConfiguration()
