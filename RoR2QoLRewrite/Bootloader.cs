@@ -35,7 +35,9 @@ namespace RoR2QoLRewrite
 
         void Awake()
         {
+            Logger.LogWarning("Bootloader: started.");
             PluginInstance = new PluginCoreModule(Config, Logger);
+            Logger.LogWarning("Bootloader: Plugin CoreModule loading started.");
             PluginInstance.PreInit();
             PluginInstance.Init();
         }
@@ -43,6 +45,7 @@ namespace RoR2QoLRewrite
         void Start()
         {
             PluginInstance.PostInit();
+            Logger.LogWarning("Bootloader: Plugin CoreModule loaded.");
         }
     }
 }

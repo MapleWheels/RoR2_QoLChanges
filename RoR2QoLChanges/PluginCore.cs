@@ -44,14 +44,16 @@ namespace RoR2QoLChanges
         //Init
         void Awake()
         {
-            Init();
+            //OLD PLUGIN DISABLED
+            //Init();
             Logger.LogInfo($"{ConVars.PluginName} is loaded");
         }
 
         //Late Init
         void Start()
         {
-            LateInit();
+            //OLD PLUGIN DISABLED
+            //LateInit();
         }
 
         void Init()

@@ -53,7 +53,8 @@ namespace RoR2QoLRewrite.Modules
             Logger = logger;
             IsLoaded = true;
 
-            EnableModule();
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)

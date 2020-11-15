@@ -51,7 +51,9 @@ namespace RoR2QoLRewrite.Modules
             Logger = logger;
             CommandoPatch.GrenadeDamageRatio = Config.GrenadeDamageCoefficient;
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)

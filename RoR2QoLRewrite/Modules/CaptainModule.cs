@@ -54,7 +54,9 @@ namespace RoR2QoLRewrite.Modules
             CaptainPatch.Beacon_MaxHpHealingRatioPerLevel = Config.Beacon_MaxHpHealingRatioPerLevel;
 
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)

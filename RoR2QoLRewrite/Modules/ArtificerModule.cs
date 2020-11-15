@@ -46,7 +46,9 @@ namespace RoR2QoLRewrite.Modules
             ArtificerPatch.M1_MaxCDFromAttackSpeed = Config.M1Fire_MaxCooldownFromAttackSpeed; 
 
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)
@@ -54,6 +56,13 @@ namespace RoR2QoLRewrite.Modules
             if (!IsLoaded)
                 return;
             Config.SetConfigFile(file);
+
+            ArtificerPatch.M1_LevelsPerCharge = Config.M1Fire_LevelsPerCharge;
+            ArtificerPatch.M1_MaxLevelCharges = Config.M1Fire_MaxLevelCharges;
+            ArtificerPatch.M1_SkillMagsPerCharge = Config.M1Fire_BackupMagsPerCharge;
+            ArtificerPatch.M1_MaxSkillMagCharges = Config.M1Fire_MaxBackupMagCharges;
+            ArtificerPatch.M1_CooldownPerAttackSpeedRatio = Config.M1Fire_CooldownPerAttackSpeedRatio;
+            ArtificerPatch.M1_MaxCDFromAttackSpeed = Config.M1Fire_MaxCooldownFromAttackSpeed;
         }
 
         public void UnloadModule()

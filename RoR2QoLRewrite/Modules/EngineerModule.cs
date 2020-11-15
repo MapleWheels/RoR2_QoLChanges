@@ -47,7 +47,9 @@ namespace RoR2QoLRewrite.Modules
                 return;
             Config = file.BindModel<EngineerConfig>(logger);
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)

@@ -37,6 +37,7 @@ namespace RoR2QoLRewrite.Modules
         internal CommandoModule CommandoModule { get; private set; }
         internal EngineerModule EngineerModule { get; private set; }
         internal FreshMeatModule FreshMeatModule { get; private set; }
+        internal SquidPolypModule SquidPolypModule { get; private set; }
         internal WarbannerModule WarbannerModule { get; private set; }
 
         //Cache & Refs
@@ -69,31 +70,41 @@ namespace RoR2QoLRewrite.Modules
 
         internal void PreInit()
         {
+            Logger.LogInfo("Pre-loader started.");
             InitResources();
             InitConfiguration();
+            Logger.LogInfo("Pre-loader completed.");
         }
 
         internal void Init()
         {
+            Logger.LogInfo("Loading modules.");
             InitModules();
         }
 
         internal void PostInit()
         {
-
+            Logger.LogInfo("Plugin loading complete.");
         }
 
         internal void Reload()
         {
-
+            Logger.LogInfo("Plugin is reloading.");
+            Reset();
+            Init();
         } 
         
         private void Reset()
         {
-            
+            ArtificerModule.UnloadModule();
+            BleedingModule.UnloadModule();
+            CaptainModule.UnloadModule();
+            CommandoModule.UnloadModule();
+            EngineerModule.UnloadModule();
+            FreshMeatModule.UnloadModule();
+            SquidPolypModule.UnloadModule();
+            WarbannerModule.UnloadModule();
         }
-
-        
 
         private void InitResources()
         {
@@ -116,6 +127,22 @@ namespace RoR2QoLRewrite.Modules
         private void InitModules()
         {
             ArtificerModule = new ArtificerModule();
+            BleedingModule = new BleedingModule();
+            CaptainModule = new CaptainModule();
+            CommandoModule = new CommandoModule();
+            EngineerModule = new EngineerModule();
+            FreshMeatModule = new FreshMeatModule();
+            SquidPolypModule = new SquidPolypModule();
+            WarbannerModule = new WarbannerModule();
+
+            ArtificerModule.LoadModule(Config, Logger);
+            BleedingModule.LoadModule(Config, Logger);
+            CaptainModule.LoadModule(Config, Logger);
+            CommandoModule.LoadModule(Config, Logger);
+            EngineerModule.LoadModule(Config, Logger);
+            FreshMeatModule.LoadModule(Config, Logger);
+            SquidPolypModule.LoadModule(Config, Logger);
+            WarbannerModule.LoadModule(Config, Logger);
         }
 
         public PluginCoreModule(ConfigFile configFile, ManualLogSource logger)

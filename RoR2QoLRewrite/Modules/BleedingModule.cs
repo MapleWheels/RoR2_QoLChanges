@@ -42,7 +42,9 @@ namespace RoR2QoLRewrite.Modules
                 return;
             Config = file.BindModel<BleedConfig>(logger);
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)

@@ -12,7 +12,7 @@ namespace RoR2QoLRewrite.Configuration.Mechanics
         public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
         {
             DescriptionString = "Enable/Disable the squid polyp changes",
-            DefaultValue = true;
+            DefaultValue = true
         };
 
         public ConfigData<float> DecayRate { get; set; } = new ConfigData<float>()

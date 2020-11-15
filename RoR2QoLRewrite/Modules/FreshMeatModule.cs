@@ -46,7 +46,9 @@ namespace RoR2QoLRewrite.Modules
             FreshMeatPatch.MaxHpRatioPerStack = Config.FreshMeat_MaxHpPercentScale * 0.01f;
 
             IsLoaded = true;
-            EnableModule();
+
+            if (Config.Enabled)
+                EnableModule();
         }
 
         public void SetConfig(ConfigFile file)
