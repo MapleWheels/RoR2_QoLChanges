@@ -1,118 +1,66 @@
-﻿using BepInEx.Configuration;
+﻿using RoR2QoLRewrite.Configuration.Survivors;
 using BepInEx.Extensions.Configuration;
-using BepInEx.Logging;
-using RoR2QoLRewrite.Configuration.Survivors;
+using RoR2QoLRewrite.Util;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using RoR2;
 using UnityEngine;
 
-using System;
-
 namespace RoR2QoLRewrite.Modules
 {
-    class ArtificerModule : IModule
+    internal class ArtificerModule : ModuleBase
     {
-        private static ArtificerConfig Config;
-        public bool IsEnabled { get; private set; }
-        public bool IsLoaded { get; private set; }
-
-        public void DisableModule()
+        protected override void OnDisable()
         {
-            if (!IsEnabled)
-                return;
-            ArtificerPatch.Unpatch();
-            IsEnabled = false;
+            On.RoR2.CharacterBody.RecalculateStats -= CharacterBody_RecalculateStats;
         }
 
-        public void EnableModule()
+        private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
-            if (IsEnabled || !IsLoaded)
-                return;
-            ArtificerPatch.Patch();
-            IsEnabled = true;
+            orig(self);
+            CharacterBody_RecalculateStats(self);
         }
 
-        public void LoadModule(ConfigFile file, ManualLogSource logger)
+        protected override void OnEnable()
         {
-            if (IsLoaded)
-                return;
-            Config = file.BindModel<ArtificerConfig>(logger);
-
-            ArtificerPatch.M1_LevelsPerCharge = Config.M1Fire_LevelsPerCharge;
-            ArtificerPatch.M1_MaxLevelCharges = Config.M1Fire_MaxLevelCharges;
-            ArtificerPatch.M1_SkillMagsPerCharge = Config.M1Fire_BackupMagsPerCharge;
-            ArtificerPatch.M1_MaxSkillMagCharges = Config.M1Fire_MaxBackupMagCharges;
-            ArtificerPatch.M1_CooldownPerAttackSpeedRatio = Config.M1Fire_CooldownPerAttackSpeedRatio;
-            ArtificerPatch.M1_MaxCDFromAttackSpeed = Config.M1Fire_MaxCooldownFromAttackSpeed; 
-
-            IsLoaded = true;
-            EnableModule();
+            On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
         }
 
-        public void SetConfig(ConfigFile file)
+        protected override void OnLoad()
         {
-            if (!IsLoaded)
-                return;
-            Config.SetConfigFile(file);
         }
 
-        public void UnloadModule()
+        protected override void OnUnload()
         {
-            if (!IsLoaded)
-                return;
-            if (IsEnabled)
-                DisableModule();
-            IsLoaded = false;
         }
 
-        static class ArtificerPatch
+        private void CharacterBody_RecalculateStats(RoR2.CharacterBody body)
         {
-            static bool PATCH_ACTIVE = false;
-            internal static string ArtificerBodyName="Mage";
-            internal static int
-                M1_LevelsPerCharge=10,
-                M1_MaxLevelCharges=0,
-                M1_SkillMagsPerCharge=9999,
-                M1_MaxSkillMagCharges=0;
-
-            internal static float
-                M1_CooldownPerAttackSpeedRatio = 0.1f,
-                M1_MaxCDFromAttackSpeed = 0.45f;
-
-            internal static void Patch() 
+            if (body.name.ToLower().Contains(ArtificerConfig.ArtificerBodyName.ToLower()))
             {
-                if (PATCH_ACTIVE)
-                    Unpatch();
+                GenericSkill m1 = body.skillLocator.primary;
 
-                Patches.Ror2_CharacterBody.Post_RecalculateStats += Post_CharacterBody_RecalculateStats;
+                m1.SetBonusStockFromBody(
+                    Math.Min(
+                        (int)(body.level / ArtificerConfig.M1Fire_LevelsPerCharge.Value),
+                        ArtificerConfig.M1Fire_MaxLevelCharges.Value
+                        ) +
+                    Math.Min(
+                        (body.inventory.GetItemCount(ItemIndex.SecondarySkillMagazine) / ArtificerConfig.M1Fire_BackupMagsPerCharge.Value),
+                        ArtificerConfig.M1Fire_MaxBackupMagCharges.Value
+                        )
+                    );
 
-                PATCH_ACTIVE = true;
-            }
-
-            internal static void Unpatch() 
-            {
-                Patches.Ror2_CharacterBody.Post_RecalculateStats -= Post_CharacterBody_RecalculateStats;
-
-                PATCH_ACTIVE = false;
-            }
-
-            static void Post_CharacterBody_RecalculateStats(RoR2.CharacterBody self)
-            {
-                if (self.name.ToLower().Contains(ArtificerBodyName.ToLower())){
-                    GenericSkill m1 = self.skillLocator.primary;
-
-                    int newBonusStock = m1.bonusStockFromBody
-                        + Math.Min((int)(self.level/M1_LevelsPerCharge), M1_MaxLevelCharges)
-                        + Math.Min(
-                            self.inventory.GetItemCount(ItemIndex.SecondarySkillMagazine)/M1_SkillMagsPerCharge, M1_MaxSkillMagCharges
-                            );
-                    m1.SetBonusStockFromBody(newBonusStock);
-
-                    m1.cooldownScale *= 1f - Mathf.Min(
-                        Mathf.Max(self.attackSpeed - (self.baseAttackSpeed + self.levelAttackSpeed * self.level), 0f) * M1_CooldownPerAttackSpeedRatio,
-                        1f - M1_MaxCDFromAttackSpeed
-                        );
-                }
+                m1.cooldownScale *= 1f - Mathf.Min(
+                    Mathf.Max(
+                        body.attackSpeed - (body.baseAttackSpeed + body.levelAttackSpeed * body.level), 0f)
+                    * ArtificerConfig.M1Fire_CooldownPerAttackSpeedRatio.Value,
+                    1f - ArtificerConfig.M1Fire_MaxCooldownFromAttackSpeed.Value
+                    );
             }
         }
     }

@@ -3,65 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BepInEx.Configuration;
-using BepInEx.Extensions.Configuration;
-using BepInEx.Logging;
-using RoR2QoLRewrite.Configuration.Items;
 
 namespace RoR2QoLRewrite.Modules
 {
-    class FreshMeatModule : IModule
+    internal class FreshMeatModule : ModuleBase
     {
-        private static FreshMeatConfig Config;
-
-        public bool IsEnabled { get; private set; }
-        public bool IsLoaded { get; private set; }
-
-        public void DisableModule()
+        protected override void OnDisable()
         {
-            if (!IsEnabled)
-                return;
-            FreshMeatPatch.Unpatch();
-            IsEnabled = false;
+            throw new NotImplementedException();
         }
 
-        public void EnableModule()
+        protected override void OnEnable()
         {
-            if (IsEnabled || !IsLoaded)
-                return;
-            FreshMeatPatch.Patch();
-            IsEnabled = true;
+            throw new NotImplementedException();
         }
 
-        public void LoadModule(ConfigFile file, ManualLogSource logger)
+        protected override void OnLoad()
         {
-            if (IsLoaded)
-                return;
-            Config = file.BindModel<FreshMeatConfig>(logger);
-            IsLoaded = true;
-            EnableModule();
+            throw new NotImplementedException();
         }
 
-        public void SetConfig(ConfigFile file)
+        protected override void OnUnload()
         {
-            if (!IsLoaded)
-                return;
-            Config.SetConfigFile(file);
-        }
-
-        public void UnloadModule()
-        {
-            if (!IsLoaded)
-                return;
-            if (IsEnabled)
-                DisableModule();
-            IsLoaded = false;
-        }
-
-        static class FreshMeatPatch
-        {
-            internal static void Patch() { }
-            internal static void Unpatch() { }
+            throw new NotImplementedException();
         }
     }
 }

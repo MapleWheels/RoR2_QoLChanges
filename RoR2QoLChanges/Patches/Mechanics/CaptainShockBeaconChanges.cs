@@ -34,7 +34,6 @@ namespace RoR2QoLChanges.Patches.Mechanics
         public override void RemovePatches()
         {
             On.EntityStates.CaptainSupplyDrop.ShockZoneMainState.OnEnter -= ShockZoneMainState_OnEnter;
-
         }
     }
 }

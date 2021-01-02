@@ -1,21 +1,21 @@
-﻿using BepInEx.Configuration;
-using BepInEx.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BepInEx.Configuration;
+using BepInEx.Logging;
+
 namespace RoR2QoLRewrite.Modules
 {
-    internal interface IModule
+    interface IModule
     {
-        bool IsLoaded { get; }
         bool IsEnabled { get; }
-        void SetConfig(ConfigFile file);
-        void LoadModule(ConfigFile file, ManualLogSource logger);
-        void UnloadModule();
-        void EnableModule();
-        void DisableModule();
+        bool Isloaded { get; }
+        void Load(ConfigFile config, ManualLogSource logger);
+        void Unload();
+        void Enable();
+        void Disable();
     }
 }

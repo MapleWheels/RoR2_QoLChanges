@@ -1,127 +1,157 @@
-﻿using BepInEx.Configuration;
-using BepInEx.Extensions.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using BepInEx.Configuration;
 using BepInEx.Logging;
-
-using R2API;
-
-using RoR2;
-
-using RoR2QoLRewrite.Configuration;
+using BepInEx.Extensions.Configuration;
 using RoR2QoLRewrite.Configuration.General;
 using RoR2QoLRewrite.Configuration.Items;
 using RoR2QoLRewrite.Configuration.Mechanics;
 using RoR2QoLRewrite.Configuration.Survivors;
-using RoR2QoLRewrite.Modules;
-using RoR2QoLRewrite.Modules.Buffs;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
 using UnityEngine;
+using RoR2QoLRewrite.Configuration;
+using R2API;
+using RoR2QoLRewrite.Util;
 
 namespace RoR2QoLRewrite.Modules
 {
-    internal class PluginCoreModule
+    internal class PluginCoreModule : ModuleBase
     {
-        //Configuration
-        internal static GeneralConfig GeneralConfig { get; private set; }
-
-        //Modules
-        internal ArtificerModule ArtificerModule { get; private set; }
-        internal BleedingModule BleedingModule { get; private set; }
-        internal CaptainModule CaptainModule { get; private set; }
-        internal CommandoModule CommandoModule { get; private set; }
-        internal EngineerModule EngineerModule { get; private set; }
-        internal FreshMeatModule FreshMeatModule { get; private set; }
-        internal WarbannerModule WarbannerModule { get; private set; }
-
-        //Cache & Refs
-        internal static Dictionary<string, GameObject> PrefabCache 
+        protected override void OnDisable()
         {
-            get
-            {
-                if (_PrefabCache == null)
-                    _PrefabCache = new Dictionary<string, GameObject>();
-                return _PrefabCache;
-            } 
+            DisableModules();
         }
-        private static Dictionary<string, GameObject> _PrefabCache;
 
-        internal static Dictionary<string, BuffEntryBase> BuffCatalog
+        protected override void OnEnable()
         {
-            get
-            {
-                if (_BuffCatalog == null)
-                    _BuffCatalog = new Dictionary<string, BuffEntryBase>();
-                return _BuffCatalog;
-            }
+            EnableModules();
         }
-        private static Dictionary<string, BuffEntryBase> _BuffCatalog;
 
-        internal static ConfigFile Config { get; private set; }
-        internal static ManualLogSource Logger { get; private set; }
-
-        internal bool Loaded { get; private set; } = false;
-
-        internal void PreInit()
+        protected override void OnLoad()
         {
+            InitConfig();
             InitResources();
-            InitConfiguration();
-        }
-
-        internal void Init()
-        {
             InitModules();
         }
 
-        internal void PostInit()
+        protected override void OnUnload()
         {
-
+            Dispose();
         }
 
-        internal void Reload()
+        //Init Config
+        private void InitConfig()
         {
-
-        } 
-        
-        private void Reset()
-        {
-            
+            Config.BindModel<ArtificerConfig>(Logger);
+            Config.BindModel<BleedConfig>(Logger);
+            Config.BindModel<CaptainConfig>(Logger);
+            Config.BindModel<CommandoConfig>(Logger);
+            Config.BindModel<EngineerConfig>(Logger);
+            Config.BindModel<FreshMeatConfig>(Logger);
+            Config.BindModel<GeneralConfig>(Logger);
+            Config.BindModel<GoragsOpusConfig>(Logger);
+            Config.BindModel<SquidPolypConfig>(Logger);
+            Config.BindModel<WarbannerConfig>(Logger);
         }
 
-        
-
+        //init Resources
         private void InitResources()
         {
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{ConVars.PluginName}.ror2qolchanges"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{ConVars.PluginName}.Resources.ror2qolchanges"))
             {
                 var bundle = AssetBundle.LoadFromStream(stream);
                 var provider = new AssetBundleResourcesProvider(ConVars.ModPrefix.TrimEnd(':'), bundle);
                 ResourcesAPI.AddProvider(provider);
             }
-
-            BuffCatalog[nameof(MissingHpHealingBoostBuff)] = new MissingHpHealingBoostBuff();
-            BuffCatalog[nameof(MissingHpHealingBoostBuff)].Init();
         }
 
-        private void InitConfiguration()
-        {
-            GeneralConfig = Config.BindModel<GeneralConfig>(Logger);
-        }
-
+        //Init Modules
         private void InitModules()
         {
-            ArtificerModule = new ArtificerModule();
+            StaticCache.Add(new ArtificerModule());
+            StaticCache.Add(new BleedingModule());
+            StaticCache.Add(new CaptainModule());
+            StaticCache.Add(new CommandoModule());
+            StaticCache.Add(new EngineerModule());
+            StaticCache.Add(new FreshMeatModule());
+            StaticCache.Add(new GoragsOpusModule());
+            StaticCache.Add(new SquidPolypModule());
+            StaticCache.Add(new WarbannerModule());
+
+            StaticCache.Get<ArtificerModule>().Load(Config, Logger);
+            StaticCache.Get<BleedingModule>().Load(Config, Logger);
+            StaticCache.Get<CaptainModule>().Load(Config, Logger);
+            StaticCache.Get<CommandoModule>().Load(Config, Logger);
+            StaticCache.Get<EngineerModule>().Load(Config, Logger);
+            StaticCache.Get<FreshMeatModule>().Load(Config, Logger);
+            StaticCache.Get<GoragsOpusModule>().Load(Config, Logger);
+            StaticCache.Get<SquidPolypModule>().Load(Config, Logger);
+            StaticCache.Get<WarbannerModule>().Load(Config, Logger);
         }
 
-        public PluginCoreModule(ConfigFile configFile, ManualLogSource logger)
+        //Enable Modules
+        private void EnableModules()
         {
-            Config = configFile;
-            Logger = logger;
+            if (ArtificerConfig.Enabled)
+                StaticCache.Get<ArtificerModule>().Enable();
+            if (BleedConfig.Enabled)
+                StaticCache.Get<BleedingModule>().Enable();
+            if (CaptainConfig.Enabled)
+                StaticCache.Get<CaptainModule>().Enable();
+            if (CommandoConfig.Enabled)
+                StaticCache.Get<CommandoModule>().Enable();
+            if (EngineerConfig.Enabled)
+                StaticCache.Get<EngineerModule>().Enable();
+            if (FreshMeatConfig.Enabled)
+                StaticCache.Get<FreshMeatModule>().Enable();
+            if (GoragsOpusConfig.Enabled)
+                StaticCache.Get<GoragsOpusModule>().Enable();
+            if (SquidPolypConfig.Enabled)
+                StaticCache.Get<SquidPolypModule>().Enable();
+            if (WarbannerConfig.Enabled)
+                StaticCache.Get<WarbannerModule>().Enable();
+        }
+
+        //Disable Modules
+        private void DisableModules()
+        {
+            StaticCache.Get<ArtificerModule>().Disable();
+            StaticCache.Get<BleedingModule>().Disable();
+            StaticCache.Get<CaptainModule>().Disable();
+            StaticCache.Get<CommandoModule>().Disable();
+            StaticCache.Get<EngineerModule>().Disable();
+            StaticCache.Get<FreshMeatModule>().Disable();
+            StaticCache.Get<GoragsOpusModule>().Disable();
+            StaticCache.Get<SquidPolypModule>().Disable();
+            StaticCache.Get<WarbannerModule>().Disable();
+        }
+
+        //Dispose of all resources
+        private void Dispose()
+        {
+            StaticCache.Get<ArtificerModule>().Unload();
+            StaticCache.Get<BleedingModule>().Unload();
+            StaticCache.Get<CaptainModule>().Unload();
+            StaticCache.Get<CommandoModule>().Unload();
+            StaticCache.Get<EngineerModule>().Unload();
+            StaticCache.Get<FreshMeatModule>().Unload();
+            StaticCache.Get<GoragsOpusModule>().Unload();
+            StaticCache.Get<SquidPolypModule>().Unload();
+            StaticCache.Get<WarbannerModule>().Unload();
+
+            StaticCache.Dispose<ArtificerModule>();
+            StaticCache.Dispose<BleedingModule>();
+            StaticCache.Dispose<CaptainModule>();
+            StaticCache.Dispose<CommandoModule>();
+            StaticCache.Dispose<EngineerModule>();
+            StaticCache.Dispose<FreshMeatModule>();
+            StaticCache.Dispose<GoragsOpusModule>();
+            StaticCache.Dispose<SquidPolypModule>();
+            StaticCache.Dispose<WarbannerModule>();
         }
     }
 }

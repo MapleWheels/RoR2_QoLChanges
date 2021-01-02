@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLRewrite.Modules
 {
-    internal class WarbannerModule : ModuleBase
+    internal class SquidPolypModule : ModuleBase
     {
         protected override void OnDisable()
         {

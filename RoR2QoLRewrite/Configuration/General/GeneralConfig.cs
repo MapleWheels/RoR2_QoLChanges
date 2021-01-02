@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RoR2QoLRewrite.Configuration.General
 {
-    public class GeneralConfig : ConfigDataModel, IConfigBase
+    public class GeneralConfig : ConfigDataModel
     {
-        public ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
+        public static ConfigData<bool> Enabled { get; set; } = new ConfigData<bool>()
         {
             DescriptionString = "Enables/Disables the whole mod",
             DefaultValue = true

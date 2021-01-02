@@ -102,47 +102,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootloader.cs" />
-    <Compile Include="Buffs\BuffBase.cs" />
-    <Compile Include="Buffs\DebuffCleansingBuff.cs" />
-    <Compile Include="Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Configuration\ConVars.cs" />
     <Compile Include="Configuration\General\GeneralConfig.cs" />
     <Compile Include="Configuration\IConfigBase.cs" />
     <Compile Include="Configuration\Items\FreshMeatConfig.cs" />
-    <Compile Include="Configuration\Items\GoragsOpusConfig.cs" />
-    <Compile Include="Configuration\Items\SquidPolypConfig.cs" />
     <Compile Include="Configuration\Items\WarbannerConfig.cs" />
     <Compile Include="Configuration\Mechanics\BleedConfig.cs" />
+    <Compile Include="Configuration\Mechanics\SquidConfig.cs" />
     <Compile Include="Configuration\Survivors\ArtificerConfig.cs" />
     <Compile Include="Configuration\Survivors\CaptainConfig.cs" />
     <Compile Include="Configuration\Survivors\CommandoConfig.cs" />
     <Compile Include="Configuration\Survivors\EngineerConfig.cs" />
     <Compile Include="Modules\ArtificerModule.cs" />
     <Compile Include="Modules\BleedingModule.cs" />
+    <Compile Include="Modules\Buffs\BuffEntryBase.cs" />
+    <Compile Include="Modules\Buffs\MissingHpHealingBoostBuff.cs" />
     <Compile Include="Modules\CaptainModule.cs" />
     <Compile Include="Modules\CommandoModule.cs" />
-    <Compile Include="Modules\EngineerModule.cs" />
+    <Compile Include="Modules\Components\MinionOnKillProcComponent.cs" />
+    <Compile Include="Modules\Components\MissingHpBoostBuffWardComponent.cs" />
+    <Compile Include="Modules\Components\SquidPolypConfiguratorComponent.cs" />
+    <Compile Include="Modules\Components\WarbannerHelperComponent.cs" />
     <Compile Include="Modules\FreshMeatModule.cs" />
-    <Compile Include="Modules\GoragsOpusModule.cs" />
     <Compile Include="Modules\IModule.cs" />
-    <Compile Include="Modules\ModuleBase.cs" />
+    <Compile Include="Modules\Networking\WarbannerSyncMsg.cs" />
+    <Compile Include="Modules\Patches\EntityStates_CaptainSupplyDrop_ShockZoneMainState.cs" />
+    <Compile Include="Modules\Patches\Ror2_CharacterBody.cs" />
+    <Compile Include="Modules\Patches\RoR2_GlobalEventManager.cs" />
+    <Compile Include="Modules\Patches\Ror2_HealthComponent.cs" />
+    <Compile Include="Modules\Patches\Ror2_ProjectileManager.cs" />
     <Compile Include="Modules\SquidPolypModule.cs" />
     <Compile Include="Modules\WarbannerModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Cache.cs" />
-    <Compile Include="Util\StaticCache.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ror2qolchanges" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ror2qolchanges.manifest" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Modules\PluginCoreModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ror2qolchanges" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ror2qolchanges.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Modules\EngineerModule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
