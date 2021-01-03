@@ -16,6 +16,8 @@ using UnityEngine;
 using RoR2QoLRewrite.Configuration;
 using R2API;
 using RoR2QoLRewrite.Util;
+using RoR2QoLRewrite.Buffs;
+using RoR2;
 
 namespace RoR2QoLRewrite.Modules
 {
@@ -67,6 +69,16 @@ namespace RoR2QoLRewrite.Modules
                 var provider = new AssetBundleResourcesProvider(ConVars.ModPrefix.TrimEnd(':'), bundle);
                 ResourcesAPI.AddProvider(provider);
             }
+
+            //Buffs
+            StaticCache.Add(new DebuffCleansingBuff());
+            Cache<BuffIndex>.Add(nameof(DebuffCleansingBuff), StaticCache.Get<DebuffCleansingBuff>().Init());
+
+            StaticCache.Add(new HyperWarCryBuff());
+            Cache<BuffIndex>.Add(nameof(HyperWarCryBuff), StaticCache.Get<HyperWarCryBuff>().Init());
+
+            StaticCache.Add(new MissingHpHealingBoostBuff());
+            Cache<BuffIndex>.Add(nameof(MissingHpHealingBoostBuff), StaticCache.Get<MissingHpHealingBoostBuff>().Init());
         }
 
         //Init Modules

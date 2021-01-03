@@ -101,10 +101,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyPolicies.cs" />
     <Compile Include="Bootloader.cs" />
     <Compile Include="Buffs\BuffBase.cs" />
     <Compile Include="Buffs\DebuffCleansingBuff.cs" />
+    <Compile Include="Buffs\HyperWarCryBuff.cs" />
     <Compile Include="Buffs\MissingHpHealingBoostBuff.cs" />
+    <Compile Include="Components\TagMinionOnKillProc.cs" />
     <Compile Include="Configuration\ConVars.cs" />
     <Compile Include="Configuration\General\GeneralConfig.cs" />
     <Compile Include="Configuration\IConfigBase.cs" />
@@ -132,9 +135,7 @@
     <Compile Include="Util\Cache.cs" />
     <Compile Include="Util\StaticCache.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\ror2qolchanges" />
   </ItemGroup>

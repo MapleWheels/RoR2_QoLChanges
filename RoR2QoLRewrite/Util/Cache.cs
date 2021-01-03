@@ -12,7 +12,7 @@ namespace RoR2QoLRewrite.Util
         private static readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
         private static readonly object lockObj = new object();
 
-        public static void Add<T>(string key, T val)
+        public static void Add(string key, T val)
         {
             lock(Cache<T>.lockObj)
             {
@@ -20,12 +20,21 @@ namespace RoR2QoLRewrite.Util
             }
         }
 
-        public static T Get<T>(string key)
+        public static T Get(string key)
         {
             lock(Cache<T>.lockObj)
             {
                 return Cache<T>._cache[key];
             }
+        }
+
+        public static T Dispose(string key)
+        {
+            lock (Cache<T>.lockObj)
+            {
+                Cache<T>._cache.TryRemove(key, out T val);
+                return val;
+            }            
         }
     }
 }
